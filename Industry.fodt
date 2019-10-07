@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:officeooo="http://openoffice.org/2009/office" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.text">
- <office:meta><meta:creation-date>2019-07-26T15:50:24.410393666</meta:creation-date><dc:date>2019-10-07T18:02:18.637880225</dc:date><meta:editing-duration>PT2H12M54S</meta:editing-duration><meta:editing-cycles>104</meta:editing-cycles><meta:generator>LibreOffice/6.0.7.3$Linux_X86_64 LibreOffice_project/00m0$Build-3</meta:generator><meta:document-statistic meta:table-count="0" meta:image-count="0" meta:object-count="0" meta:page-count="1" meta:paragraph-count="6" meta:word-count="23" meta:character-count="148" meta:non-whitespace-character-count="131"/></office:meta>
+ <office:meta><meta:creation-date>2019-07-26T15:50:24.410393666</meta:creation-date><dc:date>2019-10-07T18:28:50.503189619</dc:date><meta:editing-duration>PT2H30M41S</meta:editing-duration><meta:editing-cycles>118</meta:editing-cycles><meta:generator>LibreOffice/6.0.7.3$Linux_X86_64 LibreOffice_project/00m0$Build-3</meta:generator><meta:document-statistic meta:table-count="0" meta:image-count="0" meta:object-count="0" meta:page-count="2" meta:paragraph-count="32" meta:word-count="407" meta:character-count="3148" meta:non-whitespace-character-count="2745"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
-   <config:config-item config:name="ViewAreaTop" config:type="long">0</config:config-item>
+   <config:config-item config:name="ViewAreaTop" config:type="long">30372</config:config-item>
    <config:config-item config:name="ViewAreaLeft" config:type="long">0</config:config-item>
    <config:config-item config:name="ViewAreaWidth" config:type="long">45678</config:config-item>
    <config:config-item config:name="ViewAreaHeight" config:type="long">20736</config:config-item>
@@ -13,12 +13,12 @@
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view2</config:config-item>
-     <config:config-item config:name="ViewLeft" config:type="long">21026</config:config-item>
-     <config:config-item config:name="ViewTop" config:type="long">2000</config:config-item>
+     <config:config-item config:name="ViewLeft" config:type="long">19973</config:config-item>
+     <config:config-item config:name="ViewTop" config:type="long">46108</config:config-item>
      <config:config-item config:name="VisibleLeft" config:type="long">0</config:config-item>
-     <config:config-item config:name="VisibleTop" config:type="long">0</config:config-item>
+     <config:config-item config:name="VisibleTop" config:type="long">30372</config:config-item>
      <config:config-item config:name="VisibleRight" config:type="long">45676</config:config-item>
-     <config:config-item config:name="VisibleBottom" config:type="long">20735</config:config-item>
+     <config:config-item config:name="VisibleBottom" config:type="long">51107</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
      <config:config-item config:name="ViewLayoutColumns" config:type="short">1</config:config-item>
      <config:config-item config:name="ViewLayoutBookMode" config:type="boolean">false</config:config-item>
@@ -92,7 +92,7 @@
    <config:config-item config:name="UnxForceZeroExtLeading" config:type="boolean">false</config:config-item>
    <config:config-item config:name="TabAtLeftIndentForParagraphsInList" config:type="boolean">false</config:config-item>
    <config:config-item config:name="PrintRightPages" config:type="boolean">true</config:config-item>
-   <config:config-item config:name="Rsid" config:type="int">1989390</config:config-item>
+   <config:config-item config:name="Rsid" config:type="int">2058923</config:config-item>
    <config:config-item config:name="MathBaselineAlignment" config:type="boolean">true</config:config-item>
    <config:config-item config:name="MsWordCompTrailingBlanks" config:type="boolean">false</config:config-item>
    <config:config-item config:name="InvertBorderSpacing" config:type="boolean">false</config:config-item>
@@ -474,6 +474,25 @@
   <style:style style:name="P58" style:family="paragraph" style:parent-style-name="Code">
    <style:paragraph-properties fo:margin-left="0cm" fo:margin-right="0cm" fo:margin-top="0cm" fo:margin-bottom="0cm" loext:contextual-spacing="false" fo:line-height="115%" fo:text-indent="0cm" style:auto-text-indent="false"/>
   </style:style>
+  <style:style style:name="P59" style:family="paragraph" style:parent-style-name="Code">
+   <style:text-properties officeooo:rsid="001c6ae0" officeooo:paragraph-rsid="001c6ae0"/>
+  </style:style>
+  <style:style style:name="P60" style:family="paragraph" style:parent-style-name="Section">
+   <style:text-properties officeooo:rsid="001f6aab" officeooo:paragraph-rsid="001f6aab"/>
+  </style:style>
+  <style:style style:name="P61" style:family="paragraph" style:parent-style-name="Text_20_body">
+   <style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+   <style:text-properties officeooo:paragraph-rsid="001f6aab"/>
+  </style:style>
+  <style:style style:name="P62" style:family="paragraph" style:parent-style-name="Text_20_body">
+   <style:text-properties officeooo:paragraph-rsid="001f6aab"/>
+  </style:style>
+  <style:style style:name="P63" style:family="paragraph" style:parent-style-name="Text_20_body">
+   <style:text-properties fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/>
+  </style:style>
+  <style:style style:name="P64" style:family="paragraph" style:parent-style-name="Subsection">
+   <style:text-properties fo:font-style="normal" style:font-style-asian="normal" style:font-style-complex="normal"/>
+  </style:style>
   <style:style style:name="T1" style:family="text">
    <style:text-properties officeooo:rsid="00138824"/>
   </style:style>
@@ -613,19 +632,25 @@
    <style:text-properties fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
   </style:style>
   <style:style style:name="T47" style:family="text">
-   <style:text-properties officeooo:rsid="0016c7c6"/>
+   <style:text-properties fo:font-size="10pt" officeooo:rsid="001f6aab" style:font-size-asian="8.75pt" style:font-size-complex="10pt"/>
   </style:style>
   <style:style style:name="T48" style:family="text">
-   <style:text-properties style:font-name="Liberation Sans" fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/>
+   <style:text-properties officeooo:rsid="0016c7c6"/>
   </style:style>
   <style:style style:name="T49" style:family="text">
-   <style:text-properties fo:font-style="normal" style:font-style-asian="normal" style:font-style-complex="normal"/>
+   <style:text-properties style:font-name="Liberation Sans" fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/>
   </style:style>
   <style:style style:name="T50" style:family="text">
-   <style:text-properties officeooo:rsid="001b70b4"/>
+   <style:text-properties fo:font-style="normal" style:font-style-asian="normal" style:font-style-complex="normal"/>
   </style:style>
   <style:style style:name="T51" style:family="text">
+   <style:text-properties officeooo:rsid="001b70b4"/>
+  </style:style>
+  <style:style style:name="T52" style:family="text">
    <style:text-properties officeooo:rsid="001da811"/>
+  </style:style>
+  <style:style style:name="T53" style:family="text">
+   <style:text-properties officeooo:rsid="001f6aab"/>
   </style:style>
   <style:page-layout style:name="pm1">
    <style:page-layout-properties fo:page-width="21.001cm" fo:page-height="29.7cm" style:num-format="1" style:print-orientation="portrait" fo:margin-top="1.499cm" fo:margin-bottom="1.499cm" fo:margin-left="2cm" fo:margin-right="1.499cm" style:writing-mode="lr-tb" style:layout-grid-color="#c0c0c0" style:layout-grid-lines="20" style:layout-grid-base-height="0.706cm" style:layout-grid-ruby-height="0.353cm" style:layout-grid-mode="none" style:layout-grid-ruby-below="false" style:layout-grid-print="false" style:layout-grid-display="false" style:footnote-max-height="0cm">
@@ -640,12 +665,12 @@
  <office:master-styles>
   <style:master-page style:name="Standard" style:page-layout-name="pm1">
    <style:footer>
-    <text:p text:style-name="P1"><text:page-number text:select-page="current">1</text:page-number></text:p>
+    <text:p text:style-name="P1"><text:page-number text:select-page="current">2</text:page-number></text:p>
    </style:footer>
   </style:master-page>
  </office:master-styles>
  <office:body>
-  <office:text>
+  <office:text text:use-soft-page-breaks="true">
    <office:forms form:automatic-focus="false" form:apply-design-mode="false"/>
    <text:sequence-decls>
     <text:sequence-decl text:display-outline-level="0" text:name="Illustration"/>
@@ -654,10 +679,52 @@
     <text:sequence-decl text:display-outline-level="0" text:name="Drawing"/>
    </text:sequence-decls>
    <text:p text:style-name="P30">Document template</text:p>
-   <text:p text:style-name="P32">Заголовок документа <text:span text:style-name="T51">(section)</text:span></text:p>
-   <text:p text:style-name="P27">Заголовок параграфа <text:span text:style-name="T51">(subsection)</text:span></text:p>
-   <text:p text:style-name="P14">Тело параграфа <text:span text:style-name="T51">(Основной тект)</text:span></text:p>
-   <text:p text:style-name="P19">код - void foo() { var int bar } <text:span text:style-name="T51">(code)</text:span></text:p>
+   <text:p text:style-name="P32">Заголовок документа <text:span text:style-name="T52">(section)</text:span></text:p>
+   <text:p text:style-name="P27">Заголовок параграфа <text:span text:style-name="T52">(subsection)</text:span></text:p>
+   <text:p text:style-name="P14">Тело параграфа <text:span text:style-name="T52">(Основной тект)</text:span></text:p>
+   <text:p text:style-name="P19">код - void foo() { var int bar } <text:span text:style-name="T52">(code)</text:span></text:p>
+   <text:p text:style-name="P19"/>
+   <text:p text:style-name="P60">Оксидирование деталей из магниевых сплавов</text:p>
+   <text:p text:style-name="P61"><text:span text:style-name="T47">(http://blog.tep-nn.ru/?p=3166</text:span><text:span text:style-name="T47">)</text:span></text:p>
+   <text:p text:style-name="Text_20_body"><text:tab/>Магниевые сплавы весьма привлекательны для использования в качестве конструкционных материалов благодаря уникальным свойствам: малому удельному весу и высокой прочности, что позволяет получать более легкие изделия, а это немаловажный фактор в авиационной промышленности. Экономия в весе конструкции при замене алюминия составляет 20 – 30%. Магниевые сплавы обладают высокой способностью гасить энергию удара и вибрационных колебаний, имеют хорошую пластичность. Существенной причиной, ограничивающей их применение, является недостаточная коррозионная стойкость в атмосферных условиях. Наиболее распространенный метод защиты от коррозии сводится к покрытию магния и его сплавов путем оксидирования, чаще с дополнительной окраской и смазкой.</text:p>
+   <text:p text:style-name="Text_20_body"/>
+   <text:p text:style-name="Text_20_body"><text:span text:style-name="T53"><text:tab/>О</text:span>ксидные пленки при покрытии магния получают химической или анодной электрохимической обработкой.</text:p>
+   <text:p text:style-name="Text_20_body"/>
+   <text:p text:style-name="Text_20_body"><text:tab/>При покрытии магния методом химического оксидирования размеры деталей несколько уменьшаются, но, тем не менее, именно этот способ нашел в промышленности широкое применение, как более простой и технологичный.</text:p>
+   <text:p text:style-name="Text_20_body"/>
+   <text:p text:style-name="Text_20_body"><text:tab/>Для временного межоперационного хранения оксидные покрытия магния осуществляют путем обработки в растворе хромового ангидрида 200 г/л при 50 – 60oС в течение 8 – 10 минут.</text:p>
+   <text:p text:style-name="P62">Предварительно необходимо провести обезжиривание в органическом растворителе <text:s/>промывку в горячей воде с добавкой 0,5% бихромата калия и сушку в течение 10 – 15 минут при 40 – 50oС. </text:p>
+   <text:p text:style-name="P62"/>
+   <text:p text:style-name="P62"><text:tab/>Для длительной защиты от коррозии при покрытии магния применяют растворы, составы которых подбираются с учетом структуры металла:</text:p>
+   <text:p text:style-name="P62"/>
+   <text:p text:style-name="P64"><text:span text:style-name="T53">Д</text:span>ля оксидирования литьевых сплавов раствор состава, г/л:</text:p>
+   <text:p text:style-name="P64"/>
+   <text:p text:style-name="P10">Бихромат калия 40 – 50</text:p>
+   <text:p text:style-name="P10">Азотная кислота 75 – 90</text:p>
+   <text:p text:style-name="P10">Хлористый аммоний 0,8 – 1,2</text:p>
+   <text:p text:style-name="P10">Температура 70 – 80oС, время обработки 0,5 – 2 минуты.</text:p>
+   <text:p text:style-name="P10"/>
+   <text:p text:style-name="P10"/>
+   <text:p text:style-name="P10"/>
+   <text:p text:style-name="P10"/>
+   <text:p text:style-name="Subsection"><text:soft-page-break/>Для покрытия магния из деформированных сплавов концентрации компонентов в растворе снижаются, г/л:</text:p>
+   <text:p text:style-name="Subsection"/>
+   <text:p text:style-name="P10"><text:span text:style-name="T53">Б</text:span>ихромат калия 20 – 25</text:p>
+   <text:p text:style-name="P10">Азотная кислота 30 – 35</text:p>
+   <text:p text:style-name="P10">Хлористый аммоний 1 – 1,5</text:p>
+   <text:p text:style-name="P10">Температура 70 – 80С, время обработки 2 – 5 минут.</text:p>
+   <text:p text:style-name="P10"/>
+   <text:p text:style-name="Text_20_body">При проведении процесса покрытия магния очень важно соблюдать временной и температурный режим: понижение температуры растворов приводит к ухудшению защитных свойств, повышение – сопровождается интенсивным травлением и получением рыхлой пленки.</text:p>
+   <text:p text:style-name="Text_20_body">В зависимости от продолжительности процесса покрытия магния цвет пленки меняется от желтого до темно-коричневого. По мере работы раствора скорость формирования оксидного слоя уменьшается, при этом происходит уменьшение размеров деталей на 0,01 мм.</text:p>
+   <text:p text:style-name="Text_20_body"/>
+   <text:p text:style-name="Subsection">Для оксидирования точных деталей рекомендуется применять раствор состава, г/л:</text:p>
+   <text:p text:style-name="Subsection"/>
+   <text:p text:style-name="P10">Бихромат калия 30 – 50</text:p>
+   <text:p text:style-name="P10">Алюмокалиевые квасцы 8 – 12</text:p>
+   <text:p text:style-name="P10">Уксусная кислота (60%-ная) 5 – 8</text:p>
+   <text:p text:style-name="P10">Температура 15 – 30oС, время обработки 5 – 15 минут.</text:p>
+   <text:p text:style-name="Text_20_body"/>
+   <text:p text:style-name="Text_20_body">Увеличение концентрации уксусной кислоты ведет к активному растворению металла: при концентрации свыше 8 мл/л ухудшается качество пленки, при содержании уксусной кислоты менее 5 мл/л на поверхности образуется желто-зеленый налет. Введение бихромата способствует пассивированию поверхности металла.</text:p>
   </office:text>
  </office:body>
 </office:document>
