@@ -20,6 +20,7 @@ h1 {
 p[id="plane"] {
     font-family: serif;
     text-indent: 1.5em;
+    font-size: 12pt;
     text-align: justify; /* Выравнивание по ширине */
     margin-left: 60px; /* Отступ слева в пикселах */
     margin-right: 60px; /* Отступ справа в пикселах */
@@ -47,7 +48,26 @@ p[id="subsection"] {
 p[id="tip"] {
     font-family: serif;
     font-style: italic;
+    font-size: 12pt;
     text-indent: 0.0em;
+    text-align: justify; /* Выравнивание по ширине */
+    margin-left: 60px; /* Отступ слева в пикселах */
+    margin-right: 60px; /* Отступ справа в пикселах */
+}
+
+p[id="code"] {
+    font-family: monospace;
+    text-indent: 0.0em;
+    font-size: 12pt;
+    text-align: left; /* Выравнивание по ширине */
+    margin-left: 60px; /* Отступ слева в пикселах */
+    margin-right: 60px; /* Отступ справа в пикселах */
+}
+
+p[id="small"] {
+    font-family: serif;
+    font-style: italic;
+    font-size: 9pt;
     text-align: justify; /* Выравнивание по ширине */
     margin-left: 60px; /* Отступ слева в пикселах */
     margin-right: 60px; /* Отступ справа в пикселах */
