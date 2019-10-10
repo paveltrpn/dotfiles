@@ -1,0 +1,108 @@
+
+body {
+    font-family: serif; /* Семейство шрифтов */
+    font-size: 12pt; /* Размер основного шрифта в пунктах  */
+    /*background-color: #f0f0f0; /* Цвет фона веб-страницы */
+    background: rgb(204,204,204); 
+    color: #333; /* Цвет основного текста */ 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    color: #000000; /* Цвет заголовка */
+    font-size: 14pt; /* Размер шрифта в пунктах */
+    font-family: serif; /* Семейство шрифтов */
+    /*font-weight: normal; /* Нормальное начертание текста  */
+    text-align: justify;
+}
+
+p[id="plane"] {
+    font-family: serif;
+    text-indent: 1.5em;
+    font-size: 12pt;
+    text-align: justify; /* Выравнивание по ширине */
+    margin-left: 60px; /* Отступ слева в пикселах */
+    margin-right: 60px; /* Отступ справа в пикселах */
+}
+
+p[id="section"] {
+    font-family: serif;
+    font-size: 14pt;
+    font-weight: bold;
+    text-indent: 1.5em;
+    text-align: center; 
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+p[id="subsection"] {
+    font-family: serif;
+    font-style: italic;
+    font-weight: bold;
+    text-align: justify; 
+    margin-left: 60px; 
+    margin-right: 60px; 
+}
+
+p[id="tip"] {
+    font-family: serif;
+    font-style: italic;
+    font-size: 12pt;
+    text-indent: 0.0em;
+    text-align: justify; 
+    margin-left: 60px;
+    margin-right: 60px; 
+}
+
+p[id="code"] {
+    font-family: monospace;
+    text-indent: 0.0em;
+    font-size: 12pt;
+    text-align: left; 
+    margin-left: 60px; 
+    margin-right: 60px;
+}
+
+p[id="small"] {
+    font-family: serif;
+    font-style: italic;
+    font-size: 9pt;
+    text-align: justify;
+    margin-left: 60px;  
+    margin-right: 60px; 
+}
+
+p[id="link"] {
+    font-family: serif;
+    font-size: 12pt;
+    text-align: justify; 
+    margin-left: 60px; 
+    margin-right: 60px; 
+}
+
+div {
+    background: white;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+
+div[id="A4"] {  
+    width: 21cm;
+    /*height: 29.7cm;*/ /* если раскомментировать, то размер страницы будет
+                        точно с А4 и нужно будет начинать новую странице кадый раз */
+}
+
+div[id="A4"][layout="portrait"] {
+    width: 29.7cm;
+    height: 21cm;  
+}
+
+@media print {
+    body, page {
+        margin: 0;
+        box-shadow: 0;
+    }
+}
