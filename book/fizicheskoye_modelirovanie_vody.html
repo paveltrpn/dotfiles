@@ -125,8 +125,59 @@
                 А вот и основной шаг программы:
             </p>
 
-            <p id="subsection">
-                
+            <p id="code">
+            <code>
+            void time_step()<br>
+	        {<br>
+            &emsp; int i,j,i1,j1;<br>
+		    &emsp; i1=rand()%110;<br>
+		    &emsp; j1=rand()%110;<br>
+		    &emsp; /*1*/<br>
+		    &emsp; if((rand()&127)==0)<br>
+		    &emsp; for(i=-3;i<4;i++)<br></4>
+		    &emsp; {<br>
+			&emsp; &emsp; for(j=-3;j<4;j++)<br></4>
+			&emsp; &emsp; {<br>
+			&emsp; &emsp; float v=6.0f-i*i-j*j;<br>
+			&emsp; &emsp; if(v<0.0f)v=0.0f;<br></0.0f>
+			&emsp; &emsp; n->U[i+i1+3][j+j1+3]-=v*0.004f;<br>
+			}<br>
+		    }<br>
+		    for(i=1;i<127;i++)<br></127>
+		    {<br>
+			for(j=1;j<127;j++)<br></127>
+			{<br>
+			/*2*/<br>
+			vertices[i][j].coo[2]=n->U[i][j];<br>
+			vertices[i][j].nor[0]=n->U[i-1][j]-n->U[i+1][j];<br>
+			vertices[i][j].nor[1]=n->U[i][j-1]-n->U[i][j+1];<br>
+			/*3*/<br>
+			#define vis 0.005f  <br>
+			float laplas=(n->U[i-1][j]+<br>
+			n->U[i+1][j]+<br>
+			n->U[i][j+1]+<br>
+			n->U[i][j-1])*0.25f-n->U[i][j];<br>
+  			/*4*/<br>
+  			p→U[i][j]=((2.0f-vis)*n→U[i][j]-p→U[i][j]*(1.0f-vis)+laplas);<br>
+			}<br>
+		    }<br>
+		    /*5*/<br>
+		    for(i=1;i<127;i++)<br>
+		    {<br>
+			glBegin(GL_TRIANGLE_STRIP);<br>
+			for(j=1;j<127;j++)<br>
+			{
+			glNormal3fv(vertices[i][j].nor);<br>
+			glVertex3fv(vertices[i][j].coo);<br>
+			glNormal3fv(vertices[i+1][j].nor);<br>
+			glVertex3fv(vertices[i+1][j].coo);<br>
+			}<br>
+			glEnd();<br>
+		    }<br>
+		    /*6*/<br>
+		    field *sw=p;p=n;n=sw;<br>
+	        }<br>
+            </code>
             </p>
 
             <p id="tip">
