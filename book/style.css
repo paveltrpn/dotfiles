@@ -60,9 +60,9 @@ p[id="small"] {
 }
 
 p[id="link"] {
-    font-family: serif;
+    font-family: sans-serif;
     font-size: 12pt;
-    text-align: justify; 
+    text-align: center; 
     margin-left: 60px; 
     margin-right: 60px; 
 }

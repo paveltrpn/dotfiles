@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Работа с Github</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="A4">
+            <br>
+            <p id="section">
+                Работа с Github
+            </p>
+            
+            <p id="plane">
+                Скачать репозиторий из облака (с www.github.com):
+            </p>
+
+            <pre id="code">
+    $ git clone git://github.com/USER_NAME/REPO_NAME
+            </pre>
+
+            <p id="plane">
+                Сделать алиас на другое имя накоторо репозитория. Что-бы работали пуш и пулл нужно что-бы алиас ссылался на https:
+            </p>
+
+            <pre id="code">
+    $ cd REPO_NAME
+    $ git remote add ALIAS_NAME https://github.com/USER_NAME/REPO_NAME
+            </pre>
+            
+            <p id="plane">
+                Фиксация изменений (или добавление коммита):
+            </p>
+
+            <pre id="code">
+    $ git commit -am «COMMIT_NAME»
+    $ git push REPO_NAME master
+            </pre>
+
+            <p id="plane">
+                Отмена последнего коммита, например когда вы делаете коммит слишком рано, забыв 
+                добавить какие-то файлы, или напутали с комментарием к коммиту. Если вам хотелось бы 
+                сделать этот коммит ещё раз, вы можете выполнить commit с опцией --amend:
+            </p>
+
+            <pre id="code">
+    $ git commit --amend
+            </pre>
+            <br>
+        </div>
+    </body>
+</html>
