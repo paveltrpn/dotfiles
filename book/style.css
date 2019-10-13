@@ -1,12 +1,15 @@
 
 body {
-    font-family: serif; /* Семейство шрифтов */
+    font-family: Arimo,Tahoma,Helvetica,sans-serif; /* Семейство шрифтов */
     font-size: 12pt; /* Размер основного шрифта в пунктах  */
     /*background-color: #f0f0f0; /* Цвет фона веб-страницы */
     background: rgb(204,204,204); 
     color: #333; /* Цвет основного текста */ 
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.3;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
 }
 
 h1 {
@@ -17,58 +20,41 @@ h1 {
     text-align: justify;
 }
 
-p[id="plane"] {
-    font-family: serif;
-    text-indent: 1.5em;
-    font-size: 12pt;
-    text-align: justify; /* Выравнивание по ширине */
-    margin-left: 60px; /* Отступ слева в пикселах */
-    margin-right: 60px; /* Отступ справа в пикселах */
-}
-
 p[id="section"] {
-    font-family: serif;
-    font-size: 14pt;
+    line-height: 1.3;
+    letter-spacing: -.1rem;
+    font-size: 24pt;
     font-weight: bold;
-    text-indent: 1.5em;
     text-align: center; 
     margin-left: 60px;
     margin-right: 60px;
 }
 
 p[id="subsection"] {
-    font-family: serif;
-    font-style: italic;
+    font-family: sans-serif;
+    line-height: 1.0;
+    letter-spacing: -.1rem;
+    word-break: break-word;
+    font-size: 20pt;
     font-weight: bold;
     text-align: justify; 
     margin-left: 60px; 
     margin-right: 60px; 
 }
 
-p[id="tip"] {
-    font-family: serif;
-    font-style: italic;
+p[id="plane"] {
+    /* text-indent: 1.5em; */
     font-size: 12pt;
-    text-indent: 0.0em;
-    text-align: justify; 
-    margin-left: 60px;
-    margin-right: 60px; 
-}
-
-p[id="code"] {
-    font-family: monospace;
-    text-indent: 0.0em;
-    font-size: 12pt;
-    text-align: left; 
-    margin-left: 60px; 
-    margin-right: 60px;
+    text-align: justify; /* Выравнивание по ширине */
+    margin-left: 60px; /* Отступ слева в пикселах */
+    margin-right: 60px; /* Отступ справа в пикселах */
 }
 
 p[id="small"] {
-    font-family: serif;
+    line-height: 1.0;
     font-style: italic;
     font-size: 9pt;
-    text-align: justify;
+    text-align: center;
     margin-left: 60px;  
     margin-right: 60px; 
 }
@@ -81,6 +67,33 @@ p[id="link"] {
     margin-right: 60px; 
 }
 
+pre[id=code] {
+    font-family: monospace;
+    font-size: 11pt;
+    text-align: left;
+    line-height: 1.2;
+    margin-left: 60px; 
+    margin-right: 60px; 
+}
+
+span[id="select"] {
+    line-height: 1.1;
+    letter-spacing: -.05rem;
+    font-weight: bold;
+}
+
+span[id="cmnt"] {
+    color: #979797;
+    font-style: italic;
+    font-family: monospace;
+}
+
+span[id="kwd"] {
+    font-weight: 700;
+    color: #000000;
+    font-family: monospace;
+}
+
 div {
     background: white;
     display: block;
@@ -90,9 +103,14 @@ div {
 }
 
 div[id="A4"] {  
+    width: 1200px;
+    /*
+    если раскомментировать, то размер страницы будет
+    точно с А4 и нужно будет начинать новую странице кадый раз 
+
     width: 21cm;
-    /*height: 29.7cm;*/ /* если раскомментировать, то размер страницы будет
-                        точно с А4 и нужно будет начинать новую странице кадый раз */
+    height: 29.7cm; 
+    */
 }
 
 div[id="A4"][layout="portrait"] {
