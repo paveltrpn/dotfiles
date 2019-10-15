@@ -6,67 +6,67 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div id="A4">
-            <p id="section">
+        <div class="A4">
+            <p class="section">
                 Символические ссылки
             </p>
 
-            <p id="small">
+            <p class="small">
                 (https://codebeer.ru/simvolicheskie-ssylki-v-linux/)
             </p>
 
-            <p id="plane">
-                <span id="select">Жесткая ссылка</span> – это запись, которая указывает на дескриптор <i>inode</i>. 
+            <p class="plane">
+                <span class="select">Жесткая ссылка</span> – это запись, которая указывает на дескриптор <i>inode</i>. 
                 Жесткие ссылки можно создавать только для файлов и только в пределах одной 
                 файловой системы. Перемещение или изменении имени исходного файла, 
                 не оказывает влияния на работоспособность жесткой ссылки.
             </p>
 
-            <p id="plane">
-                <span id="select">Символическая ссылка</span> — запись, которая указывает на имя файла или директории. 
+            <p class="plane">
+                <span class="select">Символическая ссылка</span> — запись, которая указывает на имя файла или директории. 
                 Символические ссылки можно создавать для каталогов и объектов, которые расположены 
                 в разных файловых системах. Если переименовать или переместить файл в другую 
                 директорию, символическая ссылка потеряет работоспособность.
             </p>
 
-            <p id="subsection">
+            <p class="subsection">
                 Создание жесткой ссылки в Linux
             </p>
 
-            <p id="plane">
+            <p class="plane">
                 Чтобы создать жесткую ссылку в Linux,используется команда <i>ln</i>:
             </p>
 
-            <pre id="code">
-    <span id="cmnt"># Синтаксис команды</span>
-    <span id="kwd">ln</span> -s <цель> <ссылка>
-    <span id="cmnt"># Создать жесткую ссылку в Linux</span>
-    <span id="kwd">ln</span> /home/file /link
+            <pre class="code">
+    <span class="cmnt"># Синтаксис команды</span>
+    <span class="kwd">ln</span> -s <цель> <ссылка>
+    <span class="cmnt"># Создать жесткую ссылку в Linux</span>
+    <span class="kwd">ln</span> /home/file /link
             </pre>
 
-            <p id="plane">
+            <p class="plane">
                 Если попытаться создать жесткую ссылку для каталога и файла за пределами 
                 одной файловой системы, то вы получите ошибку.
             </p>
 
-            <p id="subsection">
+            <p class="subsection">
                 Создание символической ссылки в Linux:
             </p>
     
-            <p id="plane">
+            <p class="plane">
                 Чтобы создать символическую ссылку в <i>Linux</i>, вместе с командой <i>ln</i>, 
                 необходимо использовать параметр <i>-s</i>:
             </p>
 
-            <pre id="code">
-    <span id="cmnt"># Синтаксис команды</span>
-    <span id="kwd">ln</span> -s <цель> <ссылка> 
-    <span id="cmnt"># Создать символическую ссылку в Linux</span> 
-    <span id="kwd">ln</span> -s /home/file /link 
-    <span id="kwd">ln</span> -s /home/dir /home/link
+            <pre class="code">
+    <span class="cmnt"># Синтаксис команды</span>
+    <span class="kwd">ln</span> -s <цель> <ссылка> 
+    <span class="cmnt"># Создать символическую ссылку в Linux</span> 
+    <span class="kwd">ln</span> -s /home/file /link 
+    <span class="kwd">ln</span> -s /home/dir /home/link
             </pre>
 
-            <p id="plane">
+            <p class="plane">
                 При создании символических ссылок, имена файлов могут быть как абсолютными, 
                 так и относительными.
             </p>

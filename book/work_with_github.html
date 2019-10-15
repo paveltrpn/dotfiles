@@ -6,133 +6,133 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div id="A4">
+        <div class="A4">
             <br>
-            <p id="section">
+            <p class="section">
                 Работа с Github
             </p>
             
-            <p id="plane">
+            <p class="plane">
                 Скачать репозиторий из облака <i>(с www.github.com):</i>
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ git clone git://github.com/USER_NAME/REPO_NAME
             </pre>
 
-            <p id="plane">
+            <p class="plane">
                 Сделать алиас на другое имя накоторо репозитория. Что-бы работали пуш и пулл нужно что-бы алиас ссылался на <i>https:</i>
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ cd REPO_NAME
     $ git remote add ALIAS_NAME https://github.com/USER_NAME/REPO_NAME
             </pre>
             
-            <p id="plane">
+            <p class="plane">
                 Фиксация изменений (или добавление коммита):
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ git commit -am «COMMIT_NAME»
     $ git push REPO_NAME master
             </pre>
 
-            <p id="plane">
+            <p class="plane">
                 Отмена последнего коммита, например когда вы делаете коммит слишком рано, забыв 
                 добавить какие-то файлы, или напутали с комментарием к коммиту. Если вам хотелось бы 
                 сделать этот коммит ещё раз, вы можете выполнить commit с опцией <i>--amend:</i>
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ git commit --amend
             </pre>
 
-            <p id="plane">
+            <p class="plane">
                Для примера, если после совершения коммита вы осознали, что забыли проиндексировать 
                изменения в файле, которые хотели добавить в этот коммит, вы можете сделать что-то подобное: 
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ git commit -m 'initial commit'
     $ git add forgotten_file
     $ git commit —amend
             </pre>
 
-            <p id="plane">
+            <p class="plane">
                 Все три команды вместе дают один коммит — второй коммит заменяет результат первого.
             </p>
 
-            <p id="plane">
+            <p class="plane">
                 Обновление локального репозитория:
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ cd REPO_NAME
     $ git pull
             </pre>
 
-            <p id="plane">
+            <p class="plane">
                 Для того чтобы начать отслеживать (добавить под версионный контроль) новый файл, 
                 используется команда git add. Чтобы начать отслеживание файла FILE_NAME, вы можете выполнить следующее:
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ git add FILE_NAME
             </pre>
 
-            <p id="plane">
+            <p class="plane">
                 Основной инструмент, используемый для определения, какие файлы в каком состоянии находятся — это команда git status. 
                 Если вы выполните эту команду сразу после клонирования, вы увидите что-то вроде этого:
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ git status
     # On branch master
     nothing to commit, working directory clean
             </pre>
 
-            <p id="plane">
+            <p class="plane">
                 Это означает, что у вас чистый рабочий каталог, другими словами — в нём нет отслеживаемых 
                 изменённых файлов. Git также не обнаружил неотслеживаемых файлов, в противном случае они бы 
                 были перечислены здесь. И наконец, команда сообщает вам на какой ветке (branch) вы сейчас находитесь. 
             </p>
 
-            <p id="plane">
+            <p class="plane">
                 Для того чтобы удалить файл из Git'а, вам необходимо удалить его из отслеживаемых файлов 
                 (точнее, удалить его из вашего индекса) а затем выполнить коммит. Это позволяет сделать 
                 команда git rm, которая также удаляет файл из вашего рабочего каталога, так что вы в 
                 следующий раз не увидите его как “неотслеживаемый”.
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ git rm FILE_NAME
             </pre>
 
-            <p id="plane">
+            <p class="plane">
                 Удалить файл FILE_NAME из индекса, оставив его при этом в рабочем каталоге:
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ git rm --cached FILE_NAME
             </pre>
 
-            <p id="subsection">
+            <p class="subsection">
                 Испарвление ошибки с добавлением нового коммита в удалённый репозиторий из неактуального локального репозитория.
             </p>
 
-            <p id="plane">
+            <p class="plane">
                 При попытке сделать новый коммит в удалённый репозиторий из локального и выполнении <i>$ git push</i> выпадает ошибка. Истправляется так:
             </p>
 
-            <pre id="code">
+            <pre class="code">
     $ git fetch --all
     $ git reset --hard origin/<branch_name> (например master)
             </pre>
 
-            <p id="plane">
-                <span id="kwd">$ git fetch</span> — скачивает последнее из удалённого репозитория не совершая попыток смержить или заменить что либо.<br>
-                <span id="kwd">$ git reset</span> — сбрасывает ветку master к тому, что только что было подобрано <i>(fetch)</i>. 
+            <p class="plane">
+                <span class="kwd">$ git fetch</span> — скачивает последнее из удалённого репозитория не совершая попыток смержить или заменить что либо.<br>
+                <span class="kwd">$ git reset</span> — сбрасывает ветку master к тому, что только что было подобрано <i>(fetch)</i>. 
                 Опция <i>--hard</i> заменяет все файлы в рабочем дереве каталогов на файлы, имеющиеся в <i>origin/master</i>.
             </p>
 

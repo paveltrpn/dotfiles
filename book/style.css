@@ -27,7 +27,7 @@ blockquote {
     margin-right: 120px;
 }
 
-p[id="section"] {
+p[class="section"] {
     line-height: 1.3;
     letter-spacing: -.1rem;
     font-size: 24pt;
@@ -37,7 +37,7 @@ p[id="section"] {
     margin-right: 60px;
 }
 
-p[id="subsection"] {
+p[class="subsection"] {
     font-family: sans-serif;
     line-height: 1.0;
     letter-spacing: -.1rem;
@@ -49,7 +49,7 @@ p[id="subsection"] {
     margin-right: 60px; 
 }
 
-p[id="plane"] {
+p[class="plane"] {
     /* text-indent: 1.5em; */
     font-size: 12pt;
     text-align: justify; /* Выравнивание по ширине */
@@ -57,7 +57,7 @@ p[id="plane"] {
     margin-right: 60px; /* Отступ справа в пикселах */
 }
 
-p[id="small"] {
+p[class="small"] {
     line-height: 1.0;
     font-style: italic;
     font-size: 9pt;
@@ -66,15 +66,15 @@ p[id="small"] {
     margin-right: 60px; 
 }
 
-p[id="link"] {
+p[class="link"] {
     font-family: sans-serif;
-    font-size: 12pt;
-    text-align: center; 
+    font-size: 14pt;
+    text-align: left; 
     margin-left: 60px; 
     margin-right: 60px; 
 }
 
-pre[id=code] {
+pre[class=code] {
     font-family: monospace;
     font-size: 11pt;
     text-align: left;
@@ -83,19 +83,19 @@ pre[id=code] {
     margin-right: 60px; 
 }
 
-span[id="select"] {
+span[class="select"] {
     line-height: 1.1;
     letter-spacing: -.05rem;
     font-weight: bold;
 }
 
-span[id="cmnt"] {
+span[class="cmnt"] {
     color: #979797;
     font-style: italic;
     font-family: monospace;
 }
 
-span[id="kwd"] {
+span[class="kwd"] {
     font-size: 11pt;
     font-weight: 700;
     color: #000000;
@@ -110,7 +110,7 @@ div {
     box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
 }
 
-div[id="A4"] {  
+div[class="A4"] {  
     width: 1200px;
     /*
     если раскомментировать, то размер страницы будет
@@ -121,7 +121,7 @@ div[id="A4"] {
     */
 }
 
-div[id="A4"][layout="portrait"] {
+div[class="A4"][layout="portrait"] {
     width: 29.7cm;
     height: 21cm;  
 }
