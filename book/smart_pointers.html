@@ -3,7 +3,7 @@
     <head>
         <title>Использование умных указателей в C++</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <div class="A4">
@@ -40,6 +40,115 @@
                 указателя автоматически вызывается деструктор объекта, на который он указывает. 
             </p>
 
+            <p class="plane">
+                Создается unique_ptr так:
+            </p>
+
+            <pre class="code">
+    std::unique_ptr<SomeClass> unq(new SomeClass(/* ctor args */));
+            </pre>
+            
+            <p class="plane">
+                … но обычно используют шаблон make_unique, так короче:
+            </p>
+
+            <pre class="code">
+    auto unq = std::make_unique<SomeClass>(/* ctor args */);
+            </pre>
+
+            <p class="plane">
+                Класс unique_ptr перегружает оператор ->, что позволяет обращаться к полям класса и 
+                вызывать его методы, словно мы работаем с обычным указателем:
+            </p>
+
+            <pre class="code">
+    unq→sayHello();
+            </pre>
+
+            <p class="plane">
+                Как уже отмечалось, unique_ptr запрещено копировать:
+            </p>
+
+            <pre class="code">
+    // will not compile!
+    auto cpy = unq;
+            </pre>
+
+            <p class="plane">
+                Однако владение им можно передать при помощи std::move, например: 
+            </p>
+
+            <pre class="code">
+    auto mov = std::move(unq);
+    // unq is invalid now!
+    mov→sayHello();
+            </pre>
+
+            <p class="plane">
+                Плюс к этому, мы всегда можем получать из unique_ptr обычный указатель на объект:
+            </p>
+
+            <pre class="code">
+    SomeClass* ptr = mov.get();
+    ptr→sayHello();
+            </pre>
+
+            <p class="plane">
+                … хотя это и является code smell. Кроме того, ничто не мешает создавать ссылки (reference) на unique_ptr:
+            </p>
+
+            <pre class="code">
+    auto& ref = mov;
+    ref→sayHello();
+            </pre>
+
+            <p class="plane">
+                То есть, в этом случае мы как бы не отнимаем владение объектом, а ненадолго одалживаем его, 
+                обращаясь к нему через все тот же умный указатель. Интересно, что unique_ptr позволяет указать 
+                функцию, которую он будет вызывать вместо деструктора, так называемый custom deleter. Это позволяет 
+                использовать unique_ptr с ресурсами, возвращаемых из библиотек для языка C, и даже реализовать аналог defer из языка Go:
+            </p>
+
+            <pre class="code">
+    /* g++ custom-deleter.cpp -o custom-deleter */
+    #include &lt;memory&gt;
+    #include &lt;functional&gt;
+    #include &lt;iostream&gt;
+    #include &lt;stdio.h&gt;
+
+    template&lt;typename T&gt;
+    using auto_cleanup = std::unique_ptr<T,std::function<void(T*)>>;
+
+    static char dummy[] = "";
+
+    #define _DEFER_CAT_(a,b) a##b
+    #define _DEFER_NAME_(a,b) _DEFER_CAT_(a,b)
+    #define defer(...) \
+    auto _DEFER_NAME_(_defer_,__LINE__) = \
+    auto_cleanup&lt;char&gt;(dummy, [&](char*) { __VA_ARGS__; });
+
+    int main() {
+        auto_cleanup&lt;FILE&gt; f(
+            fopen("test.txt", "w"),
+            [](FILE* f) { fclose(f); }
+        );
+
+        defer( std::cout &lt;&lt; "Bye #1" &lt;&lt; std::endl );
+        defer( std::cout &lt;&lt; "Bye #2" &lt;&lt; std::endl );
+
+        fwrite("Hello!\n", 7, 1, f.get());
+    }
+            </pre>
+
+            <p class="plane">
+                Заметьте, что в макросе defer нам пришлось передать в unique_ptr фиктивный указатель. Если бы мы передали nullptr, 
+                custom deleter не был бы вызван. Важно! Если в умном указателе вы держите указать на массив объектов, 
+                то обязаны указать custom deleter, вызывающий для этого массива delete[] вместо delete. Если этого не 
+                сделать, будет освобожден только первый объект из массива, остальные же утекут.
+                shared_ptr и weak_ptr.
+            </p>
+
+            <br>
         </div>
     </body>
 </html>

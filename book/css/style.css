@@ -74,6 +74,16 @@ p[class="link"] {
     margin-right: 60px; 
 }
 
+a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    color: rgb(0, 26, 255);
+} 
+
+a:hover { 
+    text-decoration: underline; /* Добавляем подчеркивание при наведении курсора на ссылку */
+    color: red; /* Ссылка красного цвета */
+} 
+
 pre[class=code] {
     font-family: monospace;
     font-size: 11pt;

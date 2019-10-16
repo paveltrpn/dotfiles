@@ -3,7 +3,7 @@
     <head>
         <title>Физическое моделирование воды</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <div class="A4">
@@ -135,16 +135,16 @@
     
         if((rand()&127)==0)
     
-        for(i=-3;i<4;i++) {
-            for(j=-3;j<4;j++) {
+        for(i=-3;i&lt;4;i++) {
+            for(j=-3;j&lt;4;j++) {
                 float v=6.0f-i*i-j*j;
-                if(v<0.0f)v=0.0f;
+                if(v&lt;0.0f)v=0.0f;
                 n->U[i+i1+3][j+j1+3]-=v*0.004f;
             }
         }
     
-        for(i=1;i<127;i++) {
-            for(j=1;j<127;j++) {
+        for(i=1;i&lt;127;i++) {
+            for(j=1;j&lt;127;j++) {
                 /*2*/
                 vertices[i][j].coo[2]=n->U[i][j];
                 vertices[i][j].nor[0]=n->U[i-1][j]-n->U[i+1][j];
@@ -160,9 +160,9 @@
             }
         }
         /*5*/
-        for(i=1;i<127;i++) {
+        for(i=1;i&lt;127;i++) {
             glBegin(GL_TRIANGLE_STRIP);
-            for(j=1;j<127;j++) {
+            for(j=1;j&lt;127;j++) {
                 glNormal3fv(vertices[i][j].nor);
                 glVertex3fv(vertices[i][j].coo);
                 glNormal3fv(vertices[i+1][j].nor);

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+ <semantics>
+  <mrow>
+   <mfrac>
+    <mrow>
+     <msup>
+      <mi>d</mi>
+      <mn>2</mn>
+     </msup>
+     <mi>U</mi>
+    </mrow>
+    <msup>
+     <mi mathvariant="italic">dt</mi>
+     <mn>2</mn>
+    </msup>
+   </mfrac>
+   <mo stretchy="false">=</mo>
+   <mrow>
+    <mfrac>
+     <mrow>
+      <msup>
+       <mi>d</mi>
+       <mn>2</mn>
+      </msup>
+      <mi>U</mi>
+     </mrow>
+     <msup>
+      <mi mathvariant="italic">dx</mi>
+      <mn>2</mn>
+     </msup>
+    </mfrac>
+    <mo stretchy="false">+</mo>
+    <mfrac>
+     <mrow>
+      <msup>
+       <mi>d</mi>
+       <mn>2</mn>
+      </msup>
+      <mi>U</mi>
+     </mrow>
+     <msup>
+      <mi mathvariant="italic">dy</mi>
+      <mn>2</mn>
+     </msup>
+    </mfrac>
+   </mrow>
+  </mrow>
+  <annotation encoding="StarMath 5.0">{ d^2 U } over { dt^2 } = { d^2 U } over { dx^2 } + { d^2 U } over { dy^2 }</annotation>
+ </semantics>
+</math>
