@@ -3,14 +3,28 @@
     <head>
         <title>Использование умных указателей в C++</title>
         <meta charset="utf-8">
-        <link href="css/prism.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/prism.css"/> <!-- Тема подсветки кода для Prism -->
+
+        <!-- Подключение локального MathJax -->
+        <script type="text/javascript" id="MathJax-script" async
+        src="js/MathJax3.0.0/es5/tex-svg.js">
+            MathJax.Hub.Config({
+                extensions: ["tex2jax.js","TeX/noErrors.js"],
+	            jax: ["input/TeX","output/HTML-CSS"],
+	            tex2jax: {inlineMath: [['$','$'],["\\(","\\)"]]},
+	            "HTML-CSS": {availableFonts:["TeX"]}
+            });
+        </script>
+        <!-- ============================== -->
     </head>
     <body>
-        <script src="js/prism.js"></script>
+        <!-- Подключение скрипта Prism -->
+        <script src="js/prism-1.17.1.js"></script>
+
         <div class="A4">
             <p class="section">
-                Использование умных указателей в C++
+                ИСПОЛЬЗОВАНИЕ УМНЫХ УКАЗАТЕЛЕЙ С++
             </p>
 
             <p class="plane">
@@ -164,6 +178,217 @@
                 то обязаны указать custom deleter, вызывающий для этого массива delete[] вместо delete. Если этого не 
                 сделать, будет освобожден только первый объект из массива, остальные же утекут.
                 shared_ptr и weak_ptr.
+            </p>
+
+            <p class="subsection">
+                shared_ptr
+            </p>
+
+            <p class="plane">
+                Класс shared_ptr является указатем на объект, которым владеет сразу несколько объектов. Указатель 
+                можно как перемещать, так и копировать. Число существующих указателей отслеживается при помощи счетчика ссылок. 
+                Когда счетчик ссылок обнуляется, вызывается деструктор объекта. Сам по себе shared_ptr является thread-safe, 
+                но он не делает магическим образом thread-safe объект, на который ссылается. То есть, если доступ к объекту может 
+                осуществляться из нескольких потоков, вы должны не забыть предусмотреть в нем мьютексы или что-то такое.<br>
+                <br>
+                Для создания shared_ptr обычно используется шаблон make_shared:
+            </p>
+
+            <pre>
+                <code class="language-c++">
+                    auto ptr = std::make_shared&lt;SomeClass&gt;(/* ctor args */);
+                </code>
+            </pre>
+
+            <p class="plane">
+                    В остальном работа с ним мало отличается от работы с unique_ptr, за тем исключением, что shared_ptr можно 
+                    смело копировать. <br>
+                    <br>
+                    Интересные грабли при использовании shared_ptr заключается в том, что с его помощью
+                    можно создать циклические ссылки. Например, есть два объекта. Первый ссылается при помощи shared_ptr 
+                    на второй, а второй — на первый. Даже если ни на один из объектов нет других ссылок, счетчики ссылок никогда 
+                    не обнулятся, и объекты никогда не будут уничтожены.
+            </p>
+
+            <p class="subsection">
+                weak_ptr
+            </p>
+
+            <p class="plane">
+                Эта проблема обходится при помощи weak_ptr, так называемого слабого указателя. Класс weak_ptr 
+                похож на shared_ptr, но не участвует в подсчете ссылок. Также у weak_ptr есть метод lock(), 
+                возвращающий временный shared_ptr на объект. Пример использования:
+            </p>
+
+            <pre>
+                <code class="language-c++">
+                    #include &lt;memory&gt;
+                    #include &lt;iostream&gt;
+                    
+                    class SomeClass {
+                    public:
+                        void sayHello() {
+                            std::cout &lt;&lt; "Hello!" &lt;&lt; std::endl;
+                        }
+
+                        ~SomeClass() {
+                            std::cout &lt;&lt; "~SomeClass" &lt;&lt; std::endl;
+                        }
+                    };
+
+                    int main() {
+                        std::weak_ptr&lt;SomeClass&gt; wptr;
+                    
+                        {
+                            auto ptr = std::make_shared&lt;SomeClass&gt;();
+                            wptr = ptr;
+                    
+                            if(auto tptr = wptr.lock()) {
+                                tptr-&gt;sayHello();
+                            } else {
+                                std::cout &lt;&lt; "lock() failed" &lt;&lt; std::endl;
+                            }
+                        }
+
+                        if(auto tptr = wptr.lock()) {
+                            tptr-&gt;sayHello();
+                        } else {
+                            std::cout &lt;&lt; "lock() failed" &lt;&lt; std::endl;
+                        }
+                    }
+                </code>
+            </pre>
+
+            <p class="plane">
+                Программа выведет:
+            </p>
+
+            <pre class="code">
+                Hello!
+                ~SomeClass
+                lock() failed
+            </pre>
+
+            <p class="plane">
+                Можно думать о weak_ptr как об указателе, позволяющим получить временное владение объектом. 
+                Само собой разумеется, если все постоянные указатели на объект перестанут существовать, и 
+                останутся только временные, полученные при помощи метода lock() класса weak_ptr, объект 
+                продолжит свое существование. Он будет уничтожен только тогда, когда на объект не останется 
+                вообще никаких указателей.
+            </p>
+
+            <p class="subsection">
+                Умные указатели и наследование
+            </p>
+
+            <p class="plane">
+                Вопрос, о котором часто забывают — это кастование умных указателей вверх и вниз по иерархии классов. 
+                Для shared_ptr в стандартной библиотеке есть шаблоны static_pointer_cast, dynamic_pointer_cast и др. 
+                Для unique_ptr таких же шаблонов почему-то не занесли.<br>
+                <br>
+                Пример кода:
+            </p>
+
+            <pre>
+                <code class="language-cpp">
+                    #include &lt;memory&gt;
+                    #include &lt;iostream&gt;
+                    
+                    template&lt;typename Derived, typename Base, typename Del&gt;
+                    std::unique_ptr&lt;Derived, Del&gt; 
+                    static_unique_ptr_cast( std::unique_ptr&lt;Base, Del&gt;&& p )
+                    {
+                        auto d = static_cast&lt;Derived *&gt;(p.release());
+                        return std::unique_ptr&lt;Derived, Del&gt;(d,
+                            std::move(p.get_deleter()));
+                    }
+
+                    template&lt;typename Derived, typename Base, typename Del&gt;
+                    std::unique_ptr&lt;Derived, Del&gt; 
+                    dynamic_unique_ptr_cast( std::unique_ptr&lt;Base, Del&gt;&& p )
+                    {
+                        if(Derived *result = dynamic_cast&lt;Derived *&gt;(p.get())) {
+                            p.release();
+                            return std::unique_ptr&lt;Derived, Del&gt;(result,
+                                std::move(p.get_deleter()));
+                        }
+                        return std::unique_ptr&lt;Derived, Del&gt;(nullptr, p.get_deleter());
+                    }
+
+                    class Base {
+                    public:
+                        Base(int num): num(num) {};
+                    
+                        virtual void sayHello() {
+                            std::cout &lt;&lt; "I'm Base #" &lt;&lt; num &lt;&lt; std::endl;
+                        }
+
+                        virtual ~Base() { 
+                            std::cout &lt;&lt; "~Base #" &lt;&lt; num &lt;&lt; std::endl;
+                        }
+
+                    protected:
+                        int num;
+                    };
+
+                    class Derived: public Base {
+                    public:
+                        Derived(int num): Base(num) {}
+                    
+                        virtual void sayHello() {
+                            std::cout &lt;&lt; "I'm Derived #" &lt;&lt; num &lt;&lt; std::endl;
+                        }
+
+                        virtual ~Derived() { 
+                            std::cout &lt;&lt; "~Derived #" &lt;&lt; num &lt;&lt; std::endl;
+                        }
+                    };
+
+                    void testUnique() {
+                        std::cout &lt;&lt; "=== testUnique begin ===" &lt;&lt; std::endl;
+                    
+                        auto derived = std::make_unique&lt;Derived&gt;(1);
+                        derived-&gt;sayHello();
+                    
+                        std::unique_ptr&lt;Base&gt; base = std::move(derived);
+                        base-&gt;sayHello();
+                    
+                        auto derived2 = static_unique_ptr_cast&lt;Derived&gt;(std::move(base));
+                        derived2-&gt;sayHello();
+                    
+                        std::unique_ptr&lt;Base&gt; base2 = std::make_unique&lt;Derived&gt;(2);
+                        base2-&gt;sayHello();
+                    
+                        std::cout &lt;&lt; "=== testUnique end ===" &lt;&lt; std::endl;
+                    }
+
+                    void testShared() {
+                        std::cout &lt;&lt; "=== testShared begin ===" &lt;&lt; std::endl;
+                    
+                        auto derived = std::make_shared&lt;Derived&gt;(1);
+                        derived-&gt;sayHello();
+                    
+                        auto base = std::static_pointer_cast&lt;Base&gt;(derived);
+                        base-&gt;sayHello();
+                    
+                        auto derived2 = std::static_pointer_cast&lt;Derived&gt;(base);
+                        derived2-&gt;sayHello();
+                    
+                        std::shared_ptr&lt;Base&gt; base2 = std::make_shared&lt;Derived&gt;(2);
+                        base2-&gt;sayHello();
+                    
+                        std::cout &lt;&lt; "=== testShared end ===" &lt;&lt; std::endl;
+                    }
+
+                    int main() {
+                        testUnique();
+                        testShared();
+                    }
+                </code>
+            </pre>
+
+            <p class="plane">
+                Как видите, все оказалось не так уж и сложно.
             </p>
 
             <br>
