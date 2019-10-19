@@ -84,9 +84,18 @@ a:hover {
     color: red; /* Ссылка красного цвета */
 } 
 
+pre[class=plane] {
+    font-family: sans-serif;
+    font-size: 12pt;
+    text-align: left;
+    line-height: 1.2;
+    margin-left: 60px; 
+    margin-right: 60px; 
+}
+
 pre[class=code] {
     font-family: monospace;
-    font-size: 11pt;
+    font-size: 12pt;
     text-align: left;
     line-height: 1.2;
     margin-left: 60px; 
@@ -106,7 +115,7 @@ span[class="cmnt"] {
 }
 
 span[class="kwd"] {
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 700;
     color: #000000;
     font-family: monospace;
