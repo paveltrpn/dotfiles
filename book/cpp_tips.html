@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Полезные приёмы и хитрости C++</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/prism.css"/> <!-- Тема подсветки кода для Prism -->
+
+        <!-- Подключение локального MathJax -->
+        <script type="text/javascript" id="MathJax-script" async
+        src="js/MathJax3.0.0/es5/tex-svg.js">
+            MathJax.Hub.Config({
+                extensions: ["tex2jax.js","TeX/noErrors.js"],
+	            jax: ["input/TeX","output/HTML-CSS"],
+	            tex2jax: {inlineMath: [['$','$'],["\\(","\\)"]]},
+	            "HTML-CSS": {availableFonts:["TeX"]}
+            });
+        </script>
+        <!-- ============================== -->
+    </head>
+    <body>
+        <!-- Подключение скрипта Prism -->
+        <script src="js/prism-1.17.1.js"></script>
+
+        <div class="A4">
+            <br>
+            <p class="section">
+                ПОЛЕЗНЫЕ ХИТРОСТИ И ПРИЁМЫ С++ 
+            </p>
+
+            <p class="plane">
+                Знать специфику языка, на котором пишешь, всегда полезно. Чем большим количеством особенностей языка владеет разработчик, 
+                тем осознанней его код при прочих равных условиях. В материале рассмотрены интересные приёмы и трюки для C++.<br>
+                <br>
+                Макрос watch — один из самых полезных приёмов.  
+            </p>
+
+            <pre>
+                <code class="language-cpp">
+                   #define watch(x) cout &lt;&lt; (#x) &lt;&lt; " is " &lt;&lt; (x) &lt;&lt; endl
+                </code>
+            </pre>
+ 
+            <p class="plane">
+                Другие полезные макросы:
+            </p>
+
+            <pre>
+                <code class="language-cpp">
+                    #define pow2(x) ((x)*(x))
+                    #define mod(x, m) ((((x) % (m)) + (m)) % (m))
+                    #define max3(a, b, c) max(a, max(b, c))
+                    #define min3(a, b, c) min(a, min(b, c))
+                </code>
+            </pre>
+            <br>
+        </div>
+    </body>
+</html>
