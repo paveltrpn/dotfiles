@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Шпаргалка библиотек — аналогов контейнеров STL</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/prism.css"/> <!-- Тема подсветки кода для Prism -->
+
+        <!-- Подключение локального MathJax -->
+        <script type="text/javascript" id="MathJax-script" async
+        src="js/MathJax3.0.0/es5/tex-svg.js">
+            MathJax.Hub.Config({
+                extensions: ["tex2jax.js","TeX/noErrors.js"],
+	            jax: ["input/TeX","output/HTML-CSS"],
+	            tex2jax: {inlineMath: [['$','$'],["\\(","\\)"]]},
+	            "HTML-CSS": {availableFonts:["TeX"]}
+            });
+        </script>
+        <!-- ============================== -->
+    </head>
+    <body>
+        <!-- Подключение скрипта Prism -->
+        <script src="js/prism-1.17.1.js"></script>
+
+        <div class="A4">
+            <br>
+            <p class="section">
+                ШПАРГАЛКА БИБЛИОТЕК - АНАЛОГОВ STL
+            </p>
+
+            <p class="small">
+                (на 30 июля 2019г.)
+            </p>
+
+            <p class="subsection">
+                Динамический непрерывный массив
+            </p>
+
+            <p class="plane">
+                Аналог std::vector. Поддерживает обращение к элементу по индексу за константное время в несколько 
+                тактов процессора. Можно увеличить или уменьшить вместительность. Это встроеный slice:
+            </p>
+
+            <pre>
+                <code class="language-go">vector := []int{}</code></pre>
+ 
+            <p class="subsection">
+                Стек
+            </p>
+
+            <p class="plane">
+                Аналог std::stack. Упорядоченный набор, в которой добавление новых элементов и удаление 
+                существующих производится с одного конца. Первым из стека удаляется элемент, который был 
+                помещен туда последним (last-in, first-out — LIFO). Это опять встоенный slice. Из проекта в 
+                проект копируются сниппеты:
+            </p>
+
+            <pre>
+                <code class="language-go">//Push
+                stack = append(key, value)</code></pre>
+
+            <p class="subsection">
+                Очередь
+            </p>
+
+            <p class="plane">
+                Аналог std::deque и std::queue. Очереди реализуют операции извлечения и добавления для начала и конца за 
+                константное время. Первым из очереди удаляется элемент, который был первым помещен (first-in, first-out — FIFO). 
+                Буферизованный канал является очередью на кольцевом буфере, можно использовать его, когда читатель и писатель — 
+                разные горутины. Но отдельной реализации очереди в стандартной библиотеке нет. Список awesome-go советует 
+                библиотеку https://github.com/gammazero/deque.
+            </p>
+
+            <pre>
+                <code class="language-go">import "github.com/gammazero/deque"</code></pre>
+
+            <p class="plane">
+                Реализуемые операции:
+            </p>
+
+            <pre>
+                <code class="language-go">func (q *Deque) PushBack(elem interface{}) 
+                func (q *Deque) PushFront(elem interface{}) 
+                func (q *Deque) PopBack() interface{} 
+                func (q *Deque) PopFront() interface{} 
+                func (q *Deque) Back() interface{} 
+                func (q *Deque) Front() interface{} 
+                func (q *Deque) At(i int) interface{}</code></pre>
+
+            <p class="subsection">
+                Двусвязный список
+            </p>
+
+            <p class="plane">
+                Аналог std::list. Состоит из элементов, содержащих помимо собственных данных ссылки на следующий и 
+                предыдущий элемент списка. Он есть в стандартной библиотеке:
+            </p>
+
+            <pre>
+                <code class="language-go">import "container/list"</code></pre>
+
+            <p class="plane">
+                Как и ожидается, поддерживает операции вставки (в начало, в конец, до и после элемента, указатель на который 
+                передан) и удаления.
+            </p>
+
+            <pre>
+                <code class="language-go">func (l *List) PushBack(v interface{}) *Element 
+                func (l *List) PushFront(v interface{}) *Element 
+                func (l *List) InsertAfter(v interface{}, mark *Element) *Element 
+                func (l *List) InsertBefore(v interface{}, mark *Element) *Element 
+                func (l *List) Remove(e *Element) interface{}</code></pre>
+
+            <p class="plane">
+                Gо не предоставляет специфического синтаксиса для итераторов. Потому следующий/предыдущий элемент 
+                можно получить из указателя на любой узел. Эти методы не протухают после добавления/удаления элемента в 
+                список, без неожиданностей.
+            </p>
+
+            <pre>
+                <code class="language-go">func (e *Element) Next() *Element 
+                func (e *Element) Prev() *Element</code></pre>
+
+            <p class="subsection">
+                Очередь с приоритетом
+            </p>
+
+            <p class="plane">
+                Аналог std::priority_queue. Позволяет складывать элементы в любом порядке, а доставать в любой момент времени 
+                самый приоритетный из оставшихся. Применяется, например, в алгоритме построения минимального покрывающего дерева, 
+                когда на очередном шаге алгоритм выбирает самое короткое ребро из всех, одним концом начинающихся в уже покрытых вершинах.<br>
+                <br>
+                В стандартной библиотеке есть адаптер, превращающий любой сортируемый контейнер (реализующий sort.Interface) 
+                в очередь с приоритетом.
+            </p>
+
+            <pre>
+                <code class="language-go">import "container/heap"</code></pre>
+
+            <p class="plane">
+                Это классическая Двоичная куча. Реализует вставку и удаление за O(log n).
+            </p>
+
+            <pre>
+                <code class="language-go">func Pop(h Interface) interface{}
+                func Push(h Interface, x interface{})
+                func Remove(h Interface, i int) interface{}</code></pre>
+
+            <p class="subsection">
+                Хэш таблица
+            </p>
+
+            <p class="plane">
+                Она же словарь и ассоциативный массив. Aналог std::unordered_map. Позволяет добавлять ключ-значение, 
+                удалять значение по ключу и проверять наличие элемента за O(1) в среднем. Очевидно, map встроена в язык:
+            </p>
+
+            <pre>
+                <code class="language-go">unorderedMap := make(map[string]int)</code></pre>
+
+            <p class="plane">
+                Результат make(map) является указателем, и способ работы немного отличается от стандартных контейнеров:
+            </p>
+
+            <pre>
+                <code class="language-go">// Проверка вхождения: 
+                _, ok := unorderedMap["route"] 
+                // Удаление элемента: 
+                delete(unorderedMap, "route") // Нахождение длины: n := len(unorderedMap)</code></pre>
+
+            <p class="plane">
+                «runtime/map», в отличии от std::unordered_map заботится о программисте — удалять значения во время 
+                итерации по ним безопасно.
+            </p>
+
+            <p class="subsection">
+                Множества
+            </p>
+
+            <p class="plane">
+                Аналог std::unordered_set. Почти то же самое, что и хеш-таблица, но без сохранения значения. 
+                Если нам нужно только быстрая проверка вхождения, то можно снова использовать встроенный map.
+                Нужно лишь указать пустое значение, что бы указать, что важен только ключ.
+            </p>
+
+            <pre>
+                <code class="language-go">var m = make(map[string]struct{}) 
+                m["!"] = struct{}{} 
+                , ok := m["!"] // true</code></pre>
+
+            <p class="plane">
+                Но эта реализация не поддерживает сложных операторов. Для объединения, пересечения, разности из 
+                коробки, понадобятся сторонние библиотеки. Самая используемая, судя по количеству звёзд: 
+                https://github.com/deckarep/golang-set
+            </p>
+
+            <pre>
+                <code class="language-go">import "github.com/deckarep/golang-set"</code></pre>
+
+            <p class="plane">
+                Самая нужная часть API:
+            </p>
+
+            <pre>
+                <code class="language-go">Add(i interface{}) bool 
+                Remove(i interface{}) 
+                Cardinality() int // len() 
+                Contains(i ...interface{}) bool 
+                IsSubset(other Set) bool 
+                Intersect(other Set) Set 
+                Union(other Set) Set 
+                Difference(other Set) Set 
+                SymmetricDifference(other Set) Set</code></pre>
+
+            <p class="subsection">
+                Множество Int
+            </p>
+
+            <p class="plane">
+                В экспериментальной части стандарной библиотеки есть оптимизированное множесво int, экономящее каждый бит.
+            </p>
+
+            <pre>
+                <code class="language-go">import "golang.org/x/tools/container/intsets"</code></pre>
+
+            <p class="plane">
+                Оно также поддерживает объединение, пересечение, разность множеств.
+            </p>
+            <br>
+        </div>
+    </body>
+</html>

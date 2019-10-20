@@ -90,11 +90,12 @@ pre[class=plane] {
     text-align: left;
     line-height: 1.2;
     margin-left: 60px; 
-    margin-right: 60px; 
+    margin-right: 60px;
+    
 }
 
 pre[class=code] {
-    font-family: monospace;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono';
     font-size: 12pt;
     text-align: left;
     line-height: 1.2;
@@ -111,14 +112,14 @@ span[class="select"] {
 span[class="cmnt"] {
     color: #979797;
     font-style: italic;
-    font-family: monospace;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono';
 }
 
 span[class="kwd"] {
     font-size: 12pt;
     font-weight: 700;
     color: #000000;
-    font-family: monospace;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono';
 }
 
 div {
