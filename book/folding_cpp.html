@@ -45,34 +45,31 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    #include &lt;iostream&gt;
-                    #include &lt;string&gt;
-                     
-                    template &lt;bool Bit&gt;
-                    std::string bitToString()
-                    {
-                        return Bit ? "1" : "0";
-                    }
-                     
-                    template&lt;typename... Args&gt;
-                    void stub(Args&&...) {}
-                     
-                    template &lt;bool... Bits&gt;
-                    std::string linearBitsUnrolling()
-                    {
-                        std::string bits;
-                        stub((bits += bitToString&lt;Bits&gt;())...);
-                        return bits;
-                    }
-                     
-                    int main()
-                    {
-                        std::cout &lt;&lt; linearBitsUnrolling&lt;1, 0, 1, 0, 0, 0&gt;() &lt;&lt; "\n";
-                        return 0;
-                    }
-                </code>
-            </pre>
+                <code class="language-cpp">#include &lt;iostream&gt;
+                #include &lt;string&gt;
+                 
+                template &lt;bool Bit&gt;
+                std::string bitToString()
+                {
+                    return Bit ? "1" : "0";
+                }
+                 
+                template&lt;typename... Args&gt;
+                void stub(Args&&...) {}
+                 
+                template &lt;bool... Bits&gt;
+                std::string linearBitsUnrolling()
+                {
+                    std::string bits;
+                    stub((bits += bitToString&lt;Bits&gt;())...);
+                    return bits;
+                }
+                 
+                int main()
+                {
+                    std::cout &lt;&lt; linearBitsUnrolling&lt;1, 0, 1, 0, 0, 0&gt;() &lt;&lt; "\n";
+                    return 0;
+                }</code></pre>
  
             <p class="plane">
                 Здесь участвуют какие-то непонятные функции stub, чтобы достичь нужного результата, так ещё и результат 
@@ -82,16 +79,13 @@
             </p>
             
             <pre>
-                <code class="language-cpp">
-                    template &lt;bool... Bits&gt;
-                    std::string linearBitsUnrolling()
-                    {
-                        std::string bits;
-                        (bits += bitToString())...;
-                        return bits;
-                    }
-                </code>
-            </pre>
+                <code class="language-cpp">template &lt;bool... Bits&gt;
+                std::string linearBitsUnrolling()
+                {
+                    std::string bits;
+                    (bits += bitToString())...;
+                    return bits;
+                }</code></pre>
 
             <p class="plane">
                 Помимо того, что это выглядит проще и не заставляет нас создавать лишних функций, это ещё и даёт 
@@ -126,22 +120,19 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    #include &lt;iostream&gt;
- 
-                    template &lt;int... values&gt;
-                    constexpr int sum()
-                    {
-                        return (values + ...);
-                    }
-                     
-                    int main()
-                    {
-                        std::cout &lt;&lt; sum&lt;1, 2, 3, 4, 5&gt;() &lt;&lt; "\n";
-                        return 0;
-                    }
-                </code>
-            </pre>
+                <code class="language-cpp">#include &lt;iostream&gt;
+                
+                template &lt;int... values&gt;
+                constexpr int sum()
+                {
+                    return (values + ...);
+                }
+                 
+                int main()
+                {
+                    std::cout &lt;&lt; sum&lt;1, 2, 3, 4, 5&gt;() &lt;&lt; "\n";
+                    return 0;
+                }</code></pre>
 
             <p class="plane">
                 Как вы можете видеть, в нашем выражении свёртки слева стоит нераскрытая пачка values, 
@@ -171,16 +162,13 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    template &lt;bool... Bits&gt;
-                    std::string linearBitsUnrolling()
-                    {
-                        std::string bits;
-                        ((bits += bitToString&lt;Bits&gt;()), ...);
-                        return bits;
-                    }
-                </code>
-            </pre>
+                <code class="language-cpp">template &lt;bool... Bits&gt;
+                std::string linearBitsUnrolling()
+                {
+                    std::string bits;
+                    ((bits += bitToString&lt;Bits&gt;()), ...);
+                    return bits;
+                }</code></pre>
 
             <p class="plane">
                 Пример перекочевал почти без изменений! Оператор запятая решает это проблему, имея чёткие правила, прописанные в языке.
@@ -199,21 +187,18 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    #include &lt;iostream&gt;
-                    template &lt;size_t... flags&gt;
-                    constexpr size_t setFlags(size_t existingMask)
-                    {
-                        return (existingMask |= ... |= flags);
-                    }
-                     
-                    int main()
-                    {
-                        std::cout &lt;&lt; setFlags&lt;1, 2, 4&gt;(0) &lt;&lt; "\n";
-                        return 0;
-                    }
-                </code>
-            </pre>
+                <code class="language-cpp">#include &lt;iostream&gt;
+                template &lt;size_t... flags&gt;
+                constexpr size_t setFlags(size_t existingMask)
+                {
+                    return (existingMask |= ... |= flags);
+                }
+                 
+                int main()
+                {
+                    std::cout &lt;&lt; setFlags&lt;1, 2, 4&gt;(0) &lt;&lt; "\n";
+                    return 0;
+                }</code></pre>
 
             <p class="plane">
                 о похоже на унарного собрата, но с некоторыми отличиями. В общем виде (приняв ранее представленные обозначения), 
@@ -250,16 +235,13 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    template &lt;bool... Bits&gt;
-                    std::string linearBitsUnrolling()
-                    {
-                        std::string bits;
-                        (bits += ... += bitToString&lt;Bits&gt;());
-                        return bits;
-                    }
-                </code>
-            </pre>
+                <code class="language-cpp">template &lt;bool... Bits&gt;
+                std::string linearBitsUnrolling()
+                {
+                    std::string bits;
+                    (bits += ... += bitToString&lt;Bits&gt;());
+                    return bits;
+                }</code></pre>
 
             <p class="plane">
                 Т.е. мы перешли от использования универсального оператора запятая, к более подходящему, в данном случае, присваивающему 

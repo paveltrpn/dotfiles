@@ -62,20 +62,14 @@
             </p>
 
             <pre>
-                <code class="language-c++">
-                    std::unique_ptr&lt;SomeClass&gt; unq(new SomeClass(/* ctor args */));
-                </code>
-            </pre>
+                <code class="language-c++">std::unique_ptr&lt;SomeClass&gt; unq(new SomeClass(/* ctor args */));</code></pre>
             
             <p class="plane">
                 … но обычно используют шаблон make_unique, так короче:
             </p>
 
             <pre>
-                <code class="language-c++">
-                    auto unq = std::make_unique&lt;SomeClass&gt;(/* ctor args */);
-                </code>
-            </pre>
+                <code class="language-c++">auto unq = std::make_unique&lt;SomeClass&gt;(/* ctor args */);</code></pre>
 
             <p class="plane">
                 Класс unique_ptr перегружает оператор ->, что позволяет обращаться к полям класса и 
@@ -83,55 +77,40 @@
             </p>
 
             <pre>
-                <code class="language-c++">
-                    unq→sayHello();
-                </code>
-            </pre>
+                <code class="language-c++">unq→sayHello();</code></pre>
 
             <p class="plane">
                 Как уже отмечалось, unique_ptr запрещено копировать:
             </p>
 
             <pre>
-                <code class="language-c++">
-                    // will not compile!
-                    auto cpy = unq;
-                </code>
-            </pre>
+                <code class="language-c++">// will not compile!
+                auto cpy = unq;</code></pre>
 
             <p class="plane">
                 Однако владение им можно передать при помощи std::move, например: 
             </p>
 
             <pre>
-                <code class="language-c++">
-                    auto mov = std::move(unq);
-                    // unq is invalid now!
-                    mov→sayHello();
-                </code>
-            </pre>
+                <code class="language-c++">auto mov = std::move(unq);
+                // unq is invalid now!
+                mov→sayHello();</code></pre>
 
             <p class="plane">
                 Плюс к этому, мы всегда можем получать из unique_ptr обычный указатель на объект:
             </p>
 
             <pre>
-                <code class="language-c++">
-                    SomeClass* ptr = mov.get();
-                    ptr→sayHello();
-                </code>
-            </pre>
+                <code class="language-c++">SomeClass* ptr = mov.get();
+                ptr→sayHello();</code></pre>
 
             <p class="plane">
                 … хотя это и является code smell. Кроме того, ничто не мешает создавать ссылки (reference) на unique_ptr:
             </p>
 
             <pre>
-                <code class="language-c++">
-                    auto& ref = mov;
-                    ref→sayHello();
-                </code>
-            </pre>
+                <code class="language-c++">auto& ref = mov;
+                ref→sayHello();</code></pre>
 
             <p class="plane">
                 То есть, в этом случае мы как бы не отнимаем владение объектом, а ненадолго одалживаем его, 
@@ -141,37 +120,28 @@
             </p>
 
             <pre>
-                <code class="language-c++">
-                    /* g++ custom-deleter.cpp -o custom-deleter */
-                    #include &lt;memory&gt;
-                    #include &lt;functional&gt;
-                    #include &lt;iostream&gt;
-                    #include &lt;stdio.h&gt;
-
-                    template&lt;typename T&gt;
-                    using auto_cleanup = std::unique_ptr&lt;T,std::function&lt;void(T*)&gt;&gt;;
-
-                    static char dummy[] = "";
-
-                    #define _DEFER_CAT_(a,b) a##b
-                    #define _DEFER_NAME_(a,b) _DEFER_CAT_(a,b)
-                    #define defer(...) \
-                    auto _DEFER_NAME_(_defer_,__LINE__) = \
-                    auto_cleanup&lt;char&gt;(dummy, [&](char*) { __VA_ARGS__; });
-
-                    int main() {
-                        auto_cleanup&lt;FILE&gt; f(
-                            fopen("test.txt", "w"),
-                            [](FILE* f) { fclose(f); }
-                        );
-
-                        defer( std::cout &lt;&lt; "Bye #1" &lt;&lt; std::endl );
-                        defer( std::cout &lt;&lt; "Bye #2" &lt;&lt; std::endl );
-
-                        fwrite("Hello!\n", 7, 1, f.get());
-                    }
-                </code>
-            </pre>
+                <code class="language-c++">/* g++ custom-deleter.cpp -o custom-deleter */
+                #include &lt;memory&gt;
+                #include &lt;functional&gt;
+                #include &lt;iostream&gt;
+                #include &lt;stdio.h&gt;
+                template&lt;typename T&gt;
+                using auto_cleanup = std::unique_ptr&lt;T,std::function&lt;void(T*)&gt;&gt;;
+                static char dummy[] = "";
+                #define _DEFER_CAT_(a,b) a##b
+                #define _DEFER_NAME_(a,b) _DEFER_CAT_(a,b)
+                #define defer(...) \
+                auto _DEFER_NAME_(_defer_,__LINE__) = \
+                auto_cleanup&lt;char&gt;(dummy, [&](char*) { __VA_ARGS__; });
+                int main() {
+                    auto_cleanup&lt;FILE&gt; f(
+                        fopen("test.txt", "w"),
+                        [](FILE* f) { fclose(f); }
+                    );
+                    defer( std::cout &lt;&lt; "Bye #1" &lt;&lt; std::endl );
+                    defer( std::cout &lt;&lt; "Bye #2" &lt;&lt; std::endl );
+                    fwrite("Hello!\n", 7, 1, f.get());
+                }</code></pre>
 
             <p class="plane">
                 Заметьте, что в макросе defer нам пришлось передать в unique_ptr фиктивный указатель. Если бы мы передали nullptr, 
@@ -196,10 +166,7 @@
             </p>
 
             <pre>
-                <code class="language-c++">
-                    auto ptr = std::make_shared&lt;SomeClass&gt;(/* ctor args */);
-                </code>
-            </pre>
+                <code class="language-c++">auto ptr = std::make_shared&lt;SomeClass&gt;(/* ctor args */);</code></pre>
 
             <p class="plane">
                     В остальном работа с ним мало отличается от работы с unique_ptr, за тем исключением, что shared_ptr можно 
@@ -222,43 +189,37 @@
             </p>
 
             <pre>
-                <code class="language-c++">
-                    #include &lt;memory&gt;
-                    #include &lt;iostream&gt;
-                    
-                    class SomeClass {
-                    public:
-                        void sayHello() {
-                            std::cout &lt;&lt; "Hello!" &lt;&lt; std::endl;
-                        }
-
-                        ~SomeClass() {
-                            std::cout &lt;&lt; "~SomeClass" &lt;&lt; std::endl;
-                        }
-                    };
-
-                    int main() {
-                        std::weak_ptr&lt;SomeClass&gt; wptr;
-                    
-                        {
-                            auto ptr = std::make_shared&lt;SomeClass&gt;();
-                            wptr = ptr;
-                    
-                            if(auto tptr = wptr.lock()) {
-                                tptr-&gt;sayHello();
-                            } else {
-                                std::cout &lt;&lt; "lock() failed" &lt;&lt; std::endl;
-                            }
-                        }
-
-                        if(auto tptr = wptr.lock()) {
-                            tptr-&gt;sayHello();
-                        } else {
-                            std::cout &lt;&lt; "lock() failed" &lt;&lt; std::endl;
-                        }
-                    }
-                </code>
-            </pre>
+                <code class="language-c++">#include &lt;memory&gt;
+                #include &lt;iostream&gt;
+                
+                class SomeClass {
+                public:
+                    void sayHello() {
+                        std::cout &lt;&lt; "Hello!" &lt;&lt; std::endl;
+                    }
+                    ~SomeClass() {
+                        std::cout &lt;&lt; "~SomeClass" &lt;&lt; std::endl;
+                    }
+                };
+                int main() {
+                    std::weak_ptr&lt;SomeClass&gt; wptr;
+                
+                    {
+                        auto ptr = std::make_shared&lt;SomeClass&gt;();
+                        wptr = ptr;
+                
+                        if(auto tptr = wptr.lock()) {
+                            tptr-&gt;sayHello();
+                        } else {
+                            std::cout &lt;&lt; "lock() failed" &lt;&lt; std::endl;
+                        }
+                    }
+                    if(auto tptr = wptr.lock()) {
+                        tptr-&gt;sayHello();
+                    } else {
+                        std::cout &lt;&lt; "lock() failed" &lt;&lt; std::endl;
+                    }
+                }</code></pre>
 
             <p class="plane">
                 Программа выведет:
@@ -291,102 +252,90 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    #include &lt;memory&gt;
-                    #include &lt;iostream&gt;
-                    
-                    template&lt;typename Derived, typename Base, typename Del&gt;
-                    std::unique_ptr&lt;Derived, Del&gt; 
-                    static_unique_ptr_cast( std::unique_ptr&lt;Base, Del&gt;&& p )
-                    {
-                        auto d = static_cast&lt;Derived *&gt;(p.release());
-                        return std::unique_ptr&lt;Derived, Del&gt;(d,
-                            std::move(p.get_deleter()));
-                    }
-
-                    template&lt;typename Derived, typename Base, typename Del&gt;
-                    std::unique_ptr&lt;Derived, Del&gt; 
-                    dynamic_unique_ptr_cast( std::unique_ptr&lt;Base, Del&gt;&& p )
-                    {
-                        if(Derived *result = dynamic_cast&lt;Derived *&gt;(p.get())) {
-                            p.release();
-                            return std::unique_ptr&lt;Derived, Del&gt;(result,
-                                std::move(p.get_deleter()));
-                        }
-                        return std::unique_ptr&lt;Derived, Del&gt;(nullptr, p.get_deleter());
-                    }
-
-                    class Base {
-                    public:
-                        Base(int num): num(num) {};
-                    
-                        virtual void sayHello() {
-                            std::cout &lt;&lt; "I'm Base #" &lt;&lt; num &lt;&lt; std::endl;
-                        }
-
-                        virtual ~Base() { 
-                            std::cout &lt;&lt; "~Base #" &lt;&lt; num &lt;&lt; std::endl;
-                        }
-
-                    protected:
-                        int num;
-                    };
-
-                    class Derived: public Base {
-                    public:
-                        Derived(int num): Base(num) {}
-                    
-                        virtual void sayHello() {
-                            std::cout &lt;&lt; "I'm Derived #" &lt;&lt; num &lt;&lt; std::endl;
-                        }
-
-                        virtual ~Derived() { 
-                            std::cout &lt;&lt; "~Derived #" &lt;&lt; num &lt;&lt; std::endl;
-                        }
-                    };
-
-                    void testUnique() {
-                        std::cout &lt;&lt; "=== testUnique begin ===" &lt;&lt; std::endl;
-                    
-                        auto derived = std::make_unique&lt;Derived&gt;(1);
-                        derived-&gt;sayHello();
-                    
-                        std::unique_ptr&lt;Base&gt; base = std::move(derived);
-                        base-&gt;sayHello();
-                    
-                        auto derived2 = static_unique_ptr_cast&lt;Derived&gt;(std::move(base));
-                        derived2-&gt;sayHello();
-                    
-                        std::unique_ptr&lt;Base&gt; base2 = std::make_unique&lt;Derived&gt;(2);
-                        base2-&gt;sayHello();
-                    
-                        std::cout &lt;&lt; "=== testUnique end ===" &lt;&lt; std::endl;
-                    }
-
-                    void testShared() {
-                        std::cout &lt;&lt; "=== testShared begin ===" &lt;&lt; std::endl;
-                    
-                        auto derived = std::make_shared&lt;Derived&gt;(1);
-                        derived-&gt;sayHello();
-                    
-                        auto base = std::static_pointer_cast&lt;Base&gt;(derived);
-                        base-&gt;sayHello();
-                    
-                        auto derived2 = std::static_pointer_cast&lt;Derived&gt;(base);
-                        derived2-&gt;sayHello();
-                    
-                        std::shared_ptr&lt;Base&gt; base2 = std::make_shared&lt;Derived&gt;(2);
-                        base2-&gt;sayHello();
-                    
-                        std::cout &lt;&lt; "=== testShared end ===" &lt;&lt; std::endl;
-                    }
-
-                    int main() {
-                        testUnique();
-                        testShared();
-                    }
-                </code>
-            </pre>
+                <code class="language-cpp">#include &lt;memory&gt;
+                #include &lt;iostream&gt;
+                
+                template&lt;typename Derived, typename Base, typename Del&gt;
+                std::unique_ptr&lt;Derived, Del&gt; 
+                static_unique_ptr_cast( std::unique_ptr&lt;Base, Del&gt;&& p )
+                {
+                    auto d = static_cast&lt;Derived *&gt;(p.release());
+                    return std::unique_ptr&lt;Derived, Del&gt;(d,
+                        std::move(p.get_deleter()));
+                }
+                template&lt;typename Derived, typename Base, typename Del&gt;
+                std::unique_ptr&lt;Derived, Del&gt; 
+                dynamic_unique_ptr_cast( std::unique_ptr&lt;Base, Del&gt;&& p )
+                {
+                    if(Derived *result = dynamic_cast&lt;Derived *&gt;(p.get())) {
+                        p.release();
+                        return std::unique_ptr&lt;Derived, Del&gt;(result,
+                            std::move(p.get_deleter()));
+                    }
+                    return std::unique_ptr&lt;Derived, Del&gt;(nullptr, p.get_deleter());
+                }
+                class Base {
+                public:
+                    Base(int num): num(num) {};
+                
+                    virtual void sayHello() {
+                        std::cout &lt;&lt; "I'm Base #" &lt;&lt; num &lt;&lt; std::endl;
+                    }
+                    virtual ~Base() { 
+                        std::cout &lt;&lt; "~Base #" &lt;&lt; num &lt;&lt; std::endl;
+                    }
+                protected:
+                    int num;
+                };
+                class Derived: public Base {
+                public:
+                    Derived(int num): Base(num) {}
+                
+                    virtual void sayHello() {
+                        std::cout &lt;&lt; "I'm Derived #" &lt;&lt; num &lt;&lt; std::endl;
+                    }
+                    virtual ~Derived() { 
+                        std::cout &lt;&lt; "~Derived #" &lt;&lt; num &lt;&lt; std::endl;
+                    }
+                };
+                void testUnique() {
+                    std::cout &lt;&lt; "=== testUnique begin ===" &lt;&lt; std::endl;
+                
+                    auto derived = std::make_unique&lt;Derived&gt;(1);
+                    derived-&gt;sayHello();
+                
+                    std::unique_ptr&lt;Base&gt; base = std::move(derived);
+                    base-&gt;sayHello();
+                
+                    auto derived2 = static_unique_ptr_cast&lt;Derived&gt;(std::move(base));
+                    derived2-&gt;sayHello();
+                
+                    std::unique_ptr&lt;Base&gt; base2 = std::make_unique&lt;Derived&gt;(2);
+                    base2-&gt;sayHello();
+                
+                    std::cout &lt;&lt; "=== testUnique end ===" &lt;&lt; std::endl;
+                }
+                void testShared() {
+                    std::cout &lt;&lt; "=== testShared begin ===" &lt;&lt; std::endl;
+                
+                    auto derived = std::make_shared&lt;Derived&gt;(1);
+                    derived-&gt;sayHello();
+                
+                    auto base = std::static_pointer_cast&lt;Base&gt;(derived);
+                    base-&gt;sayHello();
+                
+                    auto derived2 = std::static_pointer_cast&lt;Derived&gt;(base);
+                    derived2-&gt;sayHello();
+                
+                    std::shared_ptr&lt;Base&gt; base2 = std::make_shared&lt;Derived&gt;(2);
+                    base2-&gt;sayHello();
+                
+                    std::cout &lt;&lt; "=== testShared end ===" &lt;&lt; std::endl;
+                }
+                int main() {
+                    testUnique();
+                    testShared();
+                }</code></pre>
 
             <p class="plane">
                 Как видите, все оказалось не так уж и сложно.

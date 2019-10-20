@@ -98,18 +98,15 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    std::optional&lt;std::string&gt; UI::FindUserNick() 
-                    { 
-                    	if (nick_available) return { mStrNickName }; return std::nullopt; 
-                    	// то же самое, как если вернуть просто { }; 
-                    } 
-                    // Использование: 
-                    std::optional&lt;std::string&gt; UserNick = UI->FindUserNick(); 
-                    if (UserNick) 
-                    	Show(*UserNick); 
-                </code>
-            </pre>
+                <code class="language-cpp">std::optional&lt;std::string&gt; UI::FindUserNick() 
+                { 
+                	if (nick_available) return { mStrNickName }; return std::nullopt; 
+                	// то же самое, как если вернуть просто { }; 
+                } 
+                // Использование: 
+                std::optional&lt;std::string&gt; UserNick = UI->FindUserNick(); 
+                if (UserNick) 
+                	Show(*UserNick);</code></pre>
 
             <p class="plane">
                 В коде выше мы объявили функцию, которая возвращает опциональную строку. 
