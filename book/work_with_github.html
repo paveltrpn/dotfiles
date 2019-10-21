@@ -17,17 +17,14 @@
             </p>
 
             <pre class="code">
-    $ git clone git://github.com/USER_NAME/REPO_NAME
-            </pre>
+    $ git clone git://github.com/USER_NAME/REPO_NAME</pre>
 
             <p class="plane">
                 <b>Сделать алиас</b> на другое имя накоторо репозитория. Что-бы работали пуш и пулл нужно что-бы алиас ссылался на <i>https:</i>
             </p>
 
-            <pre class="code">
-    $ cd REPO_NAME
-    $ git remote add ALIAS_NAME https://github.com/USER_NAME/REPO_NAME
-            </pre>
+            <pre class="code">    $ cd REPO_NAME
+    $ git remote add ALIAS_NAME https://github.com/USER_NAME/REPO_NAME</pre>
             
             <p class="plane">
                 <b>Фиксация изменений</b> (или добавление коммита):
@@ -35,8 +32,7 @@
 
             <pre class="code">
     $ git commit -am «COMMIT_NAME»
-    $ git push REPO_NAME master
-            </pre>
+    $ git push REPO_NAME master</pre>
 
             <p class="plane">
                 <b>Отмена последнего коммита</b>, например когда вы делаете коммит слишком рано, забыв 
@@ -45,8 +41,7 @@
             </p>
 
             <pre class="code">
-    $ git commit --amend
-            </pre>
+    $ git commit --amend</pre>
 
             <p class="plane">
                Для примера, если после совершения коммита вы осознали, что забыли проиндексировать 
@@ -56,8 +51,7 @@
             <pre class="code">
     $ git commit -m 'initial commit'
     $ git add forgotten_file
-    $ git commit —amend
-            </pre>
+    $ git commit —amend</pre>
 
             <p class="plane">
                 Все три команды вместе дают один коммит — второй коммит заменяет результат первого.
@@ -69,8 +63,7 @@
 
             <pre class="code">
     $ cd REPO_NAME
-    $ git pull
-            </pre>
+    $ git pull</pre>
 
             <p class="plane">
                 Для того чтобы <b>начать отслеживать</b> (добавить под версионный контроль) новый файл, 
@@ -78,8 +71,7 @@
             </p>
 
             <pre class="code">
-    $ git add FILE_NAME
-            </pre>
+    $ git add FILE_NAME</pre>
 
             <p class="plane">
                 Основной инструмент, используемый для определения, <b>какие файлы в каком состоянии находятся</b> — это команда git status. 
@@ -89,8 +81,7 @@
             <pre class="code">
     $ git status
     # On branch master
-    nothing to commit, working directory clean
-            </pre>
+    nothing to commit, working directory clean</pre>
 
             <p class="plane">
                 Это означает, что у вас чистый рабочий каталог, другими словами — в нём нет отслеживаемых 
@@ -106,16 +97,14 @@
             </p>
 
             <pre class="code">
-    $ git rm FILE_NAME
-            </pre>
+    $ git rm FILE_NAME</pre>
 
             <p class="plane">
                 <b>Удалить</b> файл FILE_NAME из индекса, оставив его при этом в рабочем каталоге:
             </p>
 
             <pre class="code">
-    $ git rm --cached FILE_NAME
-            </pre>
+    $ git rm --cached FILE_NAME</pre>
 
             <p class="plane">
                 <b>Переместить</b> файл hello.html в каталог lib
@@ -124,8 +113,7 @@
             <pre class="code">
     $ mkdir lib
     $ git mv hello.html lib
-    $ git status
-            </pre>
+    $ git status</pre>
             
             <p class="plane">
                 Перемещая файлы с помощью git, мы информируем git о 2 вещах:<br>
@@ -134,6 +122,17 @@
                 &emsp;2) Что файл <i>lib/hello.html</i> был создан.<br>
             
                 Оба эти факта сразу же проиндексированы и готовы к коммиту. Команда git status сообщает, что файл был перемещен.
+            </p>
+
+            <p class="plane">
+                <b>Добавить каталог</b> все файлы и подкаталоги в нём:
+            </p>
+
+            <pre class="code">
+    $ git add .</pre>
+
+            <p class="plane">
+                Именно точка, звёздочка * добавит только файлы в каталоге, игнорируя подкаталоги с файлами.
             </p>
 
             <p class="subsection">
@@ -146,8 +145,7 @@
 
             <pre class="code">
     $ git fetch --all
-    $ git reset --hard origin/<branch_name> (например master)
-            </pre>
+    $ git reset --hard origin/&lt;branch_name&gt; (например master)</pre>
 
             <p class="plane">
                 <span class="kwd">$ git fetch</span> — скачивает последнее из удалённого репозитория не совершая попыток смержить или заменить что либо.<br>
