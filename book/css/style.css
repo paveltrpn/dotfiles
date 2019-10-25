@@ -10,6 +10,11 @@
 }
 
 @font-face {
+    font-family: 'Roboto Serif Light';
+    src: url(../fonts/RobotoSlab-Light.ttf); 
+}
+
+@font-face {
     font-family: 'Roboto Mono';
     src: url(../fonts/RobotoMono-Regular.ttf); 
 }

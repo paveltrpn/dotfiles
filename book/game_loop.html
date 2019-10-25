@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Главный цикл и симуляция в реальном времени</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/prism.css"/> <!-- Тема подсветки кода для Prism -->
+
+        <!-- Подключение локального MathJax -->
+        <script type="text/javascript" id="MathJax-script" async
+        src="./js/MathJax3.0.0/es5/tex-svg.js">
+            MathJax.Hub.Config({
+                extensions: ["tex2jax.js","TeX/noErrors.js"],
+	            jax: ["input/TeX","output/HTML-CSS"],
+	            tex2jax: {inlineMath: [['$','$'],["\\(","\\)"]]},
+	            "HTML-CSS": {availableFonts:["TeX"]}
+            });
+        </script>
+        <!-- ============================== -->
+    </head>
+    <body>
+        <!-- Подключение скрипта Prism -->
+        <script src="./js/prism-1.17.1.js"></script>
+
+        <div class="A4">
+            <br>
+            <p class="section">
+                ГЛАВНЫЙ ЦИКЛ И СИМУЛЯЦИЯ В РЕАЛЬНОМ ВРЕМЕНИ
+            </p>
+
+            <p class="small">
+                (Game Engine Architecture, Jason Gregory, 2-nd edition<br>
+                перевод главы 7 - "The Game Loop and Real-Time Simulation")
+            </p>
+            <!--Games are real-time, dynamic, interactive computer simulations. As such,
+            time plays an incredibly important role in any electronic game. There are
+            many different kinds of time to deal with in a game engine—real time, game
+            time, the local timeline of an animation, the actual CPU cycles spent within
+            a particular function, and the list goes on. Every engine system might define
+            and manipulate time differently. We must have a solid understanding of all
+            the ways time can be used in a game. In this chapter, we’ll take a look at how
+            real-time, dynamic simulation software works and explore the common ways
+            in which time plays a role in such a simulation.-->
+            <p class="plane">
+                Игры - это динамические, интерактивные компъютерные симуляции реального времени. Из-за этого время 
+                играет очень важную роль в любой электронной игре. Есть несколько разных видов "времени", с которыми приходится
+                иметь дело в игровом движке - реальное время, игровое время, локальная линия времени при воспроизведении анимаций,
+                фактические циклы ЦП, проведенные в рамках определенной функции и этот список можно продолжать. каждый игровой движок
+                может определять и регулировать время разными способами. Мы должны иметь твёрдое понимание всех способов,
+                которыми "время" может быть использовано в игровом движке. В этой главе мы рассмотрим как работают приложения, работающие
+                с графикой в реальном времени и обсудим общие взгляды на роль времени в этих приложениях. 
+            </p>
+
+            <p class="subsection">
+                Цикл рендеринга
+            </p>
+            <!--In a graphical user interface (GUI), of the sort found on a Windows PC or a
+            Macintosh, the majority of the screen’s contents are static. Only a small part
+            of any one window is actively changing appearance at any given moment.
+            Because of this, graphical user interfaces have traditionally been drawn on-
+            screen via a technique known as rectangle invalidation, in which only the small
+            portions of the screen whose contents have actually changed are redrawn.
+            Older 2D video games used similar techniques to minimize the number of
+            pixels that needed to be drawn.-->
+            <p class="plane">
+
+            </p>
+
+            <br>
+        </div>
+    </body>
+</html>
