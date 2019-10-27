@@ -32,6 +32,7 @@
                 (Game Engine Architecture, Jason Gregory, 2-nd edition<br>
                 перевод главы 7 - "The Game Loop and Real-Time Simulation")
             </p>
+
             <!--Games are real-time, dynamic, interactive computer simulations. As such,
             time plays an incredibly important role in any electronic game. There are
             many different kinds of time to deal with in a game engine—real time, game
@@ -41,6 +42,7 @@
             the ways time can be used in a game. In this chapter, we’ll take a look at how
             real-time, dynamic simulation software works and explore the common ways
             in which time plays a role in such a simulation.-->
+
             <p class="plane">
                 Игры - это динамические, интерактивные компъютерные симуляции реального времени. Из-за этого время 
                 играет очень важную роль в любой электронной игре. Есть несколько разных видов "времени", с которыми приходится
@@ -52,8 +54,9 @@
             </p>
 
             <p class="subsection">
-                Цикл рендеринга
+                Цикл визуализации (рендеринга)
             </p>
+
             <!--In a graphical user interface (GUI), of the sort found on a Windows PC or a
             Macintosh, the majority of the screen’s contents are static. Only a small part
             of any one window is actively changing appearance at any given moment.
@@ -61,9 +64,82 @@
             screen via a technique known as rectangle invalidation, in which only the small
             portions of the screen whose contents have actually changed are redrawn.
             Older 2D video games used similar techniques to minimize the number of
+
             pixels that needed to be drawn.-->
             <p class="plane">
+                В пользовательском графическом окружении (GUI), таком, котырй мы можем видеть на Windows или Macintosh,
+                большая часть выводимого на экран изображения статична. Только малая часть каждого окна активно меняет
+                внешний вид в отдельно взятый момент. Поэтому графический интерфейс пользователя традиционно отрисовывается
+                на экране с помощью техники, называемой - инвалидация прямоугольника, в которой только маленькая часть экрана,
+                содержание которой изменяется, подвергается перерисовке. Старые 2D видеоигры использовали похожие подходы для
+                минимизации числа пикселей, которые необходимо перерисовывать.
+            </p>
 
+            <!-- Real-time 3D computer graphics are implemented in an entirely different
+            way. As the camera moves about in a 3D scene, the entire contents of the screen
+            or window change continually, so the concept of invalid rectangles no longer
+            applies. Instead, an illusion of motion and interactivity is produced in much
+            the same way that a movie produces it—by presenting the viewer with a series
+            of still images in rapid succession.
+            Obviously, producing a rapid succession of still images on-screen requires
+            a loop. In a real-time rendering application, this is sometimes known as the
+            render loop. At its simplest, a rendering loop is structured as follows:-->
+
+            <p class="plane">
+                Графика, обрабатываемая в реальном времени используют совсем другой подход. Пока виртуальная камера двигается 
+                через виртуальную сцену, всё содержимое этой сцены на экране постоянно меняется и поэтому подход инвалидных прямоугольников
+                больше неприменим. Вместо этого иллюзия движения и интерактивности получается способом, очень похожим на то, как это 
+                происходит в кинофильмах - путём вывода на экран для зрителя серии готовых изображений, которые быстро сменяют друг друга.<br>
+                <br>
+                Очевидно, этот процесс должен быть циклическим. В программах, работающих с графикой в реальном времени это называется
+                - цикл рендеринга. В простейшем случае он выглядит так:
+            </p>
+
+            <pre>
+                <code class="language-c++">while (!quit)
+                {
+                    // Update the camera transform based on interactive
+                    // inputs or by following a predefined path.
+                    updateCamera();
+                    // Update positions, orientations and any other
+                    // relevant visual state of any dynamic elements
+                    // in the scene.
+                    updateSceneElements();
+                    // Render a still frame into an off-screen frame
+                    // buffer known as the "back buffer".
+                    renderScene();
+                    // Swap the back buffer with the front buffer, making
+                    // the most recently rendered image visible
+                    // on-screen. (Or, in windowed mode, copy (blit) the
+                    // back buffer's contents to the front buffer.
+                    swapBuffers();
+                }</code></pre>
+            
+            <p class="subsection">
+                Игровой цикл
+            </p>
+
+            <!--A game is composed of many interacting subsystems, including device I/O,
+            rendering, animation, collision detection and resolution, optional rigid body
+            dynamics simulation, multiplayer networking, audio, and the list goes on.
+            Most game engine subsystems require periodic servicing while the game is
+            running. However, the rate at which these subsystems need to be serviced
+            varies from subsystem to subsystem. Animation typically needs to be up-
+            dated at a rate of 30 or 60 Hz, in synchronization with the rendering subsys-
+            tem. However, a dynamics (physics) simulation may actually require more
+            frequent updates (e.g., 120 Hz). Higher-level systems, like AI, might only
+            need to be serviced once or twice per second, and they needn’t necessarily be
+            synchronized with the rendering loop at all.
+            There are a number of ways to implement the periodic updating of our
+            game engine subsystems. We’ll explore some of the possible architectures in
+            a moment. But for the time being, let’s stick with the simplest way to update
+            our engine’s subsystems—using a single loop to update everything. Such a
+            loop is often called the game loop, because it is the master loop that services
+            every subsystem in the engine.-->
+
+            <p class="plane">
+                Компьютерная игра состоит из многих взаимодействующих подсистем, например системы визуализации, анимации, определения 
+                столкновений и их разрешения, взаимодействия с устройствами ввода-вывода, звуковой системой, сетью и т.д. 
             </p>
 
             <br>
