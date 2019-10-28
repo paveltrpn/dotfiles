@@ -36,38 +36,29 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                   #define watch(x) cout &lt;&lt; (#x) &lt;&lt; " is " &lt;&lt; (x) &lt;&lt; endl
-                </code>
-            </pre>
+                <code class="language-cpp">#define watch(x) cout &lt;&lt; (#x) &lt;&lt; " is " &lt;&lt; (x) &lt;&lt; endl</code></pre>
  
             <p class="plane">
                 Другие полезные макросы:
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    #define pow2(x) ((x)*(x))
-                    #define mod(x, m) ((((x) % (m)) + (m)) % (m))
-                    #define max3(a, b, c) max(a, max(b, c))
-                    #define min3(a, b, c) min(a, min(b, c))
-                </code>
-            </pre>
+                <code class="language-cpp">#define pow2(x) ((x)*(x))
+                #define mod(x, m) ((((x) % (m)) + (m)) % (m))
+                #define max3(a, b, c) max(a, max(b, c))
+                #define min3(a, b, c) min(a, min(b, c))</code></pre>
 
             <p class="plane">
                 <b>Не бойтесь использовать</b> <i>typedef</i>:
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    typedef long long ll;
-                    typedef pair<int, int> ii;
-                    typedef pair<int, ii> iii;
-                    typedef vector<int> vi;
-                    typedef vector<ii> vii;
-                    typedef vector<iii> viii;
-                </code>
-            </pre>
+                <code class="language-cpp">typedef long long ll;
+                typedef pair<int, int> ii;
+                typedef pair<int, ii> iii;
+                typedef vector<int> vi;
+                typedef vector<ii> vii;
+                typedef vector<iii> viii;</code></pre>
 
             <p class="plane">
                 Порой что-нибудь вроде set&lt;pair&lt;long long, pair&lt;int, pair&lt;int, int&gt;&gt;&gt;&gt; можно заменить на set&lt;pair&lt;ll, iii&gt;&gt;.
@@ -147,11 +138,8 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    #define count_ones __builtin_popcountl
-                    // count_ones(9) равно 2
-                </code>
-            </pre>
+                <code class="language-cpp">#define count_ones __builtin_popcountl
+                // count_ones(9) равно 2</code></pre>
 
             <p class="subsection">
                 Хитрости для C++11
@@ -173,13 +161,10 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    int main(void) {
-                        if (make_pair(0,0) < make_pair(1,1))
-                            printf("It works\n");
-                    }
-                </code>
-            </pre>
+                <code class="language-cpp">int main(void) {
+                    if (make_pair(0,0) &lt; make_pair(1,1))
+                        printf("It works\n");
+                }</code></pre>
 
             <p class="plane">
                 Этот код, с другой стороны, не скомпилируется. Дело в том, что в результате инициализации списка просто инициализируются объекты. 
@@ -187,13 +172,10 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    int main(void) {
-                        if ({0,0} < {1,1})
-                                printf("It works\n");
-                }
-                </code>
-            </pre>
+                <code class="language-cpp">int main(void) {
+                    if ({0,0} &lt; {1,1})
+                            printf("It works\n");
+                }</code></pre>
 
             <p class="plane">
                 <b>Ключевое слово auto</b> позволяет не указывать явно тип переменной, если вы объявляете и инициализируете её в одном месте. 
@@ -207,12 +189,9 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    set&lt;int> s = {1, 2, 3};
-                    for (auto e : s) cout &lt;&lt; i &lt;&lt; " ";
-                        cout &lt;&lt; endl;
-                </code>
-            </pre>
+                <code class="language-cpp">set&lt;int> s = {1, 2, 3};
+                for (auto e : s) cout &lt;&lt; i &lt;&lt; " ";
+                    cout &lt;&lt; endl;</code></pre>
 
             <p class="plane">
                 Если вы хотите изменять значения, то используйте спецификатор &, чтобы получить ссылку на содержимое контейнера.
@@ -223,18 +202,15 @@
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    tuple&lt;int, string&gt; f(void) {
-                        return {485, "Hello"};
-                    }
-                 
-                    int main(void) {
-                        int a;
-                        string b;
-                        tie(a, b) = f();
-                    }
-                </code>
-            </pre>
+                <code class="language-cpp">tuple&lt;int, string&gt; foo(void) {
+                    return {485, "Hello"};
+                }
+                
+                int main(void) {
+                    int a;
+                    string b;
+                    tie(a, b) = foo();
+                }</code></pre>
 
             <br>
         </div>
