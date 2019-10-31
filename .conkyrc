@@ -10,9 +10,9 @@ draw_borders no
 draw_graph_borders yes
 draw_outline no
 draw_shades no
-gap_x 25
+gap_x 15
 gap_y 15 
-maximum_width 350
+maximum_width 430
 max_port_monitor_connections 64
 max_specials 512
 max_user_text 16384
@@ -32,23 +32,30 @@ uppercase no
 use_spacer yes
 use_xft yes
 xftalpha 0.8
-xftfont  Bitstream Vera Sans Mono:size=9
+xftfont  Bitstream Vera Sans Mono:size=10
 
 TEXT
-${color #0077ff}$nodename     ${alignc}$sysname $kernel ${alignr}$color${time %l:%M:%p}
+${color #0077ff}
+$nodename     ${alignc}$sysname $kernel ${alignr}${time %l:%M%p}
 
-${color #0077ff}CPU:$color ${cpu}% ${color #0077ff}${cpubar 8,98}      ${color #0077ff}RAM:$color $mem${color #0077ff}/${color}$memmax
-${color #0077ff}${cpugraph 0 45,155 104E8B 0077ff} $alignr${color #0077ff}${memgraph 45,155 FF0500 00735B -l }
-${color #0077ff}Swap Usage:$color $swap${color #0077ff}/${color}$swapmax
-${color #0077ff}FS (/)      $color${fs_used /}/${fs_size /}${alignr}${color #0077ff}${fs_bar 8,155 /}
-${color #0077ff}Procs:$color $processes ${color #0077ff}Run:$color $running_processes ${color #0077ff}
-${color #0077ff}Top Processes:
-${color #0077ff}Name              PID     CPU%   MEM%
-$color ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
-$color ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
-$color ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
-${color #0077ff}Mem usage
-$color ${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
-$color ${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
-$color ${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
+CPU usage: ${cpu}% ${color #0077ff} ${alignr}RAM: $mem/$memmax
+${cpugraph 0 50,200 104E8B 0077ff} ${alignr}${memgraph 50,200 FF0500 00735B -l }
+
+Swap   :   ${fs_used swap}/$swapmax  ${alignr}${fs_bar 8,200 swap}
+Root / :   ${fs_used /}/${fs_size /} ${alignr}${fs_bar 8,200 /}
+
+${color #0077ff}Procs: $processes ${color #0077ff}Run: $running_processes ${color #0077ff}
+
+Name              ${alignr}PID     CPU%    MEM%
+by CPU
+${top name 1} ${alignr}${top pid 1}  ${top cpu 1}  ${top mem 1}
+${top name 2} ${alignr}${top pid 2}  ${top cpu 2}  ${top mem 2}
+${top name 3} ${alignr}${top pid 3}  ${top cpu 3}  ${top mem 3}
+${top name 4} ${alignr}${top pid 4}  ${top cpu 4}  ${top mem 4}
+
+by MEM
+${top_mem name 1} ${alignr}${top_mem pid 1}  ${top_mem cpu 1}  ${top_mem mem 1}
+${top_mem name 2} ${alignr}${top_mem pid 2}  ${top_mem cpu 2}  ${top_mem mem 2}
+${top_mem name 3} ${alignr}${top_mem pid 3}  ${top_mem cpu 3}  ${top_mem mem 3}
+${top_mem name 4} ${alignr}${top_mem pid 4}  ${top_mem cpu 4}  ${top_mem mem 4}
 
