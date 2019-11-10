@@ -116,6 +116,20 @@
         или
         $ source ~/.profile</pre>
 
+            <p class="subsection">
+                Выключаем go-lint в vs code
+            </p>
+
+            <p class="plane">
+                После установки расширений golang в vs code среди прочего начинает работать go-lint, ругаясь на все 
+                стиливые недочёты кода. Исправляется редактирование settings.json. Выключаем так: 
+            </p>
+
+            <pre class="code">
+        File &rArr; Preferences &rArr; Settings;
+        Выбираем где угодно - Edit in settings.json;
+        Добавляем - "go.lintFlags": ["--disable=all"]</pre>
+
             <br>
         </div>
     </body>
