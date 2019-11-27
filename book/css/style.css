@@ -1,26 +1,37 @@
 
 @font-face {
-    font-family: 'Roboto Sans';
-    src: url(../fonts/Roboto-Regular.ttf); 
+    font-family: 'Roboto-Sans';
+    src: url('fonts/Roboto-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: 'Roboto Serif';
-    src: url(../fonts/RobotoSlab-Regular.ttf); 
+    font-family: 'Roboto-Serif';
+    src: url('fonts/RobotoSlab-Regular.ttf'), format('truetype'),
+         url('fonts/RobotoSlab-Regular.woff'), format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: 'Roboto Serif Light';
-    src: url(../fonts/RobotoSlab-Light.ttf); 
+    font-family: 'Roboto-Serif-Light';
+    src: url('fonts/RobotoSlab-Light.ttf') format('truetype'),
+         url('fonts/RobotoSlab-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: 'Roboto Mono';
-    src: url(../fonts/RobotoMono-Regular.ttf); 
+    font-family: 'Roboto-Mono';
+    src: url('fonts/RobotoMono-Regular.ttf') format('truetype'),
+         url('fonts/RobotoMono-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
-    font-family: 'Roboto Serif'; /* Семейство шрифтов */
+    font-family: 'Roboto Slab'; /* Семейство шрифтов */
     font-size: 14pt; /* Размер основного шрифта в пунктах  */
     image-rendering: crisp-edges;
     /*background-color: #f0f0f0; /* Цвет фона веб-страницы */
@@ -98,8 +109,10 @@ a:hover {
 } 
 
 pre[class=plane] {
-    font-family: 'Roboto Serif';
+    font-family: 'Roboto Slab';
     text-align: left;
+    font-size: 12pt;
+    letter-spacing: .02rem;
     line-height: 1.2;
     margin-left: 60px; 
     margin-right: 60px;
