@@ -31,7 +31,7 @@
 }
 
 body {
-    font-family: 'Roboto Slab'; /* Семейство шрифтов */
+    font-family: 'Roboto Slab', Arial, sans-serif; /* Семейство шрифтов */
     font-size: 14pt; /* Размер основного шрифта в пунктах  */
     image-rendering: crisp-edges;
     /*background-color: #f0f0f0; /* Цвет фона веб-страницы */
@@ -109,7 +109,7 @@ a:hover {
 } 
 
 pre[class=plane] {
-    font-family: 'Roboto Slab';
+    font-family: 'Roboto Slab', Arial, sans-serif;;
     text-align: left;
     font-size: 12pt;
     letter-spacing: .02rem;
@@ -120,7 +120,7 @@ pre[class=plane] {
 }
 
 pre[class=code] {
-    font-family: 'Roboto Mono';
+    font-family: 'Roboto Mono', 'Ubuntu Mono', Consolas,  Monaco, 'Andale Mono', monospace;
     font-size: 12pt;
     text-align: left;
     line-height: 1.2;
@@ -131,14 +131,14 @@ pre[class=code] {
 span[class="cmnt"] {
     color: #979797;
     font-style: italic;
-    font-family: 'Roboto Mono';
+    font-family: 'Roboto Mono', 'Ubuntu Mono', Consolas,  Monaco, 'Andale Mono', monospace;
 }
 
 span[class="kwd"] {
     font-size: 12pt;
     font-weight: 700;
     color: #000000;
-    font-family: 'Roboto Mono';
+    font-family: 'Roboto Mono', 'Ubuntu Mono', Consolas,  Monaco, 'Andale Mono', monospace;
 }
 
 div {
