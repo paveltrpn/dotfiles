@@ -28,82 +28,36 @@
                 ЧЕРНОВИК
             </p>
 
-            <p class="small">
-                (уменьшенный текст)
-            </p>
-
             <p class="subsection">
-                Заголовок какой-то секции
+                Как обновить Node.js до последней версии?
+            </p>
+
+            <p class="small">
+                (https://devacademy.ru/recipe/kak-obnovit-node-js-do-poslednei-versii)
             </p>
 
             <p class="plane">
-                Текст с переносом строки <br>
-                &emsp;Текст с табуляцией - emsp;
-            </p>
-
-            <p class="plane">
-                C++ code<br>
-                форматирование с табами 
+                1. Нужно очистить NPM кеш:
             </p>
 
             <pre>
-                <code class="language-cpp">
-                    include &lt;iostream&gt;
-                    int main(int argc, char **argv) {
-                        float foo = {0.1};
-                        
-                        std::cout &lt;&lt; "foo = " &lt;&lt; foo;
-
-                        return 0;
-                    }
-                </code>
-            </pre>
+                <code class="language-bash">sudo npm cache clean -f</code></pre>
  
             <p class="plane">
-                C++ code<br>
-                форматирование без табуляций в исходном коде html. Может так правелнее?
+                2. Установить интерактивный менеджер n
             </p>
 
             <pre>
-                <code class="language-cpp">include &lt;iostream&gt;
-                int main(int argc, char **argv) {
-                    float foo = {0.1};
-                    
-                    std::cout &lt;&lt; "foo = " &lt;&lt; foo;
-                    return 0;
-                }</code></pre>
+                <code class="language-bash">sudo npm install -g n</code></pre>
 
             <p class="plane">
-                Math formula
-
-                $${f(x) = x^2}$$
-                $${g(x) = \frac{1}{x}}$$
-                $${F(x) = \int^a_b \frac{1}{3}x^3}$$
+                Эта библиотека позволяет управлять версиями node.js<br>
+                <br>
+                3. Теперь можно установить последнюю версию node.js:  
             </p>
 
-            <p class="link">
-                <a href="">
-                    Ссылка
-                </a>
-            </p>
-
-            <pre class="code">
-                Форматированый текст
-                например для вывода коммандной строки
-
-                $ls -la
-                $shutdown -h now
-            </pre>
-
-            <pre class="code">
-                    ТАБЛИЦА
-                    <table>
-                        <tr><td>Оператор</td><td>Значение</td></tr>
-                        <tr><td>&&</td><td>true</td></tr>
-                        <tr><td>|| </td><td>false</td></tr>
-                        <tr><td>, </td><td>void</td></tr>
-                    </table>
-                </pre>
+            <pre>
+                <code class="language-bash">sudo n stable</code></pre>
 
             <br>
         </div>
