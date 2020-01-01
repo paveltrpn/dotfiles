@@ -1,29 +1,50 @@
 
+/*  
+    Шрифты по умолчанию.
+    Расположены локально в css/fonts/
+    Основное семейство шрифтов для всей страницы - Google Roboto.
+    Если не подгружаются локально, тогда используем те, что
+    установлены в системе, если их нет, то перебераем Ubuntu, Droid или
+    любой из доступных
+*/
+
+/*  
+    Без засечек - 'Roboto'
+*/
 @font-face {
-    font-family: 'Roboto-Sans';
+    font-family: 'Local-Sans';
     src: url('fonts/Roboto-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
+/*  
+    С засечками - 'Roboto Slab' 
+*/
 @font-face {
-    font-family: 'Roboto-Serif';
+    font-family: 'Local-Serif';
     src: url('fonts/RobotoSlab-Regular.ttf'), format('truetype'),
          url('fonts/RobotoSlab-Regular.woff'), format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
+/*  
+    C засечеками тонкий - 'Roboto Slab Light'
+*/
 @font-face {
-    font-family: 'Roboto-Serif-Light';
+    font-family: 'Local-Serif-Light';
     src: url('fonts/RobotoSlab-Light.ttf') format('truetype'),
          url('fonts/RobotoSlab-Light.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
+/*  
+    Моноширинный - 'Roboto Mono'
+*/
 @font-face {
-    font-family: 'Roboto-Mono';
+    font-family: 'Local-Mono';
     src: url('fonts/RobotoMono-Regular.ttf') format('truetype'),
          url('fonts/RobotoMono-Regular.woff') format('woff');
     font-weight: normal;
@@ -31,7 +52,7 @@
 }
 
 body {
-    font-family: 'Roboto Slab', Arial, sans-serif; /* Семейство шрифтов */
+    font-family: 'Local-Serif', 'Roboto Slab', 'Droid Serif', 'Ubuntu Serif', sans-serif; /* Семейство шрифтов */
     font-size: 14pt; /* Размер основного шрифта в пунктах  */
     image-rendering: crisp-edges;
     /*background-color: #f0f0f0; /* Цвет фона веб-страницы */
@@ -51,6 +72,7 @@ blockquote {
     margin-right: 120px;
 }
 
+/* Заголовок темы или раздела */
 p[class="section"] {
     line-height: 1.0;
     letter-spacing: .2rem;
@@ -61,6 +83,7 @@ p[class="section"] {
     margin-right: 60px;
 }
 
+/* Заголовок подраздела */
 p[class="subsection"] {
     line-height: 1.0;
     letter-spacing: .2rem;
@@ -72,6 +95,7 @@ p[class="subsection"] {
     margin-right: 60px; 
 }
 
+/* Основной текст (вообще должно быть "plain")) */
 p[class="plane"] {
     /* text-indent: 1.5em; */
     letter-spacing: .02rem;
@@ -80,6 +104,10 @@ p[class="plane"] {
     margin-right: 60px; /* Отступ справа в пикселах */
 }
 
+/* 
+    Уменьшеный текст. Для комментариев, ссылок (не активных)
+    на исходные материалы и т.д. 
+*/
 p[class="small"] {
     line-height: 1.0;
     /*font-style: italic;*/
@@ -109,7 +137,7 @@ a:hover {
 } 
 
 pre[class=plane] {
-    font-family: 'Roboto Slab', Arial, sans-serif;;
+    font-family: 'Local-Serif', 'Roboto Slab', 'Droid Serif', 'Ubuntu Serif', sans-serif;
     text-align: left;
     font-size: 12pt;
     letter-spacing: .02rem;
@@ -120,7 +148,7 @@ pre[class=plane] {
 }
 
 pre[class=code] {
-    font-family: 'Roboto Mono', 'Ubuntu Mono', Consolas,  Monaco, 'Andale Mono', monospace;
+    font-family: 'Local-Mono', 'Roboto Mono', 'Droid Mono', 'Ubuntu Mono', Consolas, monospace;
     font-size: 12pt;
     text-align: left;
     line-height: 1.2;
@@ -131,14 +159,14 @@ pre[class=code] {
 span[class="cmnt"] {
     color: #979797;
     font-style: italic;
-    font-family: 'Roboto Mono', 'Ubuntu Mono', Consolas,  Monaco, 'Andale Mono', monospace;
+    font-family: 'Local-Mono', 'Roboto Mono', 'Droid Mono', 'Ubuntu Mono', Consolas, monospace;
 }
 
 span[class="kwd"] {
     font-size: 12pt;
     font-weight: 700;
     color: #000000;
-    font-family: 'Roboto Mono', 'Ubuntu Mono', Consolas,  Monaco, 'Andale Mono', monospace;
+    font-family: 'Local-Mono', 'Roboto Mono', 'Droid Mono', 'Ubuntu Mono', Consolas, monospace;
 }
 
 div {
