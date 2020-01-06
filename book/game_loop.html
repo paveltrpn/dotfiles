@@ -96,7 +96,7 @@
             </p>
 
             <pre>
-                <code class="language-c++">while (!quit)
+                <code class="language-cpp">while (!quit)
                 {
                     // Update the camera transform based on interactive
                     // inputs or by following a predefined path.
@@ -186,7 +186,7 @@
             </p>
 
             <pre>
-                <code class="language-c++">void main() // Pong
+                <code class="language-cpp">void main() // Pong
                 {
                     initGame();
                     
@@ -286,7 +286,7 @@
             </p>
 
             <pre>
-                <code class="language-c++">while (true)
+                <code class="language-cpp">while (true)
                 {
                     // Service any and all pending Windows messages.
                     MSG msg;
@@ -334,7 +334,7 @@
             </p>
 
             <pre>
-                <code class="language-c++">while (true)
+                <code class="language-cpp">while (true)
                 {
                     for (each frameListener)
                     {
@@ -353,7 +353,7 @@
             </p>
 
             <pre>
-                <code class="language-c++">class GameFrameListener : public Ogre::FrameListener
+                <code class="language-cpp">class GameFrameListener : public Ogre::FrameListener
                 {
                 public:
                     virtual void frameStarted(const FrameEvent& event)
@@ -379,6 +379,75 @@
             
             <p class="subsection">
                 Event-Based Updating
+            </p>
+
+            <!-- In games, an event is any interesting change in the state of the game or its en-
+                vironment. Some examples include: the human player pressing a button on
+                the joypad, an explosion going off, an enemy character spotting the player,
+                and the list goes on. Most game engines have an event system, which permits
+                various engine subsystems to register interest in particular kinds of events
+                and to respond to those events when they occur (see Section 15.7 for details).
+                A game’s event system is usually very similar to the event/messaging sys-
+                tem underlying virtually all graphical user interfaces (for example, Microsoft
+                Windows’ window messages, the event handling system in Java’s AWT or the
+                services provided by C#’s delegate and event keywords).
+                Some game engines leverage their event system in order to implement the
+                periodic servicing of some or all of their subsystems. For this to work, the
+                event system must permit events to be posted into the future—that is, to be
+                queued for later delivery. A game engine can then implement periodic updat-
+                ing by simply posting an event. In the event handler, the code can perform whatever 
+                periodic servicing is required. It can then post a new event 1/30 or
+                1/60 of a second into the future, thus continuing the periodic servicing for as
+                long as it is required.-->
+
+            <p class="plane">
+                В играх, <i>события</i> - это любые, сколько-нибудь интересные изменения в состоянии игры или её окружения.
+                Например: игрок нажимает кнопку на джойстике, происходит взрыв, вражеский персонаж обнаруживает игрока и т.д. 
+                Большинство игровых движков включают в себя систему событий, которая позволяет различным подсистемама игрового
+                движка регистрировать события и отвечать на них, когда что-то происходит. Систама событий событий конкретной игры
+                обычно очень похожа на таковую, лежащую в основе всех графических интерфейсов пользователя (например, оконные 
+                сообщения Microsoft Windows, система обработки событий в Java AWT или службы, предоставляемые делегатом C # и 
+                ключевыми словами события). <br>
+                <br>
+                Некоторые игровые движки устанавливают свои системы событий в некий порядок, чтобы реализовать переодическое 
+                обслуживание некоторых или всех своих подсистем. Что бы это работало, система событий должна выставлять конкретные события в
+                очередь для последующей обработки. Игровой движок, таким образом, может реализовать периодическое обновление просто добавляя
+                некоторое событие в очередь. Обработчик событий - код, который выполняет необходимое периодическое обслуживание. Движок
+                Может записывать новое событие каждую 1/30 или 1/60 секунды и продолжать периодическоую работу столько, сколько это
+                необходимо.
+            </p>
+
+            <p class="subsection">
+                Abstract Timelines (абстрактные временнЫе линии)
+            </p>
+
+            <!--In game programming, it can be extremely useful to think in terms of abstract
+            timelines. A timeline is a continuous, one-dimensional axis whose origin (t =
+            0) can lie at any arbitrary location relative to other timelines in the system. A
+            timeline can be implemented via a simple clock variable that stores absolute
+            time values in either integer or floating-point format.-->
+
+            <p class="plane">
+                В программировании игр очень полезно размышлять в категориях абстрактных временнЫх линий. ВременнАя линия - это бесконечная
+                в обе стороны ось, имеющая нулевую точку отсчёта (t = 0), которая может находиться в любом произвольном месте относительно
+                другиз временных линий в системе. Временная линия может быть реализована с помощью переменной, хранящей абсолютное время в 
+                любом формате - целочисленном или с плавающей запятой.
+            </p>
+
+            <p class="subsection">
+                Real Time
+            </p>
+
+            <p class="plane">
+                Мы можем называть реальной временной шкалой отрезки времени, измеренные непосредственно через регистр таймера высокого 
+                разрешения CPU (см. Раздел 7.5.3). Начало этой временной шкалы определено так, чтобы оно совпадало с моментом последнего 
+                включения или сброса CPU. Данная временная шкала измеряет время в единицах циклов CPU (или нескольких их кратных), 
+                хотя эти значения времени можно легко преобразовать в единицы секунд, умножив их на частоту таймера высокого разрешения 
+                на текущем CPU.
+            </p>
+
+            <p class="subsection">
+                Game Time
             </p>
             <br>
         </div>
