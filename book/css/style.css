@@ -52,7 +52,7 @@
 }
 
 body {
-    font-family: 'Local-Serif', 'Roboto Slab', 'Droid Serif', 'Ubuntu Serif', sans-serif; /* Семейство шрифтов */
+    font-family: 'Local-Serif', 'Roboto Slab', 'Droid Serif', 'Ubuntu Serif', serif; /* Семейство шрифтов */
     font-size: 14pt; /* Размер основного шрифта в пунктах  */
     image-rendering: crisp-edges;
     /*background-color: #f0f0f0; /* Цвет фона веб-страницы */
@@ -137,7 +137,7 @@ a:hover {
 } 
 
 pre[class=plane] {
-    font-family: 'Local-Serif', 'Roboto Slab', 'Droid Serif', 'Ubuntu Serif', sans-serif;
+    font-family: 'Local-Serif', 'Roboto Slab', 'Droid Serif', 'Ubuntu Serif', serif;
     text-align: left;
     font-size: 12pt;
     letter-spacing: .02rem;

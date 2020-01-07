@@ -3,12 +3,12 @@
     <head>
         <title>Настройка SSH ключей для GitHub</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/prism.css"/> <!-- Тема подсветки кода для Prism -->
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/prism.css"/> <!-- Тема подсветки кода для Prism -->
 
         <!-- Подключение локального MathJax -->
         <script type="text/javascript" id="MathJax-script" async
-        src="js/MathJax3.0.0/es5/tex-svg.js">
+        src="../js/MathJax3.0.0/es5/tex-svg.js">
             MathJax.Hub.Config({
                 extensions: ["tex2jax.js","TeX/noErrors.js"],
 	            jax: ["input/TeX","output/HTML-CSS"],
@@ -20,7 +20,7 @@
     </head>
     <body>
         <!-- Подключение скрипта Prism -->
-        <script src="js/prism-1.17.1.js"></script>
+        <script src="../js/prism-1.17.1.js"></script>
 
         <div class="A4">
             <br>
@@ -70,16 +70,17 @@
                 Открываем консоль и вводим команду:
             </p>
 
-            <pre class="code">$ ssh-keygen -t rsa -b 4096 -C "your_mail@example.com"</pre> 
+            <pre>
+                <code class="language-shell">$ ssh-keygen -t rsa -b 4096 -C "your_mail@example.com"</code></pre> 
 
             <p class="plane">
                 Указываем тот адрес электронной почты, который вводили при регистрации на GitHub.
             </p>
 
-            <pre class="code">
-        $ ssh-keygen -t rsa -b 4096 -C "your_mail@example.com"
-        Generating private/public rsa key pair.
-        Enter file in which to save the key (/Users/username/.ssh/id_rsa):</pre> 
+            <pre>
+                <code class="language-shell">$ ssh-keygen -t rsa -b 4096 -C "your_mail@example.com"
+                Generating private/public rsa key pair.
+                Enter file in which to save the key (/Users/username/.ssh/id_rsa):</code></pre> 
 
             <p class="plane">
                 - Далее нужно указать расположение файла для сохранения ключа. Если вы не введёте путь до файла и просто 
@@ -89,20 +90,20 @@
                 раз, когда используете ключ, пропустите этот шаг, нажав «Enter», и ничего не вводите.
             </p>
 
-            <pre class="code">
-        $ ssh-keygen -t rsa -b 4096 -C "your_mail@example.com"
-        Generating private/public rsa key pair.
-        Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/pavlushk0/git-keys
-        Enter passphrase (empty for no passphrase):</pre>
+            <pre>
+                <code class="language-shell">$ ssh-keygen -t rsa -b 4096 -C "your_mail@example.com"
+                Generating private/public rsa key pair.
+                Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/pavlushk0/git-keys
+                Enter passphrase (empty for no passphrase):</code></pre>
 
             <p class="plane">
                 4. Добавляем ключ в ssh-agent (сгенерированный или уже существующий). Проверяем доступность ключа командой eval 
                 "$(ssh-agent -s)" и добавляем с помощью ssh-add ~/.ssh/your_key_name, где указываем верный путь до файла с ключом и его имя.
             </p>
 
-            <pre class="code">
-        $ ssh-add /Users/pavlushk0/git-keys
-        Identity added: .......</pre>
+            <pre>
+                <code class="language-shell">$ ssh-add /Users/pavlushk0/git-keys
+                Identity added: .......</code></pre>
 
             <p class="plane">
                 <b>Несколько важных примечаний:</b><br>
@@ -122,11 +123,11 @@
                 загрузить ключи в ssh-agent и хранить пароли.
             </p>
 
-            <pre class="code">
-        Host *
-        AddKeysToAgent yes
-        UseKeychain yes
-        IdentityFile ~/.ssh/id_rsa</pre>
+            <pre>
+                <code class="language-shell">Host *
+                AddKeysToAgent yes
+                UseKeychain yes
+                IdentityFile ~/.ssh/id_rsa</code></pre>
 
             <p class="plane">
                 Вы можете добавить свой приватный ключ в ssh-agent и сохранить пароль к нему с помощью команды ssh-add -K ~/.ssh/id_rsa.
@@ -137,9 +138,9 @@
                 5. После того как создан ключ, его нужно добавить на GitHub. Для этого копируем его содержимое с помощью одной из 
                 следующих команд:<br>
                 <br>
-                - Если вы на Windows clip.<br>
+                - Если вы на Windows - clip.<br>
                 <br>
-                - Для пользователей macOS pbcopy.<br>
+                - Для пользователей macOS - pbcopy.<br>
                 <br>
                 - На Linux используйте sudo apt-get install xclip, чтобы установить необходимый для копирования пакет xclip, а 
                 затем введите xclip -sel clip . Или введите команду cat ~/.ssh/id_rsa.pub, контент документа появится прямо в 
