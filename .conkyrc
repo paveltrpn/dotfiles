@@ -12,7 +12,7 @@ draw_outline no
 draw_shades no
 gap_x 15
 gap_y 15 
-maximum_widt 430
+#maximum_width 430
 max_port_monitor_connections 64
 max_specials 512
 max_user_text 16384
@@ -34,8 +34,8 @@ use_spacer left
 use_xft yes
 xftalpha 0.8
 xftfont  Bitstream Vera Sans Mono:size=10:bold
-color0 green
-color1 red
+color0 lightgray
+color1 black
 
 TEXT
 ${color0}
@@ -49,11 +49,11 @@ ${cpugraph 0 50,220 104E8B 0077ff} ${alignr}${memgraph 50,220 FF0500 00735B -l }
 ${color1}Swap fs:       ${color0}${swap} ${color1}/${color0} $swapmax  ${alignr}${swapbar 12,200}
 ${color1}Root fs (/):   ${color0}${fs_used /} ${color1}/${color0} ${fs_size /} ${alignr}${fs_bar 12,200 /}
 
-# wlp2s0 - имя устройства Wi-Fi
-# если нужен по проводу - ставь elp2s0
-${color1}Down spd: ${color0}${downspeedf wlp2s0} k/s  
-${color1}Upld spd: ${color0}${upspeedf wlp2s0} k/s
-${color1}Ttl down:      ${color0}${totaldown wlp2s0} 
+# тут надо ставить выдачу ifconfig
+# например wlp2s0 или eth0 или wlan0 и т.д.
+${color1}Down spd: ${color0}${downspeedf ens33} k/s  
+${color1}Upld spd: ${color0}${upspeedf ens33} k/s
+${color1}Ttl down:      ${color0}${totaldown ens33} 
 
 ${color1}Procs: ${color0}$processes ${color1}${alignr}Run: ${color0}$running_processes
 
