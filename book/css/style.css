@@ -74,8 +74,9 @@ blockquote {
 
 /* Заголовок темы или раздела */
 p[class="section"] {
+    font-family: 'Roboto Bold', 'Droid Serif', 'Ubuntu Serif', serif;
     line-height: 1.0;
-    letter-spacing: .2rem;
+    letter-spacing: .1rem;
     font-size: 26pt;
     font-weight: bold;
     text-align: center; 
@@ -85,8 +86,9 @@ p[class="section"] {
 
 /* Заголовок подраздела */
 p[class="subsection"] {
+    font-family: 'Roboto Bold', 'Droid Serif', 'Ubuntu Serif', serif;
     line-height: 1.0;
-    letter-spacing: .2rem;
+    letter-spacing: .1rem;
     word-break: break-word;
     font-size: 18pt;
     font-weight: bold;
