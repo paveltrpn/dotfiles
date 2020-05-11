@@ -38,9 +38,9 @@ conky.config = {
     stippled_borders = 2,
     use_xft = true,
     xftalpha = 0.8,
-    font = 'Consolas :size=10:bold',
+    font = 'Ubuntu Mono : size=12',
     color0 = 'lightgray',
-    color1 = 'white'
+    color1 = 'darkgrey'
 }
 
 conky.text = [[
