@@ -1,10 +1,13 @@
 
+# Скрипт пробегается по вложенным директориям (только первого уровня), 
+# и запускает в каждой git status
+
 import os
 import subprocess
 
 def main() -> None:
-    tree = os.listdir(".")
     wd = os.getcwd()
+    tree = os.listdir(wd)
     for i in tree:
         if os.path.isdir(i):
             os.chdir(i)
