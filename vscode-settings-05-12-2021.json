@@ -1,0 +1,28 @@
+{
+    "workbench.activityBar.visible": false,
+    "workbench.colorTheme": "Soda Pop VS",
+    "editor.fontFamily": "'Fira Code Medium', 'Courier New', monospace",
+    "editor.fontSize": 18,
+    "editor.tabCompletion": "on",
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideTabs": false,
+    "zenMode.hideStatusBar": false,
+    "editor.minimap.scale": 2,
+    "editor.minimap.renderCharacters": false,
+    "python.analysis.diagnosticSeverityOverrides": {
+    "python.analysis.extraPaths": ["C:/Python/Python39/Lib/site-packages/glfw", 
+                                   "C:/Python/Python39/Lib/site-packages/OpenGL",
+                                   "C:/Python/Python39/Lib/site-packages/imgui",
+                                   "C:/Python/Python39/Lib/site-packages/imgui/integrations",
+                                   "C:/Python/Python310/Lib/site-packages/bpy",
+                                   "C:/Python/Python310/Lib/site-packages"],
+    },
+    "python.analysis.logLevel": "Error",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.completeFunctionParens": true,
+    "go.buildOnSave": "off",
+    "go.useLanguageServer": true,
+    "C_Cpp.updateChannel": "Insiders",
+    "C_Cpp.default.compilerPath": "E:\\devtools\\mingw64\\bin\\g++.exe",
+    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64"
+}

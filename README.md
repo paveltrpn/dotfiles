@@ -50,4 +50,6 @@ sudo ninja -C builddir/ install
 				"label": "Teme Name",
 				"uiTheme": "vs-dark",
 				"path": "./theme-file.json"
-			},```
+			},```  
+  
+Другие хорошие темы можно посмотреть - https://themes.vscode.one/theme/paveltrpn/BgDPpWrh  
