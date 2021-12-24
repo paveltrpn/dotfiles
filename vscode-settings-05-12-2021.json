@@ -24,5 +24,8 @@
     "go.useLanguageServer": true,
     "C_Cpp.updateChannel": "Insiders",
     "C_Cpp.default.compilerPath": "E:\\devtools\\mingw64\\bin\\g++.exe",
-    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64"
+    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+    "go.toolsEnvVars": {
+        "GOBIN": "/usr/paveltrpn/go/bin"
+    }
 }
