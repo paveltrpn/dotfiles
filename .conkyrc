@@ -12,7 +12,6 @@ conky.config = {
     draw_shades = false,
 	double_buffer = true,
     use_xft = true,
-    font = 'DejaVu Sans Mono:size=12',
     gap_x = 15,
     gap_y = 15,
     minimum_height = 5,
@@ -40,7 +39,7 @@ conky.config = {
     stippled_borders = 2,
     use_xft = true,
     xftalpha = 0.8,
-    font = 'Ubuntu Mono : size=12',
+    font = 'Monospace : size=12',
     color0 = 'lightgray',
     color1 = 'darkgrey'
 }
