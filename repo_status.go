@@ -31,7 +31,7 @@ func filter(vs []string, f func(string) bool) []string {
 var gitPorcelainCodes = map[string]string{
 	" M": "updated in index",
 	" T": "type changed in index",
-	" A": "added to index",
+	"A ": "added to index",
 	" D": "deleted from index",
 	" R": "renamed in index",
 	" C": "copied in index",
@@ -58,7 +58,7 @@ func checkStatusPorcelain(input []string) string {
 	}
 
 	for _, line := range filteredInput {
-		// Берём префих строки, содержащий код.
+		// Берём префикс строки, содержащий код.
 		prefix = line[0:2]
 		if porcelainCode, ok := gitPorcelainCodes[prefix]; ok {
 			rt = append(rt, porcelainCode+" - "+line[3:])
@@ -71,19 +71,25 @@ func checkStatusPorcelain(input []string) string {
 }
 
 func main() {
-	workDir, _ := os.Getwd()
+	workDir, err := os.Getwd()
+	if err != nil {
+		println(err)
+		return
+	}
+
+	// Без контроля ошибки, потому что workDir всегда существует
 	dirs, _ := os.ReadDir(workDir)
 
 	for _, dir := range dirs {
 		if dir.IsDir() {
-			_ = os.Chdir(workDir + "/" + dir.Name())
+			os.Chdir(workDir + "/" + dir.Name())
 
 			gitStatus := exec.Command("git", "status", "--porcelain")
 			out, err := gitStatus.Output()
 			if err != nil {
 				fmt.Printf("---=== %v ===---\n", dir.Name())
 				fmt.Printf("Directory - %v has not contain a git repo!\n", dir.Name())
-				fmt.Println(err.Error())
+				println(err.Error())
 				continue
 			}
 

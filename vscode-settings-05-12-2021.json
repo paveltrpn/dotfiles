@@ -1,6 +1,6 @@
 {
     "workbench.activityBar.visible": false,
-    "workbench.colorTheme": "Popping and Locking",
+    "workbench.colorTheme": "Noctis Obscuro",
     "editor.fontFamily": "'Fira Code Medium', 'Courier New', monospace",
     "editor.fontSize": 17.5,
     "editor.tabCompletion": "on",
@@ -9,6 +9,7 @@
     "zenMode.hideStatusBar": false,
     "editor.minimap.scale": 2,
     "editor.minimap.renderCharacters": false,
+    "explorer.sortOrder": "type",
     "python.analysis.diagnosticSeverityOverrides": {
     "python.analysis.extraPaths": ["C:/Python/Python39/Lib/site-packages/glfw", 
                                    "C:/Python/Python39/Lib/site-packages/OpenGL",
@@ -28,5 +29,9 @@
     "go.goroot": "/home/paveltrpn/go-1.17.5",
     "C_Cpp.updateChannel": "Insiders",
     "C_Cpp.default.compilerPath": "E:\\devtools\\mingw64\\bin\\g++.exe",
-    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64"
+    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+    "gopls": {
+        "build.experimentalWorkspaceModule": true
+    },
+    "js/ts.implicitProjectConfig.checkJs": true
 }

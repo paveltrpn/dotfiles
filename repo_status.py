@@ -1,6 +1,6 @@
 
 # Скрипт пробегается по вложенным директориям (только первого уровня), 
-# и запускает в каждой git status
+# и запускает в каждой $git status --porcelain
 
 import os
 import subprocess
@@ -16,6 +16,11 @@ gitPorcelainCodes: dict[str, str] = {" M": "updated in index",
 
 
 def checkStatusWithPorcelain(input: list[str]) -> str:
+    """
+    Function recieve a output of $git status --porcelain command
+    and replace a symbols to human readable description of it.
+    @return: Return a single string which describe a status of repository.
+    """
     rt: list[str] = []
 
     input = list(filter(lambda x: x != "", input))
