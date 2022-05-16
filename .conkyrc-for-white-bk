@@ -1,0 +1,83 @@
+conky.config = {
+    alignment = 'top_right',
+    background = false,
+    border_width = 3,
+    cpu_avg_samples = 2,
+    default_color = 'darkgrey',
+    default_outline_color = 'lightgrey',
+    default_shade_color = 'grey',
+    draw_borders = false,
+    draw_graph_borders = true,
+    draw_outline = true,
+    draw_shades = false,
+    double_buffer = true,
+    use_xft = true,
+    gap_x = 5,
+    gap_y = 25,
+    border_inner_margin = 10,
+    border_outer_margin = 10,
+    minimum_height = 5,
+    minimum_width = 5,
+    max_port_monitor_connections = 64,
+    max_user_text = 16384,
+    net_avg_samples = 2,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_stderr = false,
+    extra_newline = false,
+    own_window = true,
+    own_window_hints = 'undecorated', 'below', 'sticky', 'skip_taskbar' ,'skip_pager',
+    own_window_class = 'Conky',
+    own_window_type = 'desktop',
+    own_window_transparent = false, 
+    own_window_argb_visual = true,    
+    own_window_argb_value = 0,        
+    stippled_borders = 0,
+    update_interval = 2,
+    uppercase = false,
+    use_spacer = 'none',
+    show_graph_scale = false,
+    show_graph_range = false,
+    stippled_borders = 2,
+    use_xft = true,
+    xftalpha = 1.0,
+    font = 'Monospace :bold: size=13',
+    color0 = '#686868',
+    color1 = '#202020',
+    color2 = '#0f0f0f',
+    color3 = '#757575',
+}
+
+conky.text = [[
+${color0}
+${color1}Nodename: ${color0}$nodename     ${alignr}${color1}time: ${color0}${time %l:%M%p}
+${color1}Sysname:  ${color0}$sysname 
+${color1}Kernel:   ${color0}$kernel 
+
+# тут надо ставить выдачу ifconfig
+# например wlp2s0 или eth0 или wlan0 и т.д.
+${color1}Down spd: ${color0}${downspeedf ens33} k/s  
+${color1}Upld spd: ${color0}${upspeedf ens33} k/s
+${color1}Ttl down:      ${color0}${totaldown ens33} 
+
+${color1}Procs: ${color0}$processes ${color1}${alignr}Run: ${color0}$running_processes
+
+${color1}Name              ${alignr}PID     CPU%    MEM%
+by CPU${color0}
+${top name 1} ${alignr}${top pid 1}  ${top cpu 1}  ${top mem 1}
+${top name 2} ${alignr}${top pid 2}  ${top cpu 2}  ${top mem 2}
+${top name 3} ${alignr}${top pid 3}  ${top cpu 3}  ${top mem 3}
+${top name 4} ${alignr}${top pid 4}  ${top cpu 4}  ${top mem 4}
+
+${color1}by MEM${color0}
+${top_mem name 1} ${alignr}${top_mem pid 1}  ${top_mem cpu 1}  ${top_mem mem 1}
+${top_mem name 2} ${alignr}${top_mem pid 2}  ${top_mem cpu 2}  ${top_mem mem 2}
+${top_mem name 3} ${alignr}${top_mem pid 3}  ${top_mem cpu 3}  ${top_mem mem 3}
+${top_mem name 4} ${alignr}${top_mem pid 4}  ${top_mem cpu 4}  ${top_mem mem 4}
+
+${color1}CPU usage: ${color0}${cpu}% ${color1} ${alignr}RAM: ${color0}$mem/$memmax
+${color3}${cpugraph 0 50,220 104E8B 0077ff}    ${alignc} ${color3}${memgraph 50, 295 FF0500 00735B }
+
+${color1}Swap fs:       ${color0}${swap} ${color1}/${color0} $swapmax ${color3} ${alignr}${swapbar 12,200}
+${color1}Root fs (/):   ${color0}${fs_used /} ${color1}/${color0} ${fs_size /} ${color3} ${alignr}${fs_bar 12,200 /}
+]]
