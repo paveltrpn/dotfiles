@@ -1,0 +1,89 @@
+1) Создаём конфиг файл для nvim:
+mkdir ~/.config/nvim
+touch ~/.config/nvim/init.vim
+
+2) Устанавливаем vim-plug
+curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+       
+Ключи curl-a из этой комманды значат следующее:
+-f, --fail
+              (HTTP) Fail silently (no output at all) on server errors. This is mostly done
+              to enable scripts etc to better deal with failed attempts.
+              
+-L, --location
+              (HTTP) If the server reports that the requested page has moved to a different
+              location (indicated with a Location: header and a 3XX  response  code),  this
+              option  will  make  curl  redo the request on the new place.
+              
+ -o, --output <file>
+              Write  output to <file> instead of stdout. If you are using {} or [] to fetch
+              multiple documents, you should quote the URL and you can use '#' followed  by
+              a  number  in  the  <file> specifier. That variable will be replaced with the
+              current string for the URL being fetched.
+              
+--create-dirs
+              When used in conjunction with the -o, --output option, curl will  create  the
+              necessary local directory hierarchy as needed. This option creates the direc‐
+              tories mentioned with the -o, --output option, nothing else. If the  --output
+              file name uses no directory, or if the directories it mentions already exist,
+              no directories will be created.
+              
+
+3) Устанавливает плагин Tagbar, который позволяет выводить список идентификаторов
+(переменых, функций и т.д.), которые содержатся в файле. Для работы использует
+ctags, поэтому для начала нужно установить его.
+
+git clone https://github.com/universal-ctags/ctags.git
+cd ctags
+./autogen.sh
+./configure --prefix=/where/you/want/to/install # install to where you have access
+# Или можно не ставить префикс и установка будет в директорию по умолчанию
+make -j && make install # may require extra privileges depending on where to install
+
+Сам Tagbar устанавливается как обычно:
+Plug 'majutsushi/tagbar'
+:Plug install
+
+4) При добавлении в init.vim активирует автодополнений после точки,
+работает для плагина vim-go
+au filetype go inoremap <buffer> . .<C-x><C-o>
+
+5) Для автокомплита и других возможностей в golang можно импользовать несколько плагинов,
+например vim-go - Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } или coc - 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}. vim-go неплохой плагин с хорошей поддержкой, 
+работает с LSP самостоятельно, всё что нужно в нём есть. coc - огромный комбайн, с поддержкой 
+большого количества языков, написан для node.js, для установки нужно предварительно сделать
+sudo apt-get install node. Для поддержки языков использует собственные плагины, для golang
+например, есть такой - :CocInstall coc-go.
+
+6) Настройка vim-go.
+Для начало нужно просто установить плагин - Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }.
+Затем можно настроить режимы подсветки, клавиши вызова go vet, gofmt, staticcheck и gofmt.
+Клавиши для вызова пользовательских комманд настраиваются через <leader>, например - \а для
+:GoFmt, где \ это и есть <leader>.
+
+vim-go вызывает окно preview при использовании автокомплита, в котором показывает информацию
+о текущем идентификаторе из godoc. Чтобы его подавить или закрывать автоматически при закрытии 
+автокомплита можно использовать такие настройки, соответственно:
+
+" Supress vim-go autocomplete preview window
+set completeopt-=preview
+
+" Autoclose vim-go autocomplete preview window when
+" close autocomplete popup hover window
+augroup completion_preview_close
+  autocmd!
+  autocmd CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | endif
+augroup END
+
+7) Для выделения мультистрок можно использовать - Plug 'mg979/vim-visual-multi'.
+Я настроил работу с мультистрокой по сочетаниям клавишь как в VSCode:
+
+" Some remaps fo vim-visual-multi
+" Disable dafault mappings, for C-Up/Down cursor selection off
+let g:VM_default_mappings = 0
+" Define new map - needed for strings below
+let g:VM_maps = {}
+" Map cursor selection for Shift-Ctrl-Up/Down, VSCode style multicursor
+let g:VM_maps["Select Cursor Down"] = '<S-C-Down>'      " start selecting down
+let g:VM_maps["Select Cursor Up"]   = '<S-C-Up>'        " start selecting up
