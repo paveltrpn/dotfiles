@@ -2,6 +2,7 @@
 set mouse=a
 
 set shell=sh
+set t_Co=256
 
 " Syntax highlights
 syntax on
@@ -14,6 +15,9 @@ set noswapfile
 
 set autoindent
 
+" We don't need to see things like -- INSERT -- anymore 
+set noshowmode
+
 " Encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -24,7 +28,7 @@ set backspace=indent,eol,start
 " Highlight line under cursor
 set cursorline
 " Toggle highlight line under cursor by <leader>h
-:nnoremap <Leader>h :set cursorline!<CR>
+nnoremap <Leader>h :set cursorline!<CR>
 
 "" Tabs. May be overridden by autocmd rules
 set tabstop=4
@@ -34,41 +38,98 @@ set shiftwidth=4
 set expandtab
 set ruler
 
+" Useful to faster update gitgutter plugin show bar with changes
+set updatetime=500
+
 call plug#begin()
 " Golang vim plugin
   Plug 'fatih/vim-go'
+
+" Funny icons fo NERDTree and some other plugins. Patched nerd fonts need for work.
+  Plug 'ryanoasis/vim-devicons'
+
 " File explorer
   Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-" Plugin for showing all instatnces in source file
-  Plug 'majutsushi/tagbar'
+
 " Fuzzy finder plugin. Need to do sudo apt-get install fzf, before use
   Plug 'junegunn/fzf'
-" Status bar below
+
+" Find text in files. Searches through whole directory. Very fast.
+" Required sudo apt-get install silversearcher-ag for work and set
+" to silversearcher-ag as main finding tool.
+" May use 'epmatsw/ag.vim' instead of these guy, but it repo 
+" mark as deprecated.
+  Plug 'mileszs/ack.vim'
+
+" Status bar and tabsline improvement plugin
   Plug 'vim-airline/vim-airline'
+
 " Nice color theme
   Plug 'safv12/andromeda.vim'
-" Plugin for autocomplete braces. This one works with LUA
-  Plug 'windwp/nvim-autopairs'
+
+" Plugin for autocomplete braces. 
+  Plug 'raimondi/delimitmate'
+
 " Multiline selection plugin
   Plug 'mg979/vim-visual-multi'
-" Easy comment line plugin
+
+" Easy comment line plugin. <leader>cc and <leader>c-space in normal mode for using.
   Plug 'preservim/nerdcommenter'
+
 " Very nice plugin for smooth page scrolling by ctrl-u, ctrl-d, shuft-up, shift-down
   Plug 'psliwka/vim-smoothie'
 
-  Plug 'romgrk/barbar.nvim'
-  " Funny icons fo NERDTree. Patched nerd fonts need for work
-  " Plug 'ryanoasis/vim-devicons'
+" Show changes in files accordig git.
+  Plug 'airblade/vim-gitgutter'
+
+  Plug 'nvim-treesitter/nvim-treesitter'
+  
+  Plug 'neovim/nvim-lspconfig'
+
+  " Plugin for autocomplete braces. This one works with LUA.
+  " Must be enabled by some sofisticated method listed below.
+  " Plug 'windwp/nvim-autopairs'
+
+  " Plugin for showing tags (functions, variables an so on) in source file.
+  " Currently commented because of when it plug with vim-go it cause strange
+  " bug - when you try to use ctrl-] (go to definition) vim-go show this error
+  " message - vim-go: could not find 'gotags'
+  " Plug 'majutsushi/tagbar'
+  "
+  " Make tabs little prettier. Also show opened (but may be hidden) buffers.
+  " I found that vim-airline can make same things.
+  " Plug 'romgrk/barbar.nvim'
+  "
+  "
   " Autocomplete plugin. Very complex node.js plugin with many features,
   " many languages support and so on. I prefer to use vim-go instead of it by now.
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
+" Setup ack.vim to use the_silver_searcher (ag) by default.
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 " Open a neovim with window splitted by two parts
-autocmd VimEnter * :vsplit
+" autocmd VimEnter * :vsplit
 
 set background=dark
 colorscheme andromeda
+
+" Hide tilde symbol that indicates empty lines in vim beffer.
+" It replace with blank space, in the end of next line space
+" symbol was next to backslash symbol
+set fillchars+=eob:\ 
+
+" Map to close quickfix window - <leader>q
+nnoremap <leader>q :cclose<CR>
+
+" vim-airline plugin setup
+set showtabline=2
+let g:airline#extensions#tabline#enabled=1
+"let g:airline#extensions#tabline#left_sep='|'
+"let g:airline#extensions#tabline#left_alt_sep='|'
+"let g:airline#extensions#tabline#right_sep='|'
+"let g:airline#extensions#tabline#right_alt_sep='|'
 
 "" NERDTree configuration
 let g:NERDTreeChDirMode=2
@@ -84,12 +145,31 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
 nnoremap <leader>b :NERDTreeToggle ~/code<CR>
       
 " Remap fo Tagbar, not always useful, maybe better call :TagbarToggle
-" directly at first time
-nnoremap <leader>t :TagbarToggle<CR>
+" directly at first time.
+" Uncomment this when you fix bug with tagbar and vim-go simulteineus
+" usage!
+" nnoremap <leader>t :TagbarToggle<CR>
 
 " Force to work 'windwp/nvim-autopairs'
+"lua << EOF
+"require("nvim-autopairs").setup {}
+"EOF
+
 lua << EOF
-require("nvim-autopairs").setup {}
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+lua << EOF
+require'lspconfig'.gopls.setup{}
 EOF
 
 " Golang vim-go plugin hightlights options
@@ -125,8 +205,7 @@ set completeopt-=preview
 " close autocomplete popup hover window
 augroup completion_preview_close
   autocmd!
-  autocmd CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | endif
-augroup END
+  autocmd CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | augroup END
 
 " Automatically call vim-go autocomplete dialog
 " au filetype go inoremap <buffer> . .<C-x><C-o>
@@ -158,6 +237,10 @@ vnoremap <A-up> :m '<-2<CR>gv=gv
 
 " Some barbar tab manager plugin options
 " NOTE: If barbar's option dict isn't created yet, create it
-let bufferline = get(g:, 'bufferline', {})
+"let bufferline = get(g:, 'bufferline', {})
 " Tell barbar don't search devicons plugin
-let bufferline.icons = v:false
+"let bufferline.icons = v:false
+
+" Set gitgutter signcolumn color to background.
+highlight clear SignColumn
+
