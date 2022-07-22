@@ -1,19 +1,14 @@
 
+-- ============================= ---
+-- === Basic options section === ---
+-- ============================= ---
+
 -- Enable mouse. set mouse = - for disable
 vim.opt.mouse = "a"
 -- String numbers
 vim.opt.number = true
 
 vim.opt.shell = "sh"
-
--- Functional wrapper for mapping custom keybindings
-function map(mode, lhs, rhs, opts)
-    local options = { noremap = true }
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
 
 -- Fix backspace indent
 --vim.opt.backspace = indent,eol,start
@@ -27,33 +22,6 @@ set backspace=indent,eol,start
 vim.cmd([[
 set fillchars+=eob:\ 
 ]])
-
--- Map to close quickfix window - <leader>q
-vim.cmd([[
-nnoremap <leader>q :cclose<CR>
-]])
-
--- Map to deselect word selected by shift-8 (or shift-*)
-vim.cmd([[
-nnoremap <leader>8 :nohlsearch<CR>
-]])
-
--- The following mappings a quick way to move lines of text up or down. 
--- The mappings work in normal, insert and visual 
--- modes, allowing you to move the current line, or a selected block of lines. 
-vim.cmd([[
-nnoremap <A-down> :m .+1<CR>==
-nnoremap <A-up> :m .-2<CR>==
-inoremap <A-down> <Esc>:m .+1<CR>==gi
-inoremap <A-up> <Esc>:m .-2<CR>==gi
-vnoremap <A-down> :m '>+1<CR>gv=gv
-vnoremap <A-up> :m '<-2<CR>gv=gv
-]])
-
--- Highlight line under cursor
-vim.o.cursorline = true
--- Toggle highlight line under cursor by <leader>h
-map("n", "<Leader>h", ":set cursorline!<CR>")
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 0
@@ -81,7 +49,54 @@ vim.opt.ruler = true
 -- Useful to faster update gitgutter plugin show bar with changes
 vim.opt.updatetime = 500
 
---require("plugins")
+-- ======================= ---
+-- === Keymaps section === ---
+-- ======================= ---
+
+-- Functional wrapper for mapping custom keybindings
+function map(mode, lhs, rhs, opts)
+    local options = { noremap = true }
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+
+-- Highlight line under cursor
+vim.o.cursorline = true
+-- Toggle highlight line under cursor by <leader>h
+map("n", "<Leader>h", ":set cursorline!<CR>")
+
+-- The following mappings a quick way to move lines of text up or down. 
+-- The mappings work in normal, insert and visual 
+-- modes, allowing you to move the current line, or a selected block of lines. 
+vim.cmd([[
+nnoremap <A-down> :m .+1<CR>==
+nnoremap <A-up> :m .-2<CR>==
+inoremap <A-down> <Esc>:m .+1<CR>==gi
+inoremap <A-up> <Esc>:m .-2<CR>==gi
+vnoremap <A-down> :m '>+1<CR>gv=gv
+vnoremap <A-up> :m '<-2<CR>gv=gv
+]])
+
+
+-- Map to close quickfix window - <leader>q
+vim.cmd([[
+nnoremap <leader>q :cclose<CR>
+]])
+
+-- Map to deselect word selected by shift-8 (or shift-*)
+vim.cmd([[
+nnoremap <leader>8 :nohlsearch<CR>
+]])
+
+--- ================================ ---
+--- === Plugins fetching section === ---
+--- ================================ ---
+
+-- Uncomment next sentence if packer plugins fetch in 
+-- seperate script, e.g. ~/.config/nvim/lua/plugins.lua
+-- require("plugins")
 
 local use = require('packer').use
 require('packer').startup(function()
@@ -91,6 +106,7 @@ require('packer').startup(function()
   -- Color theme
   use 'folke/tokyonight.nvim'
 
+  -- Status line written in lua
   use 'feline-nvim/feline.nvim'
 
   -- Plugin for autocomplete braces. This one works with LUA.
@@ -99,10 +115,20 @@ require('packer').startup(function()
   
   -- Fuzzy finder plugin
   use 'ibhagwan/fzf-lua'
+  
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icons
+    },
+   -- tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
 
   -- Smooth scrolling plugin.
   -- Scroll by ctrl-f, ctrl-b, ctrl-e, ctrl-y
   use 'karb94/neoscroll.nvim'
+
+  use 'romgrk/barbar.nvim'
 
   -- Neovim tree-sitter support plugin
   use {
@@ -115,10 +141,14 @@ require('packer').startup(function()
 
 end)
 
--- Require tokyonight theme
+--- ============================= ---
+--- === Plugins setup section === ---
+--- ============================= ---
+
+-- Require 'folke/tokyonight.nvim'
 vim.cmd[[colorscheme tokyonight]]
 
--- Require fzf-lua.
+-- Require 'ibhagwan/fzf-lua'
 -- Map fuzzy finder plugint to ctrl-p (like VSCode)
 vim.api.nvim_set_keymap('n', '<c-P>',
     "<cmd>lua require('fzf-lua').files({ cwd = '~/' })<CR>",
@@ -139,6 +169,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+-- Require 'neovim/nvim-lspconfig' 
 -- NEOVIM LSP DEFAULT CONFIG --
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -179,7 +210,21 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
-require'lspconfig'.gopls.setup{
+require'lspconfig'.gopls.setup {
+    cmd = {'gopls'},
+	-- for postfix snippets and analyzers
+	capabilities = capabilities,
+	    settings = {
+	      gopls = {
+		      experimentalPostfixCompletions = true,
+		      analyses = {
+		        unusedparams = true,
+		        shadow = true,
+		     },
+		     staticcheck = true,
+		    },
+	    },
+
     on_attach = on_attach,
     flags = lsp_flags,
 }
@@ -189,6 +234,28 @@ vim.cmd([[
     set completeopt-=preview
 ]])
 
-require("nvim-autopairs").setup {}
+require("nvim-autopairs").setup{}
+
 require('feline').setup()
 
+require("nvim-tree").setup({
+    filters = {
+        dotfiles = true,
+    },
+
+    view = {
+        width = 24,
+    },
+
+    git = {
+        enable = true,
+        ignore = true,
+        show_on_dirs = true,
+        timeout = 400,
+    },
+})
+
+-- Remap \b to call NvimTree 
+vim.cmd([[
+    nnoremap <leader>b :NvimTreeToggle ~/code<CR>
+]])
