@@ -49,6 +49,16 @@ vim.opt.ruler = true
 -- Useful to faster update gitgutter plugin show bar with changes
 vim.opt.updatetime = 500
 
+-- Always show the signcolumn, otherwise it would shift the text each time
+-- diagnostics appear/become resolved.
+vim.cmd([[
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+]])
 -- ======================= ---
 -- === Keymaps section === ---
 -- ======================= ---
@@ -66,19 +76,6 @@ end
 vim.o.cursorline = true
 -- Toggle highlight line under cursor by <leader>h
 map("n", "<Leader>h", ":set cursorline!<CR>")
-
--- The following mappings a quick way to move lines of text up or down. 
--- The mappings work in normal, insert and visual 
--- modes, allowing you to move the current line, or a selected block of lines. 
-vim.cmd([[
-nnoremap <A-down> :m .+1<CR>==
-nnoremap <A-up> :m .-2<CR>==
-inoremap <A-down> <Esc>:m .+1<CR>==gi
-inoremap <A-up> <Esc>:m .-2<CR>==gi
-vnoremap <A-down> :m '>+1<CR>gv=gv
-vnoremap <A-up> :m '<-2<CR>gv=gv
-]])
-
 
 -- Map to close quickfix window - <leader>q
 vim.cmd([[
@@ -109,12 +106,11 @@ require('packer').startup(function()
   -- Status line written in lua
   use 'feline-nvim/feline.nvim'
 
+  -- Tabbar plugin
+  use 'romgrk/barbar.nvim'
+
   -- Plugin for autocomplete braces. This one works with LUA.
-  -- Must be enabled by some sofisticated method listed below.
   use 'windwp/nvim-autopairs'
-  
-  -- Fuzzy finder plugin
-  use 'ibhagwan/fzf-lua'
   
   use {
     'kyazdani42/nvim-tree.lua',
@@ -124,11 +120,22 @@ require('packer').startup(function()
    -- tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
+  -- Fuzzy finder plugin
+  -- I use this instead of 'ibhagwan/fzf-lua'  
+  -- despite of it's vim script plugin
+  -- use 'junegunn/fzf'
+  
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+  -- or                            , branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  
   -- Smooth scrolling plugin.
   -- Scroll by ctrl-f, ctrl-b, ctrl-e, ctrl-y
   use 'karb94/neoscroll.nvim'
 
-  use 'romgrk/barbar.nvim'
+  use 'lewis6991/gitsigns.nvim'
 
   -- Neovim tree-sitter support plugin
   use {
@@ -137,7 +144,14 @@ require('packer').startup(function()
   }
 
   -- Neovim built-in LSP support plugin
-  use 'neovim/nvim-lspconfig' 
+  use 'neovim/nvim-lspconfig'
+
+  -- Autocomplition engine
+  -- for work need do this:
+  -- sudo apt-get install python3-venv
+  -- :COQdeps
+  use 'ms-jpq/coq_nvim'
+  use 'ms-jpq/coq.artifacts'
 
 end)
 
@@ -148,114 +162,36 @@ end)
 -- Require 'folke/tokyonight.nvim'
 vim.cmd[[colorscheme tokyonight]]
 
--- Require 'ibhagwan/fzf-lua'
--- Map fuzzy finder plugint to ctrl-p (like VSCode)
-vim.api.nvim_set_keymap('n', '<c-P>',
-    "<cmd>lua require('fzf-lua').files({ cwd = '~/' })<CR>",
-    { noremap = true, silent = true })
-
 -- Require 'karb94/neoscroll.nvim'
 require('neoscroll').setup()
 
--- Require 'nvim-treesitter/nvim-treesitter'
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
+-- use 'nvim-treesitter/nvim-treesitter',
+require "treesitter"
 
--- Require 'neovim/nvim-lspconfig' 
--- NEOVIM LSP DEFAULT CONFIG --
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
-end
-
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
-
-require'lspconfig'.gopls.setup {
-    cmd = {'gopls'},
-	-- for postfix snippets and analyzers
-	capabilities = capabilities,
-	    settings = {
-	      gopls = {
-		      experimentalPostfixCompletions = true,
-		      analyses = {
-		        unusedparams = true,
-		        shadow = true,
-		     },
-		     staticcheck = true,
-		    },
-	    },
-
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-
--- Supress neovim builtin lsp and vim-go autocomplete preview window
+require "t-scope"
 vim.cmd([[
-    set completeopt-=preview
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 ]])
+
+require "nvim-lspconfig"
+
+-- use 'ms-jpq/coq_nvim'
+-- Config autostart
+vim.cmd([[
+let g:coq_settings = { 'auto_start': 'shut-up' }
+]])
+-- Cunfig to use with gopls
+local lsp = require "lspconfig"
+local coq = require "coq" -- add this
+lsp.gopls.setup(coq.lsp_ensure_capabilities()) -- after
+
+require "gitsigns-nvim"
 
 require("nvim-autopairs").setup{}
 
 require('feline').setup()
 
-require("nvim-tree").setup({
-    filters = {
-        dotfiles = true,
-    },
-
-    view = {
-        width = 24,
-    },
-
-    git = {
-        enable = true,
-        ignore = true,
-        show_on_dirs = true,
-        timeout = 400,
-    },
-})
-
--- Remap \b to call NvimTree 
-vim.cmd([[
-    nnoremap <leader>b :NvimTreeToggle ~/code<CR>
-]])
+-- use 'kyazdani42/nvim-tree',
+require "tree"

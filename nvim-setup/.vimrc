@@ -1,7 +1,7 @@
 
-""" ============================= ---
-""" === Basic options section === ---
-""" ============================= ---
+""" ============================== ---
+""" === Common options section === ---
+""" ============================== ---
 
 " Enable mouse. set mouse = - for disable
 set mouse=a
@@ -46,11 +46,12 @@ set ruler
 ":autocmd InsertLeave * set nocul
 
 " Change cursor style depend which mode are we in
+" necessary in vim
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
 " Useful to faster update gitgutter plugin show bar with changes
-set updatetime=500
+set updatetime=200
 
 set background=dark
 
@@ -75,15 +76,26 @@ else
   set signcolumn=yes
 endif
 
-" Tab indent for html, css and js files
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+" Set for highlight search word
+set hlsearch
 
-""" ======================= ---
-""" === Keymaps section === ---
-""" ======================= ---
+" Move newborn quickfix window to bottomest place.
+" This trigger takes advantage of the fact that the quickfix window 
+" can be easily distinguished by its file-type, qf. The wincmd J command 
+" is equivalent to the [Ctrl+W, Shift+J] shortcut sequence 
+" instructing Vim to move the current window to the very bottom of the screen
+:autocmd FileType qf wincmd J
+
+" NETRW file explorer settings (native vim explorer)
+" call by :Explore command
+let g:netrw_banner = 0
+" Tree instead a split view
+let g:netrw_liststyle = 3
+" Open file in new tab
+let g:netrw_browse_split = 3
+""" ============================== ---
+""" === Common keymaps section === ---
+""" ============================== ---
 
 " Toggle highlight line under cursor by <leader>h
 nnoremap <Leader>h :set cursorline!<CR>
@@ -93,6 +105,12 @@ nnoremap <leader>q :cclose<CR>
 
 "" Map to deselect word selected by shift-8 (or shift-*)
 nnoremap <leader>8 :nohlsearch<CR>
+
+" Map traditional copy-paste bindings to global clipboard
+" copy and paste
+:inoremap <C-v> <ESC>"+pa
+:vnoremap <C-c> "+y
+:vnoremap <C-d> "+d
 
 """ ================================ ---
 """ === Plugins fetching section === ---
@@ -144,10 +162,15 @@ call plug#end()
 "" Plug 'safv12/andromeda.vim'
 "colorscheme andromeda
 
+"" Plug 'preservim/nerdcommenter'
+" Set default gap between comment and text
+let g:NERDSpaceDelims = 2
+
 "" Plug 'ghifarit53/tokyonight-vim'
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 0
 colorscheme tokyonight
+
 
 "" Plug 'preservim/nerdtree'
 let g:NERDTreeChDirMode=2
@@ -161,6 +184,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
 
 " \b to call NERDTree 
 nnoremap <leader>b :NERDTreeToggle ~/code<CR>
+
 
 "" Plug 'vim-airline/vim-airline'
 set showtabline=2
@@ -191,6 +215,8 @@ let g:go_highlight_space_tab_error = 0
 let g:go_highlight_array_whitespace_error = 0
 let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_extra_types = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
 
 " Show identifier info in status bar
 let g:go_auto_type_info = 1
@@ -202,11 +228,12 @@ let g:go_metlainter_command = "staticcheck"
 let g:go_fmt_command = "goimports" 
 " Some vim-go remaps for easy invoke `go vet`, `gofmt`,`staticcheck`
 " and `go-doc. Remaping works with \v, \f, \l and \d respectively
-autocmd FileType go nnoremap <leader>v :GoVet<CR>
 autocmd FileType go nnoremap <leader>f :GoFmt<CR>
 autocmd FileType go nnoremap <leader>l :GoMetaLinter<CR>
 autocmd FileType go nnoremap <leader>d :GoDoc<CR>
-
+" go vet can be replaced with statickcheck
+" autocmd FileType go nnoremap <leader>v :GoVet!<CR>
+"
 " Supress vim-go autocomplete preview window
 set completeopt-=preview
 
@@ -217,7 +244,9 @@ augroup completion_preview_close
   autocmd CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | augroup END
 
 " Automatically call vim-go autocomplete dialog
+" Not very useful.
 " au filetype go inoremap <buffer> . .<C-x><C-o>
 
 " Remap default vim-go ctrl-x + ctrl-o autocomplete to alt-x
-autocmd FileType go inoremap <A-x> <C-x><C-o>
+" Not work in Vim 9.0
+" autocmd FileType go inoremap <A-x> <C-x><C-o>
