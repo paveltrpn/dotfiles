@@ -67,15 +67,6 @@ set cmdheight=2
 " symbol was next to backslash symbol
 set fillchars+=eob:\ 
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
 " Set for highlight search word
 set hlsearch
 
@@ -159,20 +150,20 @@ call plug#end()
 """ === Plugins setup section === ---
 """ ============================= ---
 
-"" Plug 'safv12/andromeda.vim'
+" Plug 'safv12/andromeda.vim'
 "colorscheme andromeda
 
-"" Plug 'preservim/nerdcommenter'
+" Plug 'preservim/nerdcommenter'
 " Set default gap between comment and text
 let g:NERDSpaceDelims = 2
 
-"" Plug 'ghifarit53/tokyonight-vim'
+" Plug 'ghifarit53/tokyonight-vim'
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 0
 colorscheme tokyonight
 
 
-"" Plug 'preservim/nerdtree'
+" Plug 'preservim/nerdtree'
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['node_modules','\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
@@ -186,7 +177,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
 nnoremap <leader>b :NERDTreeToggle ~/code<CR>
 
 
-"" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 set showtabline=2
 let g:airline#extensions#tabline#enabled=1
 "let g:airline#extensions#tabline#left_sep='|'
@@ -196,57 +187,10 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline_theme = "tokyonight" " If plugged!
 
 
-"" Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 " Set gitgutter signcolumn color to background.
 highlight clear SignColumn
 
+source ~/.vim/vim-go.vim
+source ~/.vim/coc.vim
 
-"" Plug 'fatih/vim-go'
-" Golang vim-go plugin hightlights options
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_space_tab_error = 0
-let g:go_highlight_array_whitespace_error = 0
-let g:go_highlight_trailing_whitespace_error = 0
-let g:go_highlight_extra_types = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-
-" Show identifier info in status bar
-let g:go_auto_type_info = 1
-
-let g:go_doc_popup_window = 1
-let g:go_metlainter_command = "staticcheck"
-" May be set to gofmt instead, beacuse of some people claims
-" that goimports may take long time for work.
-let g:go_fmt_command = "goimports" 
-" Some vim-go remaps for easy invoke `go vet`, `gofmt`,`staticcheck`
-" and `go-doc. Remaping works with \v, \f, \l and \d respectively
-autocmd FileType go nnoremap <leader>f :GoFmt<CR>
-autocmd FileType go nnoremap <leader>l :GoMetaLinter<CR>
-autocmd FileType go nnoremap <leader>d :GoDoc<CR>
-" go vet can be replaced with statickcheck
-" autocmd FileType go nnoremap <leader>v :GoVet!<CR>
-"
-" Supress vim-go autocomplete preview window
-set completeopt-=preview
-
-" Autoclose vim-go autocomplete preview window when
-" close autocomplete popup hover window
-augroup completion_preview_close
-  autocmd!
-  autocmd CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | augroup END
-
-" Automatically call vim-go autocomplete dialog
-" Not very useful.
-" au filetype go inoremap <buffer> . .<C-x><C-o>
-
-" Remap default vim-go ctrl-x + ctrl-o autocomplete to alt-x
-" Not work in Vim 9.0
-" autocmd FileType go inoremap <A-x> <C-x><C-o>
