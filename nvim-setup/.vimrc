@@ -15,6 +15,8 @@ syntax on
 set number
 " Don't wrap string
 set nowrap
+" But wrap lines in preview window
+autocmd BufEnter * if &previewwindow | set wrap | endif
 " Disable vim to create swapfile fo edited files
 set noswapfile
 
@@ -36,9 +38,9 @@ set cursorline
 "" Tabs. May be overridden by autocmd rules
 set tabstop=4
 set softtabstop=0
-set shiftwidth=4
-            
+set shiftwidth=4           
 set expandtab
+
 set ruler
 
 " Enable line highlighting when insert mode on
@@ -84,17 +86,31 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 " Open file in new tab
 let g:netrw_browse_split = 3
+
 """ ============================== ---
 """ === Common keymaps section === ---
 """ ============================== ---
 
+" Shortcuts to open vim explorer on far left pan
+nnoremap <leader>ee :Lexplore %:p:h<CR>
+" Close opened Explorer window
+nnoremap <Leader>ea :Lexplore<CR>
+" Explorer pan size
+let g:netrw_winsize = 20
+
 " Toggle highlight line under cursor by <leader>h
 nnoremap <Leader>h :set cursorline!<CR>
 
-"" Map to close quickfix window - <leader>q
-nnoremap <leader>q :cclose<CR>
+" Map to close quickfix window 
+nnoremap <leader>qq :cclose<CR>
 
-"" Map to deselect word selected by shift-8 (or shift-*)
+" Map to select quickfix window
+nnoremap <leader>qs :copen<CR>
+" Quickfix next and prev elements
+nnoremap <leader>qn :cnext<CR>
+nnoremap <leader>qp :cprev<CR>
+
+" Map to deselect word selected by shift-8 (or shift-*)
 nnoremap <leader>8 :nohlsearch<CR>
 
 " Map traditional copy-paste bindings to global clipboard
@@ -111,16 +127,14 @@ call plug#begin()
 " Funny icons for NERDTree and some other plugins. Patched nerd fonts need for work.
   Plug 'ryanoasis/vim-devicons'
 
-" File explorer
-  Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-
 " Nice color theme
   "Plug 'safv12/andromeda.vim'
   Plug 'ghifarit53/tokyonight-vim'
 
 " Fuzzy finder plugin. Need to do sudo apt-get install fzf, before use
   Plug 'junegunn/fzf'
-
+  Plug 'junegunn/fzf.vim'
+  
 " Status bar and tabsline improvement plugin
   Plug 'vim-airline/vim-airline'
 
@@ -162,28 +176,9 @@ let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 0
 colorscheme tokyonight
 
-
-" Plug 'preservim/nerdtree'
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['node_modules','\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 20
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
-" Start NERDTree and leave the cursor in it.
-" autocmd VimEnter * NERDTree ~/code
-
-" \b to call NERDTree 
-nnoremap <leader>b :NERDTreeToggle ~/code<CR>
-
-
 " Plug 'vim-airline/vim-airline'
 set showtabline=2
 let g:airline#extensions#tabline#enabled=1
-"let g:airline#extensions#tabline#left_sep='|'
-"let g:airline#extensions#tabline#left_alt_sep='|'
-"let g:airline#extensions#tabline#right_sep='|'
-"let g:airline#extensions#tabline#right_alt_sep='|'
 let g:airline_theme = "tokyonight" " If plugged!
 
 
