@@ -3,25 +3,22 @@
 -- === Basic options section === ---
 -- ============================= ---
 
+vim.g.completeopt = "menu, preview"
+       
 -- Enable mouse. set mouse = - for disable
 vim.opt.mouse = "a"
 -- String numbers
 vim.opt.number = true
 
-vim.opt.shell = "sh"
+vim.opt.shell = "bash"
 
 -- Fix backspace indent
---vim.opt.backspace = indent,eol,start
-vim.cmd([[
-set backspace=indent,eol,start
-]])
+vim.opt.backspace = "indent,eol,start"
 
 -- Hide tilde symbol that indicates empty lines in vim beffer.
 -- It replace with blank space, in the end of next line space
 -- symbol was next to backslash symbol
-vim.cmd([[
-set fillchars+=eob:\ 
-]])
+vim.opt.fillchars = "eob:\\"
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 0
@@ -49,6 +46,10 @@ vim.opt.ruler = true
 -- Useful to faster update gitgutter plugin show bar with changes
 vim.opt.updatetime = 500
 
+-- Some servers have issues with backup files, see #649.
+vim.opt.backup = false
+vim.opt.writebackup = false
+
 -- Always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appear/become resolved.
 vim.cmd([[
@@ -59,6 +60,31 @@ else
   set signcolumn=yes
 endif
 ]])
+
+--- NETRW file explorer settings (native vim file explorer)
+--- call by :Explore command
+vim.g.netrw_banner = 0
+--- Tree instead a split view
+vim.g.netrw_liststyle = 3
+--- Open file in new tab
+vim.g.netrw_browse_split = 3
+
+-- Ask t oclose unsaved buffer instead of throw error
+vim.opt.confirm = true
+
+-- Show tabs as >---
+-- vim.opt.list = true
+-- vim.opt.listchars = {tab = ">-"}
+
+-- Move newborn quickfix window to bottomest place.
+-- This trigger takes advantage of the fact that the quickfix window 
+-- can be easily distinguished by its file-type, qf. The wincmd J command 
+-- is equivalent to the [Ctrl+W, Shift+J] shortcut sequence 
+-- instructing Vim to move the current window to the very bottom of the screen
+vim.cmd([[
+:autocmd FileType qf wincmd J
+]])
+
 -- ======================= ---
 -- === Keymaps section === ---
 -- ======================= ---
@@ -77,15 +103,46 @@ vim.o.cursorline = true
 -- Toggle highlight line under cursor by <leader>h
 map("n", "<Leader>h", ":set cursorline!<CR>")
 
--- Map to close quickfix window - <leader>q
-vim.cmd([[
-nnoremap <leader>q :cclose<CR>
-]])
-
 -- Map to deselect word selected by shift-8 (or shift-*)
+map("n", "<leader>8", ":nohlsearch<CR>")
+
+-- Unmap F1 from normal and visual mode
 vim.cmd([[
-nnoremap <leader>8 :nohlsearch<CR>
+:map <F1> :echo<CR>
 ]])
+-- Unmap F1 from insert mode (do no op)
+vim.cmd([[
+:imap <F1> <Nop>
+]])
+-- Map list all buffers command
+vim.cmd([[
+:noremap <F1> :ls<CR>
+:noremap <F2> :bprev<CR>
+:noremap <F3> :bnext<CR>
+]])
+-- Delete buffer (:bd) leader to avoid accident
+vim.cmd([[
+:noremap <leader><F4> :bd<CR>
+:noremap <F4> :echo "to delete buffer use F4 with leader"<CR>
+]])
+-- More dangerous version of command above
+--:noremap <leader><F4> :bd<CR>
+
+-- Shortcuts to open vim explorer on far left pan
+map("n", "<leader>ee", ":Lexplore %:p:h<CR>")
+-- Close opened Explorer window
+map("n", "<leader>eq", ":Lexplore<CR>")
+-- Explorer pan size
+vim.g.netrw_winsize = 20
+
+-- Map to close quickfix window 
+map("n", "<leader>qq", ":cclose<CR>")
+
+-- Map to select quickfix window
+map("n", "<leader>qs", ":copen<CR>")
+-- Quickfix next and prev elements
+map("n", "<leader>qn", ":cnext<CR>")
+map("n", "<leader>qp", ":cprev<CR>")
 
 --- ================================ ---
 --- === Plugins fetching section === ---
@@ -101,40 +158,27 @@ require('packer').startup(function()
   use 'wbthomason/packer.nvim' 
 
   -- Color theme
-  use 'folke/tokyonight.nvim'
-
+  -- use 'folke/tokyonight.nvim'
+  use 'sainnhe/sonokai'
+  
   -- Status line written in lua
   use 'feline-nvim/feline.nvim'
 
-  -- Tabbar plugin
-  use 'romgrk/barbar.nvim'
-
   -- Plugin for autocomplete braces. This one works with LUA.
   use 'windwp/nvim-autopairs'
-  
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icons
-    },
-   -- tag = 'nightly' -- optional, updated every week. (see issue #1193)
-  }
-
+ 
   -- Fuzzy finder plugin
   -- I use this instead of 'ibhagwan/fzf-lua'  
   -- despite of it's vim script plugin
-  -- use 'junegunn/fzf'
-  
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-  -- or                            , branch = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
-  
-  -- Smooth scrolling plugin.
-  -- Scroll by ctrl-f, ctrl-b, ctrl-e, ctrl-y
+  -- :FZF      - for fuzzy search
+  -- :Rg <str> - for ripgrep
+  use 'junegunn/fzf'
+  use 'junegunn/fzf.vim'
+    
+  -- Scroll by ctrl-f, ctrl-b, ctrl-e, ctrl-y, ctrl-u, ctrl-d
   use 'karb94/neoscroll.nvim'
 
+  -- Github
   use 'lewis6991/gitsigns.nvim'
 
   -- Neovim tree-sitter support plugin
@@ -143,6 +187,9 @@ require('packer').startup(function()
          run = ':TSUpdate'
   }
 
+  -- Powerful golang plugin written in vimsript
+  use 'fatih/vim-go'
+  
   -- Neovim built-in LSP support plugin
   use 'neovim/nvim-lspconfig'
 
@@ -151,47 +198,64 @@ require('packer').startup(function()
   -- sudo apt-get install python3-venv
   -- :COQdeps
   use 'ms-jpq/coq_nvim'
+  -- snippets
   use 'ms-jpq/coq.artifacts'
 
 end)
 
---- ============================= ---
---- === Plugins setup section === ---
---- ============================= ---
+-- ============================= ---
+-- === Plugins setup section === ---
+-- ============================= ---
 
--- Require 'folke/tokyonight.nvim'
-vim.cmd[[colorscheme tokyonight]]
+-- use 'folke/tokyonight.nvim'
+-- vim.g.tokyonight_italic_comments = false
+-- vim.g.tokyonight_italic_keywords = false
+-- vim.g.tokyonight_style = "night"
+-- vim.cmd[[colorscheme tokyonight]]
 
--- Require 'karb94/neoscroll.nvim'
+-- use 'sainnhe/sonokai'
+vim.opt.termguicolors = true
+vim.g.sonokai_style = 'atlantis'
+vim.g.sonokai_better_performance = 1
+vim.cmd([[colorscheme sonokai]])
+
+-- use 'junegunn/fzf'
+-- if file already opened, show it's buffer
+vim.g.fzf_buffers_jump = 1 
+
+-- use 'karb94/neoscroll.nvim'
 require('neoscroll').setup()
 
--- use 'nvim-treesitter/nvim-treesitter',
+-- use 'nvim-treesitter/nvim-treesitter'
+-- ~/.config/nvim/lua/treesitter.lua
 require "treesitter"
 
-require "t-scope"
-vim.cmd([[
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-]])
-
-require "nvim-lspconfig"
-
 -- use 'ms-jpq/coq_nvim'
--- Config autostart
+-- Config coq.nvim autostart
 vim.cmd([[
-let g:coq_settings = { 'auto_start': 'shut-up' }
+let g:coq_settings = {'auto_start': 'shut-up'}
 ]])
--- Cunfig to use with gopls
+-- Config to use with gopls
 local lsp = require "lspconfig"
-local coq = require "coq" -- add this
-lsp.gopls.setup(coq.lsp_ensure_capabilities()) -- after
+local coq = require "coq"
+lsp.gopls.setup(coq.lsp_ensure_capabilities())
 
+-- use 'lewis6991/gitsigns.nvim'
+-- ~/.config/nvim/lua/gitsigns-nvim.lua
 require "gitsigns-nvim"
 
+-- use 'windwp/nvim-autopairs'
 require("nvim-autopairs").setup{}
 
-require('feline').setup()
+-- use 'feline-nvim/feline.nvim'
+require("feline").setup()
 
--- use 'kyazdani42/nvim-tree',
-require "tree"
+-- use 'neovim/nvim-lspconfig'
+-- mappings of LSP server if it included before them
+--
+-- ~/.config/nvim/lua/nvim-lspconfig.lua
+require "nvim-lspconfig"
+
+-- ~/.config/nvim/lua/vim-go.lua
+require "vim-go"
+
