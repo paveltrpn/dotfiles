@@ -18,7 +18,7 @@ vim.opt.backspace = "indent,eol,start"
 -- Hide tilde symbol that indicates empty lines in vim beffer.
 -- It replace with blank space, in the end of next line space
 -- symbol was next to backslash symbol
-vim.opt.fillchars = "eob:\\"
+vim.opt.fillchars = "eob: "
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 0
@@ -162,7 +162,7 @@ require('packer').startup(function()
   use 'sainnhe/sonokai'
   
   -- Status line written in lua
-  use 'feline-nvim/feline.nvim'
+  use 'nvim-lualine/lualine.nvim'
 
   -- Plugin for autocomplete braces. This one works with LUA.
   use 'windwp/nvim-autopairs'
@@ -193,14 +193,13 @@ require('packer').startup(function()
   -- Neovim built-in LSP support plugin
   use 'neovim/nvim-lspconfig'
 
-  -- Autocomplition engine
-  -- for work need do this:
-  -- sudo apt-get install python3-venv
-  -- :COQdeps
-  use 'ms-jpq/coq_nvim'
-  -- snippets
-  use 'ms-jpq/coq.artifacts'
-
+  -- Autocompletion and snippets engine
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/nvim-cmp'
+  
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
 end)
 
 -- ============================= ---
@@ -227,35 +226,29 @@ vim.g.fzf_buffers_jump = 1
 require('neoscroll').setup()
 
 -- use 'nvim-treesitter/nvim-treesitter'
--- ~/.config/nvim/lua/treesitter.lua
-require "treesitter"
-
--- use 'ms-jpq/coq_nvim'
--- Config coq.nvim autostart
-vim.cmd([[
-let g:coq_settings = {'auto_start': 'shut-up'}
-]])
--- Config to use with gopls
-local lsp = require "lspconfig"
-local coq = require "coq"
-lsp.gopls.setup(coq.lsp_ensure_capabilities())
+-- ~/.config/nvim/lua/nvim-treesitter-conf.lua
+require "nvim-treesitter-conf"
 
 -- use 'lewis6991/gitsigns.nvim'
--- ~/.config/nvim/lua/gitsigns-nvim.lua
-require "gitsigns-nvim"
+-- ~/.config/nvim/lua/gitsigns-nvim-conf.lua
+require "gitsigns-nvim-conf"
 
 -- use 'windwp/nvim-autopairs'
 require("nvim-autopairs").setup{}
 
--- use 'feline-nvim/feline.nvim'
-require("feline").setup()
+-- ~/.config/nvim/lua/lualine-conf.lua
+require "lualine-conf"
 
 -- use 'neovim/nvim-lspconfig'
 -- mappings of LSP server if it included before them
 --
--- ~/.config/nvim/lua/nvim-lspconfig.lua
-require "nvim-lspconfig"
+-- ~/.config/nvim/lua/nvim-lspconfig-conf.lua
+require "nvim-lspconfig-conf"
 
--- ~/.config/nvim/lua/vim-go.lua
-require "vim-go"
+-- ~/.config/nvim/lua/vim-go-conf.lua
+require "vim-go-conf"
+
+-- ~/.config/nvim/lua/nvim-cmp-conf.lua
+require "nvim-cmp-conf"
+
 
