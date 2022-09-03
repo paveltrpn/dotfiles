@@ -22,7 +22,7 @@ def checkStatusWithPorcelain(input: list[str]) -> str:
     @return: Return a single string which describe a status of repository.
     """
     rt: list[str] = []
-
+    
     input = list(filter(lambda x: x != "", input))
 
     if len(input) == 0: 

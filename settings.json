@@ -1,0 +1,55 @@
+{
+    "workbench.colorTheme": "Andromeda",
+    "editor.fontFamily": "'Fira Code Medium', 'Courier New', monospace",
+    "editor.fontSize": 13,
+    "editor.tabCompletion": "on",
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideTabs": false,
+    "zenMode.hideStatusBar": false,
+    "editor.minimap.enabled": false,
+    "editor.minimap.scale": 1,
+    "workbench.activityBar.visible": false,
+    "_comment01": "set next line option value to zero for default GUI zoom",
+    "window.zoomLevel": 1,
+    "editor.minimap.renderCharacters": false,
+    "explorer.sortOrder": "type",
+    "python.analysis.logLevel": "Error",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.completeFunctionParens": true,
+    "go.buildOnSave": "off",
+    "go.useLanguageServer": true,
+    "go.toolsEnvVars": {
+        "GOBIN": "/usr/paveltrpn/go/bin"
+    },
+    "go.goroot": "/home/pavel/go-1.18.1",
+    "go.lintTool": "staticcheck",
+    "gopls": {
+        "build.experimentalWorkspaceModule": true,
+        "ui.semanticTokens": true 
+    },
+    "vim.handleKeys": {
+        "<C-k>": false
+    },
+    "vim.easymotion": true,
+    "vim.hlsearch": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+    {
+        "before":["<leader>", "8"],
+        "after":[],
+        "commands": [
+            {
+                "command": ":nohl"
+            }
+        ]
+    },
+    {    
+        "before":["<leader>", "e", "e"],
+        "after":[],
+        "commands": [
+            {
+                "command": "workbench.action.toggleSidebarVisibility"
+            }
+        ]
+    }
+]
+}

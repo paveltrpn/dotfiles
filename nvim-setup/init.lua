@@ -73,8 +73,8 @@ vim.g.netrw_browse_split = 3
 vim.opt.confirm = true
 
 -- Show tabs as >---
--- vim.opt.list = true
--- vim.opt.listchars = {tab = ">-"}
+vim.opt.list = true
+vim.opt.listchars = {tab = ">-"}
 
 -- Move newborn quickfix window to bottomest place.
 -- This trigger takes advantage of the fact that the quickfix window 
@@ -214,7 +214,7 @@ end)
 
 -- use 'sainnhe/sonokai'
 vim.opt.termguicolors = true
-vim.g.sonokai_style = 'atlantis'
+vim.g.sonokai_style = 'espresso'
 vim.g.sonokai_better_performance = 1
 vim.cmd([[colorscheme sonokai]])
 
@@ -225,6 +225,9 @@ vim.g.fzf_buffers_jump = 1
 -- use 'karb94/neoscroll.nvim'
 require('neoscroll').setup()
 
+-- use 'windwp/nvim-autopairs'
+require("nvim-autopairs").setup{}
+
 -- use 'nvim-treesitter/nvim-treesitter'
 -- ~/.config/nvim/lua/nvim-treesitter-conf.lua
 require "nvim-treesitter-conf"
@@ -232,9 +235,6 @@ require "nvim-treesitter-conf"
 -- use 'lewis6991/gitsigns.nvim'
 -- ~/.config/nvim/lua/gitsigns-nvim-conf.lua
 require "gitsigns-nvim-conf"
-
--- use 'windwp/nvim-autopairs'
-require("nvim-autopairs").setup{}
 
 -- ~/.config/nvim/lua/lualine-conf.lua
 require "lualine-conf"
@@ -250,5 +250,4 @@ require "vim-go-conf"
 
 -- ~/.config/nvim/lua/nvim-cmp-conf.lua
 require "nvim-cmp-conf"
-
 

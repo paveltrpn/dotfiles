@@ -1,4 +1,3 @@
-
 """ ============================== ---
 """ === Common options section === ---
 """ ============================== ---
@@ -20,6 +19,7 @@ autocmd BufEnter * if &previewwindow | set wrap | endif
 " Disable vim to create swapfile fo edited files
 set noswapfile
 
+" Autoindent)
 set autoindent
 
 " We don't need to see things like -- INSERT -- anymore 
@@ -35,7 +35,7 @@ set backspace=indent,eol,start
 " Highlight line under cursor
 set cursorline
 
-"" Tabs. May be overridden by autocmd rules
+" Tabs
 set tabstop=4
 set softtabstop=0
 set shiftwidth=4           
@@ -85,16 +85,38 @@ let g:netrw_banner = 0
 " Tree instead a split view
 let g:netrw_liststyle = 3
 " Open file in new tab
-let g:netrw_browse_split = 3
+let g:netrwabrowse_split = 3
+
+" Ask t oclose unsaved buffer instead of throw error
+set confirm
+
+" Show tabs as >---
+" set list
+" set listchars=tab:>-
 
 """ ============================== ---
 """ === Common keymaps section === ---
 """ ============================== ---
 
+" Unmap F1 from normal and visual mode
+:map <F1> :echo<CR>
+" Unmap F1 from insert mode (do no op)
+:imap <F1> <Nop>
+" Map list all buffers command
+:noremap <F1> :ls<CR>
+:noremap <F2> :bprev<CR>
+:noremap <F3> :bnext<CR>
+" Delete buffer (:bd) leader to avoid accident
+:noremap <leader><F4> :bd<CR>
+:noremap <F4> :echo "to delete buffer use F4 with leader"<CR>
+" More dangerous version of command above
+":noremap <leader><F4> :bd<CR>
+
+
 " Shortcuts to open vim explorer on far left pan
 nnoremap <leader>ee :Lexplore %:p:h<CR>
 " Close opened Explorer window
-nnoremap <Leader>ea :Lexplore<CR>
+nnoremap <Leader>eq :Lexplore<CR>
 " Explorer pan size
 let g:netrw_winsize = 20
 
@@ -172,6 +194,7 @@ call plug#end()
 let g:NERDSpaceDelims = 2
 
 " Plug 'ghifarit53/tokyonight-vim'
+set termguicolors
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 0
 colorscheme tokyonight
@@ -180,7 +203,6 @@ colorscheme tokyonight
 set showtabline=2
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme = "tokyonight" " If plugged!
-
 
 " Plug 'airblade/vim-gitgutter'
 " Set gitgutter signcolumn color to background.
