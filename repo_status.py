@@ -35,7 +35,7 @@ def checkStatusWithPorcelain(input: list[str]) -> str:
             rt.append("{} - {}".format(porcelainCode, line[3:]))
         else: 
             rt.append("{} - {}".format("Unknow code with file", line[3:]))  
-
+    
     return "\n".join(rt)
 
 
