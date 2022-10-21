@@ -1,4 +1,3 @@
-
 -- ============================= ---
 -- === Basic options section === ---
 -- ============================= ---
@@ -23,6 +22,7 @@ vim.opt.fillchars = "eob: "
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 0
 vim.opt.shiftwidth = 4
+vim.opt.smarttab = true
 
 -- Syntax highlights
 vim.opt.syntax = "on"
@@ -72,9 +72,11 @@ vim.g.netrw_browse_split = 3
 -- Ask t oclose unsaved buffer instead of throw error
 vim.opt.confirm = true
 
--- Show tabs as >---
+-- Show hidden chars
 vim.opt.list = true
-vim.opt.listchars = {tab = ">-"}
+--vim.opt.listchars = {eol = "¬"}
+vim.opt.listchars = {eol = "⏎", trail = "×", tab = ">·", nbsp = "⎵"}
+--vim.opt.listchars = {space = "¬"}
 
 -- Move newborn quickfix window to bottomest place.
 -- This trigger takes advantage of the fact that the quickfix window 
@@ -214,7 +216,7 @@ end)
 
 -- use 'sainnhe/sonokai'
 vim.opt.termguicolors = true
-vim.g.sonokai_style = 'espresso'
+vim.g.sonokai_style = 'default'
 vim.g.sonokai_better_performance = 1
 vim.cmd([[colorscheme sonokai]])
 

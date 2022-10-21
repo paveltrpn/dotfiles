@@ -33,7 +33,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+  -- Comment line below because it throw some error on python and cpp
+  -- files. All normal with golang
+  --vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
 local lsp_flags = {
@@ -64,8 +66,16 @@ require'lspconfig'.gopls.setup {
     flags = lsp_flags,
 }
 
-require'lspconfig'.pyright.setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-    filetypes = {"python"}
+require('lspconfig')['pyright'].setup {
+   on_attach = on_attach,
+   flags = lsp_flags,
+   filetypes = {'python'}
+}
+
+-- clangd downloaded from https://github.com/clangd/clangd/releases/tag/15.0.1
+-- place symlink from ../bin/clangd to /usr/local/bin/
+require'lspconfig'.clangd.setup {
+   on_attach = on_attach,
+   flags = lsp_flags,
+   filetypes = {'c', 'cpp'},
 }
