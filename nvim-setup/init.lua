@@ -131,11 +131,13 @@ vim.cmd([[
 --:noremap <leader><F4> :bd<CR>
 
 -- Shortcuts to open vim explorer on far left pan
-map("n", "<leader>ee", ":Lexplore %:p:h<CR>")
+-- map("n", "<leader>ee", ":Lexplore %:p:h<CR>")
 -- Close opened Explorer window
-map("n", "<leader>eq", ":Lexplore<CR>")
+-- map("n", "<leader>eq", ":Lexplore<CR>")
 -- Explorer pan size
-vim.g.netrw_winsize = 20
+-- vim.g.netrw_winsize = 20
+
+map("n", "<leader>ee", ":NeoTreeShowToggle<CR>")
 
 -- Map to close quickfix window 
 map("n", "<leader>qq", ":cclose<CR>")
@@ -179,6 +181,16 @@ require('packer').startup(function()
     
   -- Scroll by ctrl-f, ctrl-b, ctrl-e, ctrl-y, ctrl-u, ctrl-d
   use 'karb94/neoscroll.nvim'
+  
+  use {
+  "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
 
   -- Github
   use 'lewis6991/gitsigns.nvim'
@@ -246,6 +258,9 @@ require "lualine-conf"
 --
 -- ~/.config/nvim/lua/nvim-lspconfig-conf.lua
 require "nvim-lspconfig-conf"
+
+-- ~/.config/nvim/lua/neo-tree-conf.lua
+require "neo-tree-conf"
 
 -- ~/.config/nvim/lua/vim-go-conf.lua
 require "vim-go-conf"
