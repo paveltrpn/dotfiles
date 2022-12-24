@@ -66,10 +66,10 @@ require'lspconfig'.gopls.setup {
     flags = lsp_flags,
 }
 
-require('lspconfig')['pyright'].setup {
+require'lspconfig'.pyright.setup {
    on_attach = on_attach,
    flags = lsp_flags,
-   filetypes = {'python'}
+   -- filetypes = {'python'}
 }
 
 -- clangd downloaded from https://github.com/clangd/clangd/releases/tag/15.0.1

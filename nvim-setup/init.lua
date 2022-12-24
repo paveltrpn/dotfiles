@@ -50,6 +50,9 @@ vim.opt.updatetime = 500
 vim.opt.backup = false
 vim.opt.writebackup = false
 
+-- undo reopened files
+vim.opt.undofile = true
+
 -- Always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appear/become resolved.
 vim.cmd([[
@@ -102,6 +105,8 @@ end
 
 -- Highlight line under cursor
 vim.o.cursorline = true
+vim.o.cursorcolumn = true
+
 -- Toggle highlight line under cursor by <leader>h
 map("n", "<Leader>h", ":set cursorline!<CR>")
 
@@ -163,8 +168,10 @@ require('packer').startup(function()
 
   -- Color theme
   -- use 'folke/tokyonight.nvim'
-  use 'sainnhe/sonokai'
-  
+  -- use 'sainnhe/sonokai'
+  -- use 'Shatur/neovim-ayu'
+  use 'sainnhe/everforest'
+
   -- Status line written in lua
   use 'nvim-lualine/lualine.nvim'
 
@@ -227,10 +234,19 @@ end)
 -- vim.cmd[[colorscheme tokyonight]]
 
 -- use 'sainnhe/sonokai'
-vim.opt.termguicolors = true
-vim.g.sonokai_style = 'default'
-vim.g.sonokai_better_performance = 1
-vim.cmd([[colorscheme sonokai]])
+-- vim.opt.termguicolors = true
+-- vim.g.sonokai_style = 'default'
+-- vim.g.sonokai_better_performance = 1
+-- vim.cmd([[colorscheme sonokai]])
+
+--require('ayu').setup({
+--    mirage = true, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
+--    overrides = {}, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
+--})
+--require('ayu').colorscheme()
+
+vim.g.everforest_background = 'hard'
+vim.cmd([[colorscheme everforest]])
 
 -- use 'junegunn/fzf'
 -- if file already opened, show it's buffer

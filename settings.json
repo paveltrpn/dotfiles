@@ -1,12 +1,13 @@
 {
-    "workbench.colorTheme": "Andromeda",
+    "workbench.colorTheme": "Ayu Mirage",
     "editor.fontFamily": "'Fira Code Medium', 'Courier New', monospace",
-    "editor.fontSize": 13,
+    "editor.fontSize": 12,
     "editor.tabCompletion": "on",
+    "editor.renderWhitespace": "all",
     "zenMode.hideLineNumbers": false,
     "zenMode.hideTabs": false,
     "zenMode.hideStatusBar": false,
-    "editor.minimap.enabled": false,
+    "editor.minimap.enabled": true,
     "editor.minimap.scale": 1,
     "workbench.activityBar.visible": false,
     "_comment01": "set next line option value to zero for default GUI zoom",
@@ -21,11 +22,9 @@
     "go.toolsEnvVars": {
         "GOBIN": "/usr/paveltrpn/go/bin"
     },
-    "go.goroot": "/home/pavel/go-1.18.1",
+    "go.goroot": "/home/pavel/go1.19.2",
     "go.lintTool": "staticcheck",
     "gopls": {
-        "build.experimentalWorkspaceModule": true,
-        "ui.semanticTokens": true 
     },
     "vim.handleKeys": {
         "<C-k>": false
