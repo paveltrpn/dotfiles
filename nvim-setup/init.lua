@@ -2,8 +2,6 @@
 -- === Basic options section === ---
 -- ============================= ---
 
-vim.g.completeopt = "menu, preview"
-       
 -- Enable mouse. set mouse = - for disable
 vim.opt.mouse = "a"
 -- String numbers
@@ -76,10 +74,10 @@ vim.g.netrw_browse_split = 3
 vim.opt.confirm = true
 
 -- Show hidden chars
-vim.opt.list = true
---vim.opt.listchars = {eol = "¬"}
-vim.opt.listchars = {eol = "⏎", trail = "×", tab = ">·", nbsp = "⎵"}
---vim.opt.listchars = {space = "¬"}
+--vim.opt.list = true
+----vim.opt.listchars = {eol = "¬"}
+--vim.opt.listchars = {eol = "⏎", trail = "×", tab = ">·", nbsp = "⎵"}
+----vim.opt.listchars = {space = "¬"}
 
 -- Move newborn quickfix window to bottomest place.
 -- This trigger takes advantage of the fact that the quickfix window 
@@ -121,11 +119,17 @@ vim.cmd([[
 vim.cmd([[
 :imap <F1> <Nop>
 ]])
--- Map list all buffers command
+-- buffers switch and list all
 vim.cmd([[
-:noremap <F1> :ls<CR>
-:noremap <F2> :bprev<CR>
-:noremap <F3> :bnext<CR>
+:noremap <leader>bl :ls<CR>
+:noremap <leader>bp :bprev<CR>
+:noremap <leader>bn :bnext<CR>
+]])
+-- tabs switch and close current
+vim.cmd([[
+:noremap <leader>tn :tabn<CR>
+:noremap <leader>tp :tabp<CR>
+:noremap <leader>tc :tabc<CR>
 ]])
 -- Delete buffer (:bd) leader to avoid accident
 vim.cmd([[
@@ -167,10 +171,11 @@ require('packer').startup(function()
   use 'wbthomason/packer.nvim' 
 
   -- Color theme
-  -- use 'folke/tokyonight.nvim'
-  -- use 'sainnhe/sonokai'
-  -- use 'Shatur/neovim-ayu'
+  use 'folke/tokyonight.nvim'
+  use 'sainnhe/sonokai'
+  use 'Shatur/neovim-ayu'
   use 'sainnhe/everforest'
+  use "rebelot/kanagawa.nvim"
 
   -- Status line written in lua
   use 'nvim-lualine/lualine.nvim'
@@ -227,57 +232,95 @@ end)
 -- === Plugins setup section === ---
 -- ============================= ---
 
--- use 'folke/tokyonight.nvim'
--- vim.g.tokyonight_italic_comments = false
--- vim.g.tokyonight_italic_keywords = false
--- vim.g.tokyonight_style = "night"
--- vim.cmd[[colorscheme tokyonight]]
+-- Plugin theme 'folke/tokyonight.nvim'
+vim.g.tokyonight_italic_comments = false
+vim.g.tokyonight_italic_keywords = false
+-- vim.cmd[[colorscheme tokyonight-day]]
+-- vim.cmd[[colorscheme tokyonight-moon]]
+vim.cmd[[colorscheme tokyonight-storm]]
+-- vim.cmd[[colorscheme tokyonight-night]]
 
--- use 'sainnhe/sonokai'
+-- Plugin theme kanagawa
+--require('kanagawa').setup({
+--    compile = false,             -- enable compiling the colorscheme
+--    undercurl = true,            -- enable undercurls
+--    commentStyle = { italic = true },
+--    functionStyle = {},
+--    keywordStyle = { italic = false},
+--    statementStyle = { bold = true },
+--    typeStyle = {},
+--    transparent = false,         -- do not set background color
+--    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+--    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+--    colors = {                   -- add/modify theme and palette colors
+--        palette = {},
+--        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+--    },
+--    overrides = function(colors) -- add/modify highlights
+--        return {}
+--    end,
+--    theme = "wave",              -- Load "wave" theme when 'background' option is not set
+--    background = {               -- map the value of 'background' option to a theme
+--        dark = "wave",           -- try "dragon" !
+--        light = "lotus"
+--    },
+--})
+--require("kanagawa").load("dragon") -- night style
+--require("kanagawa").load("lotus") -- day style
+-- require("kanagawa").load("wave")
+
+-- Plugin theme 'sainnhe/sonokai'
 -- vim.opt.termguicolors = true
 -- vim.g.sonokai_style = 'default'
 -- vim.g.sonokai_better_performance = 1
 -- vim.cmd([[colorscheme sonokai]])
 
---require('ayu').setup({
---    mirage = true, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
---    overrides = {}, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
---})
---require('ayu').colorscheme()
+-- Plugin theme 'Shatur/neovim-ayu'
+-- require('ayu').setup({
+--     mirage = true, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
+--     overrides = {}, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
+-- })
+-- require('ayu').colorscheme()
 
-vim.g.everforest_background = 'hard'
-vim.cmd([[colorscheme everforest]])
+-- Plugin theme 'sainnhe/everforest'
+-- vim.cmd([[set background=light]]) -- for day theme
+-- vim.cmd([[let g:everforest_background = 'medium']])
+-- vim.cmd([[colorscheme everforest]])
 
--- use 'junegunn/fzf'
+
+-- Plugin fuzzyfinder 'junegunn/fzf'
 -- if file already opened, show it's buffer
 vim.g.fzf_buffers_jump = 1 
 
--- use 'karb94/neoscroll.nvim'
+-- Plugin 'karb94/neoscroll.nvim'
 require('neoscroll').setup()
 
--- use 'windwp/nvim-autopairs'
+-- Plugin 'windwp/nvim-autopairs'
 require("nvim-autopairs").setup{}
 
--- use 'nvim-treesitter/nvim-treesitter'
+-- Plugin 'nvim-treesitter/nvim-treesitter'
 -- ~/.config/nvim/lua/nvim-treesitter-conf.lua
 require "nvim-treesitter-conf"
 
--- use 'lewis6991/gitsigns.nvim'
+-- Plugin 'lewis6991/gitsigns.nvim'
 -- ~/.config/nvim/lua/gitsigns-nvim-conf.lua
 require "gitsigns-nvim-conf"
 
+-- Plugin 'nvim-lualine/lualine.nvim'
 -- ~/.config/nvim/lua/lualine-conf.lua
 require "lualine-conf"
 
--- use 'neovim/nvim-lspconfig'
+-- Plugin 'neovim/nvim-lspconfig'
 -- mappings of LSP server if it included before them
 --
 -- ~/.config/nvim/lua/nvim-lspconfig-conf.lua
 require "nvim-lspconfig-conf"
 
+-- Plugin "nvim-neo-tree/neo-tree.nvim"
 -- ~/.config/nvim/lua/neo-tree-conf.lua
 require "neo-tree-conf"
 
+-- Plugin'fatih/vim-go'
 -- ~/.config/nvim/lua/vim-go-conf.lua
 require "vim-go-conf"
 

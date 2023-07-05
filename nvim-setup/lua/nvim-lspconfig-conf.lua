@@ -77,5 +77,15 @@ require'lspconfig'.pyright.setup {
 require'lspconfig'.clangd.setup {
    on_attach = on_attach,
    flags = lsp_flags,
-   filetypes = {'c', 'cpp'},
+   defalt_config = {
+       cmd = {
+            "clangd", "--background-index", "--pch-storage=memory",
+            "--clang-tidy", "--suggest-missing-includes"
+        },
+        filetypes = {"c", "cpp", "objc", "objcpp"},
+        init_option = {
+            fallbackFlags = {"-std=c++20"}
+        }
+    }
 }
+
