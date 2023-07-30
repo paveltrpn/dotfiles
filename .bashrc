@@ -114,8 +114,6 @@ fi
 
 alias tru='trans -from en -to ru'
 alias ll='ls -l -a -h'
-alias gitco='git checkout'
-alias gitbr='git branch'
 alias clang-format='clang-format-11'
 
 export HISTSIZE=10000

@@ -176,6 +176,7 @@ require('packer').startup(function()
   use 'Shatur/neovim-ayu'
   use 'sainnhe/everforest'
   use "rebelot/kanagawa.nvim"
+  use 'ayu-theme/ayu-vim'
 
   -- Status line written in lua
   use 'nvim-lualine/lualine.nvim'
@@ -233,11 +234,11 @@ end)
 -- ============================= ---
 
 -- Plugin theme 'folke/tokyonight.nvim'
-vim.g.tokyonight_italic_comments = false
-vim.g.tokyonight_italic_keywords = false
+-- vim.g.tokyonight_italic_comments = false
+-- vim.g.tokyonight_italic_keywords = false
 -- vim.cmd[[colorscheme tokyonight-day]]
 -- vim.cmd[[colorscheme tokyonight-moon]]
-vim.cmd[[colorscheme tokyonight-storm]]
+-- vim.cmd[[colorscheme tokyonight-storm]]
 -- vim.cmd[[colorscheme tokyonight-night]]
 
 -- Plugin theme kanagawa
@@ -281,6 +282,10 @@ vim.cmd[[colorscheme tokyonight-storm]]
 --     overrides = {}, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
 -- })
 -- require('ayu').colorscheme()
+
+vim.cmd([[ set termguicolors ]])
+vim.cmd([[ let ayucolor="dark"]])
+vim.cmd([[ colorscheme ayu]])
 
 -- Plugin theme 'sainnhe/everforest'
 -- vim.cmd([[set background=light]]) -- for day theme
