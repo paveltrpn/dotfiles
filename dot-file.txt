@@ -1,10 +1,66 @@
-======================================
-========starting at this==============
-======================================
+==============================================
+============starting at this point============
+==============================================
 
 ============
 |03.08.2023|
 ============
 Сборка llvm-clang с lldb (да и вообще):
 cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" ../llvm
+
+Чтобы не делать глобальный make install
+clangbuild=~/apps/llvm-project-llvmorg-13.0.1/build
+export PATH=$clangbuild/bin:$PATH
+export LD_LIBRARY_PATH=$clangbuild/lib:$LD_LIBRARY_PATH
+
+============
+|04.08.2023|
+============
+
+infolada dns servers
+217.113.115.150
+217.113.114.100
+
+install nvidia drivers on debian 12.1.
+pkgconfig must be installed
+switch to terminal ctrl-alt-F1 (F2 and so on)
+$ sudo service lightdm stop
+nvidia run file must have to execution permissions
+$ sudo chmod 777 NVIDIA-....run
+
+llvm скачивам отсуда. Всё что нужно есть - линтер, lsp сервер, format и т.д.
+Как конфигурировать смотри выше, ведь дополнительно ещё нужен lldb.
+$ git clone https://github.com/llvm/llvm-project.git
+
+============
+|05.08.2023|
+============
+
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.br branch
+git config --global alias.hist "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
+git config --global alias.type 'cat-file -t'
+git config --global alias.dump 'cat-file -p'
+git log -p -2 --oneline --max-count=2 --pretty=oneline
+
+neovim first start, packer install
+$ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+============
+|06.08.2023|
+============
+
+Для загрузки старого clang-format-11 в Debian 12.1. По умолчанию в нём 14-й.
+Рабочее решение - подключить репозитории от 11-го Debian bullseye.
+$ sudo nvim /etc/apt/sources.list
+туда добавляем
+deb http://deb.debian.org/debian bullseye non-free-firmware main non-free
+deb-src http://deb.debian.org/debian bullseye non-free-firmware main non-free
+потом
+$ sudo apt update
+и можно устанавливать
+$ sudo apt install clang-format-11
 
