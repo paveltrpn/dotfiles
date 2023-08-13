@@ -64,3 +64,100 @@ $ sudo apt update
 и можно устанавливать
 $ sudo apt install clang-format-11
 
+Библиотека для векторизации на с++ - EVE
+https://github.com/jfalcou/eve
+
+============
+|07.08.2023|
+============
+
+Логи после выключения
+$ journalctl -b-1 | grep systemd
+Информация о последних выключениях
+$ last reboot | head
+
+Debian 12.1 Firefox stable (non ESR) install
+download from official site tarball archive
+delete previous install
+$ sudo rm -r /opt/firefox
+$ sudo tar -jxf ~/Downloads/firefox-*.tar.bz2 -C /opt/
+$ mkdir -p ~/.local/share/applications
+$ nvim ~/.local/share/applications/firefox.desktop
+Then copy and paste the lines below into file (the terminal window):
+[Desktop Entry]
+Name=Firefox Stable
+Comment=Web Browser
+Exec=/opt/firefox/firefox %u
+Terminal=false
+Type=Application
+Icon=/opt/firefox/browser/chrome/icons/default/default128.png
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+Actions=Private;
+[Desktop Action Private]
+Exec=/opt/firefox/firefox --private-window %u
+Name=Open in private mode
+
+Install Google Chrome in Debian 12.1
+$ sudo apt install apt-transport-https curl -y
+$ curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/google-chrome.gpg >> /dev/null
+$ echo deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+$ sudo apt update
+$ sudo apt install google-chrome-stable
+
+QT debug flags for QtWebWidget
+$ export QTWEBENGINE_DISABLE_SANDBOX=1
+$ export QTWEBENGINE_CHROMIUM_FLAGS=--no-sandbox
+
+VS Code (CTRL+Shift+P)
+In order to have two separate VSCode windows open that point 
+to the same workspace, press CTRL+Shift+P and then search 
+for Duplicate As Workspace in New Window. This will 
+open a new window that is associated with the current workspace
+
+============
+|08.08.2023|
+============
+
+NVIDIA system managment interface
+$ nvidia-smi
+
+А зачем делать вот так?:
+....
+    const CObject&& foo = some_map["key"].returnObj()
+....
+при этом returnObj() возвращает by value. И потом передавать
+в функцию, принимающую const &?
+
+SensorCord::SensorCord вызывает как коллбэк в лямбде по итогу DrawLink() <67>,
+далее drawLink() <SensorCord.cpp 242> далее внутри вызывает invoke(...) <550> из
+<EntitiTransform.cpp 306> и тут есть мьютекс!!! Зачем такая фигня?
+SensorCordInfoHandler при клике, красная область.
+
+EntitiTransform.h - FUNC_WRAPPER_TYPE <242> 
+Список из функторов, вызываемых под блокировкой.
+
+keyboard shortcut power off
+keybouard -> shortcuts -> custom shortcuts
+$ cinnamon-session-quit --power-off
+
+============
+|10.08.2023|
+============
+
+VSVode - change "show call hierarchy" command shortcut (it shift-alt-H by default):
+call command pallete - shift-alt-p
+search "show call hierarchy" and press "gear" icons
+set new shortcut, ctrl-shift-h for instance, but it shadows a existing shortcut (replace files
+or something...)
+
+Formatting with clang daemon.
+Clang daemon uses last version of clang-format tool and maybe link it 
+to itself when building llvm-clang toolchain performed. There is no obvious way 
+to specify custom clang-format binary or clang-format config file in clangd options.
+
+Работаем с коммитами, ищем комминт внёсший изменения в данных строчках.
+$ git blame -L 1409,+3 {file} - посмотреть коммиты, затрагивающие строчки с 1409 по 1412.
+$ git log --pretty=short -u -L 1410,1410:{file} - довольно подробная инфа о коммитах, включая
+commit message и автора о коммитах, внёсших изменения в строчки.

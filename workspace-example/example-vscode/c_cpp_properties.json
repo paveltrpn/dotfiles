@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/editor/editor/src",
+                "~/.conan/data/**",
+                "${workspaceFolder}/Qt/5.15.2/gcc_64/**",
+                "${workspaceFolder}/editor/editor/src",
+                "${workspaceFolder}/editor/build/Ninja_RelWithDebInfo/ninja",
+                "${workspaceFolder}/editor/build/Ninja_RelWithDebInfo/ninja/IntegraPlanetEarth_autogen/include",
+                "${workspaceFolder}/editor/build/Ninja_RelWithDebInfo/ninja/IntegraPlanetEarth_autogen",
+                "${workspaceFolder}/editor/common/inc",
+                "${workspaceFolder}/Qt/5.15.2/gcc_64/include",
+                "${workspaceFolder}/Qt/5.15.2/gcc_64/include/QtCore"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": "${workspaceFolder}/editor/build/Ninja_RelWithDebInfo/ninja/compile_commands.json"
+        }
+    ],
+    "version": 4
+}

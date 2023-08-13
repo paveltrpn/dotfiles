@@ -1,0 +1,71 @@
+{
+    "json.schemaDownload.enable": false,
+    "workbench.colorTheme": "Kanagawa",
+    "editor.fontFamily": "Fira Code, monospace",
+    "editor.fontSize": 15,
+    "editor.fontWeight": 500,
+    "editor.tabCompletion": "on",
+    "editor.renderWhitespace": "all",
+    "editor.inlayHints.enabled": "off",
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+    "clang-format.executable": "/usr/bin/clang-format-11",
+    "C_Cpp.clang_format_path": "/usr/bin/clang-format-11",
+    "editor.renderControlCharacters": false,
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideTabs": false,
+    "zenMode.hideStatusBar": false,
+    "editor.minimap.enabled": true,
+    "editor.minimap.scale": 1,
+    "workbench.activityBar.visible": false,
+    "editor.minimap.renderCharacters": false,
+    "explorer.sortOrder": "type",
+    "python.analysis.logLevel": "Error",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.completeFunctionParens": true,
+    "go.buildOnSave": "off",
+    "go.useLanguageServer": true,
+    "go.toolsEnvVars": {
+        "GOBIN": "/usr/paveltrpn/go/bin"
+    },
+    "go.goroot": "/home/pavel/go1.19.2",
+    "go.lintTool": "staticcheck",
+    "gopls": {},
+    "vim.handleKeys": {
+        "<C-k>": false
+    },
+    "vim.easymotion": true,
+    "vim.hlsearch": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "8"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": ":nohl"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "e",
+                "e"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.toggleSidebarVisibility"
+                }
+            ]
+        }
+    ],
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "array": "cpp"
+    },
+    "cmake.sourceDirectory": "/mnt/Fdisk_ext4_ssd_sata/work/editor"
+}

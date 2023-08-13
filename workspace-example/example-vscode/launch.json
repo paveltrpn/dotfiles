@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/editor/build/Ninja_RelWithDebInfo/IntegraPlanetEarth/bin/IntegraPlanetEarth",
+            "args": [],
+            "env": {
+                "LD_LIBRARY_PATH": "${workspaceFolder}/editor/build/Ninja_RelWithDebInfo/IntegraPlanetEarth/lib:${workspaceFolder}/5.15.2/gcc_64/../../5.15.2/gcc_64/bin::$LD_LIBRARY_PATH}",
+            },
+        }
+    ]
+}
