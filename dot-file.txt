@@ -161,3 +161,65 @@ to specify custom clang-format binary or clang-format config file in clangd opti
 $ git blame -L 1409,+3 {file} - посмотреть коммиты, затрагивающие строчки с 1409 по 1412.
 $ git log --pretty=short -u -L 1410,1410:{file} - довольно подробная инфа о коммитах, включая
 commit message и автора о коммитах, внёсших изменения в строчки.
+
+============
+|14.08.2023|
+============
+
+<c++ snippet>
+Grill the Committee 2018 - Herb Sutter first reason to 
+use almost always auto is - not forget to initialize
+variable by some value, not deduction reason.
+And c++17 it guarantie move elision
+....
+    auto x = std::vector<int> {};
+....
+
+============
+|15.08.2023|
+============
+
+<commit, erase, local, git, remote>
+Erase last commit locally and at remote brunch
+git reset --hard HEAD~1
+git push -f origin {branch}
+
+============
+|16.08.2023|
+============
+
+<c++, expression>
+In c++ 'this' - is a expression, 'new' - is a expression. Every expression
+has a value and this value can be ignored, so that constructions is valid
+....
+    this;   // evaluate expression which result is implicit object parameter 
+            // pointer and ignore returned value
+    new FooBar; // evaluate expression - allocate memory and call FooBar ctor
+                // and ignore return value - pointer to allocated memory
+....
+
+============
+|22.08.2023|
+============
+
+<fzf, rg, grep>
+Search text in file in all subderictories
+$ rg . --line-number | fzf --print0 -e
+--print0 - no new line
+$ rg . -n | fzf -e
+
+============
+|24.08.2023|
+============
+
+<fzf, cd, directory, grep, search>
+Nice ripgrep and fzf shortcuts to convinient search of 
+directories to come and string in files. Add to .bashrc
+alias rgfzf='rg . -n | fzf -e'
+alias cdfzf="cd / && cd \$(find * -type d 2>&1 | rg -v \"Permission denied\" | fzf)"
+
+<vscode, keybindings, shortcuts>
+vscode shortcuts stored at ~/.config/Code/user/keybindings.json
+To change or find some shortcuts - ctrl+k ctrk+s
+I change "show call hierarchy" to ctrl+shift+t, "tuggle debug panel" to ctrl+shift+d
+
