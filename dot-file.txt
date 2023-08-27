@@ -45,6 +45,8 @@ git config --global alias.type 'cat-file -t'
 git config --global alias.dump 'cat-file -p'
 git log -p -2 --oneline --max-count=2 --pretty=oneline
 
+<neovim, nvim, packer, setup, first install>
+===========
 neovim first start, packer install
 $ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -64,6 +66,8 @@ $ sudo apt update
 и можно устанавливать
 $ sudo apt install clang-format-11
 
+<c++lib>
+===========
 Библиотека для векторизации на с++ - EVE
 https://github.com/jfalcou/eve
 
@@ -207,19 +211,68 @@ Search text in file in all subderictories
 $ rg . --line-number | fzf --print0 -e
 --print0 - no new line
 $ rg . -n | fzf -e
+or make aliases as shown beyond
 
 ============
 |24.08.2023|
 ============
 
-<fzf, cd, directory, grep, search>
+<fzf, bash, cd, directory, grep, search>
+============
 Nice ripgrep and fzf shortcuts to convinient search of 
 directories to come and string in files. Add to .bashrc
 alias rgfzf='rg . -n | fzf -e'
 alias cdfzf="cd / && cd \$(find * -type d 2>&1 | rg -v \"Permission denied\" | fzf)"
 
 <vscode, keybindings, shortcuts>
+============
 vscode shortcuts stored at ~/.config/Code/user/keybindings.json
 To change or find some shortcuts - ctrl+k ctrk+s
-I change "show call hierarchy" to ctrl+shift+t, "tuggle debug panel" to ctrl+shift+d
+I change 
+"show call hierarchy"   - ctrl+shift+t 
+"tuggle debug panel"    - ctrl+shift+d
+"debug disconnect"      - ctrl+shift+F5 -- may not work
+also press alt and click at detach icon
+
+<c++, templates, make_pair(), rvalue ref>
+============
+....
+    double foo, bar;
+    auto baz = make_pair<double, double>(foo, bar);
+....
+not working since c++11, because in modern c++ make_pair() function template
+defined as
+....
+    template<typename T1, typename T2>
+    std::pair<T1, T2> make_pair(T1 &&u, T2 &&v)
+....
+and this template expects a reference, not an lvalue. If you try to explicitly
+instatiate template with non reference parameter then there will be a error that
+"can't bind rvalue reference with lvalue".
+
+============
+|25.08.2023|
+============
+
+<vim, nvim, simple config, minimalistic>
+============
+For neovim config see note_book/nvim_conf/nvim_setup.txt (maybe outdated)
+Basic usage.
+
+vim config file (.vimrc) location is ~/.vimrc.
+neovim config file (init.lua or init.vim) is ~/.config/nvim, anf it must be created manually.
+
+Remember that you can always paste into vim by shift-Ins, like in any regular terminal!!!
+
+<vscode, settings, preferences, wrap tabs>
+============
+To use tab wrapping instead of straight line of tabs
+Preferences -> Settings -> search by "wrap tabs" or Workbench>Editor: Wrap Tabs option
+
+<vim, build, from source>
+To build vim from source (primarily for +clipboard)
+$ sudo apt-get install xclip libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+$ ./configure --with-features=huge --enable-pythoninterp=yes --enable-cscope --with-x
+$ make -j 10
+$ sudo make install
 
