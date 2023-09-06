@@ -5,10 +5,20 @@
 ============
 |03.08.2023|
 ============
-Сборка llvm-clang с lldb (да и вообще):
-cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" ../llvm
 
-Чтобы не делать глобальный make install
+<llvm-clang, build, source>
+============
+Сборка llvm-clang с lldb (да и вообще):
+cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
+-DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" ../llvm
+
+!!!WARNING!!! - to build qt6 with qdoc required llvm toolchain and this toolchain must be
+built with RTTI support, but RTTI disable by default in llvm-clang config.
+It need to be enabled by this config command:
+$ cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
+-DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=1 -DLLVM_ENABLE_EH=1 -G "Unix Makefiles" ../llvm
+
+Чтобы не делать глобальный make install (хотя это можно и не делать, установка в /usr/local тоже нормально)
 clangbuild=~/apps/llvm-project-llvmorg-13.0.1/build
 export PATH=$clangbuild/bin:$PATH
 export LD_LIBRARY_PATH=$clangbuild/lib:$LD_LIBRARY_PATH
@@ -161,6 +171,7 @@ Clang daemon uses last version of clang-format tool and maybe link it
 to itself when building llvm-clang toolchain performed. There is no obvious way 
 to specify custom clang-format binary or clang-format config file in clangd options.
 
+<git, blame, commit author, stats>
 Работаем с коммитами, ищем комминт внёсший изменения в данных строчках.
 $ git blame -L 1409,+3 {file} - посмотреть коммиты, затрагивающие строчки с 1409 по 1412.
 $ git log --pretty=short -u -L 1410,1410:{file} - довольно подробная инфа о коммитах, включая
@@ -276,3 +287,40 @@ $ ./configure --with-features=huge --enable-pythoninterp=yes --enable-cscope --w
 $ make -j 10
 $ sudo make install
 
+============
+|28.08.2023|
+============
+
+<Qt6, build, source>
+============
+Prepare Qt6 (see also https://wiki.qt.io/Building_Qt_6_from_Git)
+
+!!!WARNING!!! - to build qt6 with qdoc required llvm toolchain and this toolchain must be
+built with RTTI support, but RTTI disable by default in llvm-clang config.
+It need to be enabled by this config command:
+$ cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
+-DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=1 -DLLVM_ENABLE_EH=1 -G "Unix Makefiles" ../llvm
+
+Download:
+$ git clone git://code.qt.io/qt/qt5.git qt6
+Switch to latest:
+$ cd qt6
+$ git switch v6.5
+Init repo:
+$ perl init-repository
+Configure, make and install (optionaly):
+$ mkdir qt6-build
+$ cd qt6-build
+$ ../qt6/configure -prefix /path/to/install
+$ cmake --build . --parallel 4
+$ cmake --install .
+
+
+============
+|28.08.2023|
+============
+
+<git, merge, rebease, branch>
+============
+How to make local copy of remote branch
+git checkout -b 12331 --no-track origin/12331
