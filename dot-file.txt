@@ -324,3 +324,35 @@ $ cmake --install .
 ============
 How to make local copy of remote branch
 git checkout -b 12331 --no-track origin/12331
+
+
+============
+|07.09.2023|
+============
+
+<windows, link, execute>
+In windows to make a link to exe file executable from console
+add the .LNK text to PATHEXT environment variable
+search переменные and in bottom panel find PATHEXT
+
+<windows, visual studio, msbuild, setup, environment>
+To call msbuild on .vxcproj file like that
+$  msbuild some_proj.vcxproj /p:Configuration=RelWithDebInfo
+Is need to be set VS env vars, it could be done by calling some
+.bat files, for example
+$ "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+Or it can be vcvarsall.bat and so on.
+
+Setup VS env vars
+"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+
+Build
+cd "work\editor\build\{bla-bla-bla}\vcproj"
+msbuild {bla-bla-bla}.vcxproj /p:Configuration=RelWithDebInfo
+
+Run app
+"E:\work\editor\build\Visual Studio 17 2022_RelWithDebInfo\vcproj\{some-executable}.cmd"
+
+<work note, qt window stay on top, windows>
+Stackoverflow question that exactly math to mine
+https://stackoverflow.com/questions/75734617/setting-the-main-window-qwidget-as-parent-of-qml-windows
