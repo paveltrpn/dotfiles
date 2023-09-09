@@ -111,14 +111,6 @@ map("n", "<Leader>h", ":set cursorline!<CR>")
 -- Map to deselect word selected by shift-8 (or shift-*)
 map("n", "<leader>8", ":nohlsearch<CR>")
 
--- Unmap F1 from normal and visual mode
-vim.cmd([[
-:map <F1> :echo<CR>
-]])
--- Unmap F1 from insert mode (do no op)
-vim.cmd([[
-:imap <F1> <Nop>
-]])
 -- buffers switch and list all
 vim.cmd([[
 :noremap <leader>bl :ls<CR>
@@ -131,18 +123,9 @@ vim.cmd([[
 :noremap <leader>tp :tabp<CR>
 :noremap <leader>tc :tabc<CR>
 ]])
--- Delete buffer (:bd) leader to avoid accident
-vim.cmd([[
-:noremap <leader><F4> :bd<CR>
-:noremap <F4> :echo "to delete buffer use F4 with leader"<CR>
-]])
--- More dangerous version of command above
---:noremap <leader><F4> :bd<CR>
 
--- Shortcuts to open vim explorer on far left pan
- map("n", "<leader>ee", ":Lexplore %:p:h<CR>")
--- Close opened Explorer window
- map("n", "<leader>eq", ":Lexplore<CR>")
+-- Shortcuts to toggle vim explorer on far left pan
+ map("n", "<leader>ee", ":Lexplore<CR>")
 -- Explorer pan size
  vim.g.netrw_winsize = 20
 
@@ -175,9 +158,6 @@ require('packer').startup(function()
   use 'sainnhe/everforest'
   use "rebelot/kanagawa.nvim"
   use 'ayu-theme/ayu-vim'
-
-  -- Status line written in lua
-  use 'nvim-lualine/lualine.nvim'
 
   -- Fuzzy finder plugin
   -- I use this instead of 'ibhagwan/fzf-lua'  
@@ -274,7 +254,6 @@ vim.cmd([[set background=dark]]) -- for day theme
 vim.cmd([[let g:everforest_background = 'medium']])
 vim.cmd([[colorscheme everforest]])
 
-
 -- Plugin fuzzyfinder 'junegunn/fzf'
 -- if file already opened, show it's buffer
 vim.g.fzf_buffers_jump = 1 
@@ -286,10 +265,6 @@ require "nvim-treesitter-conf"
 -- Plugin 'lewis6991/gitsigns.nvim'
 -- ~/.config/nvim/lua/gitsigns-nvim-conf.lua
 require "gitsigns-nvim-conf"
-
--- Plugin 'nvim-lualine/lualine.nvim'
--- ~/.config/nvim/lua/lualine-conf.lua
-require "lualine-conf"
 
 -- Plugin 'neovim/nvim-lspconfig'
 -- mappings of LSP server if it included before them
