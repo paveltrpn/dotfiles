@@ -140,16 +140,14 @@ vim.cmd([[
 --:noremap <leader><F4> :bd<CR>
 
 -- Shortcuts to open vim explorer on far left pan
--- map("n", "<leader>ee", ":Lexplore %:p:h<CR>")
+ map("n", "<leader>ee", ":Lexplore %:p:h<CR>")
 -- Close opened Explorer window
--- map("n", "<leader>eq", ":Lexplore<CR>")
+ map("n", "<leader>eq", ":Lexplore<CR>")
 -- Explorer pan size
--- vim.g.netrw_winsize = 20
-
-map("n", "<leader>ee", ":NeoTreeShowToggle<CR>")
+ vim.g.netrw_winsize = 20
 
 -- Map to close quickfix window 
-map("n", "<leader>qq", ":cclose<CR>")
+ map("n", "<leader>qq", ":cclose<CR>")
 
 -- Map to select quickfix window
 map("n", "<leader>qs", ":copen<CR>")
@@ -181,9 +179,6 @@ require('packer').startup(function()
   -- Status line written in lua
   use 'nvim-lualine/lualine.nvim'
 
-  -- Plugin for autocomplete braces. This one works with LUA.
-  use 'windwp/nvim-autopairs'
- 
   -- Fuzzy finder plugin
   -- I use this instead of 'ibhagwan/fzf-lua'  
   -- despite of it's vim script plugin
@@ -192,19 +187,6 @@ require('packer').startup(function()
   use 'junegunn/fzf'
   use 'junegunn/fzf.vim'
     
-  -- Scroll by ctrl-f, ctrl-b, ctrl-e, ctrl-y, ctrl-u, ctrl-d
-  use 'karb94/neoscroll.nvim'
-  
-  use {
-  "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    requires = { 
-      "nvim-lua/plenary.nvim",
-      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    }
-  }
-
   -- Github
   use 'lewis6991/gitsigns.nvim'
 
@@ -283,25 +265,19 @@ end)
 -- })
 -- require('ayu').colorscheme()
 
-vim.cmd([[ set termguicolors ]])
-vim.cmd([[ let ayucolor="dark"]])
-vim.cmd([[ colorscheme ayu]])
+-- vim.cmd([[ set termguicolors ]])
+-- vim.cmd([[ let ayucolor="dark"]])
+-- vim.cmd([[ colorscheme ayu]])
 
 -- Plugin theme 'sainnhe/everforest'
--- vim.cmd([[set background=light]]) -- for day theme
--- vim.cmd([[let g:everforest_background = 'medium']])
--- vim.cmd([[colorscheme everforest]])
+vim.cmd([[set background=dark]]) -- for day theme
+vim.cmd([[let g:everforest_background = 'medium']])
+vim.cmd([[colorscheme everforest]])
 
 
 -- Plugin fuzzyfinder 'junegunn/fzf'
 -- if file already opened, show it's buffer
 vim.g.fzf_buffers_jump = 1 
-
--- Plugin 'karb94/neoscroll.nvim'
-require('neoscroll').setup()
-
--- Plugin 'windwp/nvim-autopairs'
-require("nvim-autopairs").setup{}
 
 -- Plugin 'nvim-treesitter/nvim-treesitter'
 -- ~/.config/nvim/lua/nvim-treesitter-conf.lua
@@ -320,10 +296,6 @@ require "lualine-conf"
 --
 -- ~/.config/nvim/lua/nvim-lspconfig-conf.lua
 require "nvim-lspconfig-conf"
-
--- Plugin "nvim-neo-tree/neo-tree.nvim"
--- ~/.config/nvim/lua/neo-tree-conf.lua
-require "neo-tree-conf"
 
 -- Plugin'fatih/vim-go'
 -- ~/.config/nvim/lua/vim-go-conf.lua
