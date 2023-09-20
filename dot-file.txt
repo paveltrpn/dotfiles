@@ -356,3 +356,13 @@ Run app
 <work note, qt window stay on top, windows>
 Stackoverflow question that exactly math to mine
 https://stackoverflow.com/questions/75734617/setting-the-main-window-qwidget-as-parent-of-qml-windows
+
+============
+|11.09.2023|
+============
+
+<linux, clang-format, command>
+Recursive format all nested directories
+find . | grep "\..*\.cpp$\|\..*\.h$" | xargs clang-format --dry-run --Werror --verbose
+Or some directory nested directories
+find . | grep "\./src.*\.cpp$\|\./src.*\.h$" | xargs clang-format --dry-run --Werror

@@ -1,0 +1,54 @@
+Golang workspace settings.
+
+1) Download and unpack:
+$ wget -c https://storage.googleapis.com/golang/go{version}.linux-amd64.tar.gz
+$ tar -xzf go{version}.tar.gz
+Usually place go directory in /home/{usr}/go
+
+2) Add go executable to .bashrc
+....
+export PATH=$PATH:/home/pavel/go/bin
+....
+
+3) Install environment dependencies such as linter, formatter, language server and so on:
+$ go install -v github.com/ramya-rao-a/go-outline@latest
+$ go install -v github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest
+$ go install -v github.com/cweill/gotests/gotests@latest
+$ go install -v github.com/fatih/gomodifytags@latest
+$ go install -v github.com/josharian/impl@latest
+$ go install -v github.com/haya14busa/goplay/cmd/goplay@latest
+$ go install -v github.com/go-delve/delve/cmd/dlv@latest
+$ go get -x -d github.com/go-delve/delve/cmd/dlv@master
+$ go install -v honnef.co/go/tools/cmd/staticcheck@latest
+$ go install golang.org/x/tools/cmd/goimports@latest
+$ go install -v golang.org/x/tools/gopls@latest
+$ go install github.com/mgechev/revive@latest
+
+4) Optionally for vscode may build debuger addon
+$ sudo go build -o /usr/paveltrpn/go/bin/dlv-dap github.com/go-delve/delve/cmd/dlv
+
+5) Настройка среды GoLang в Linux (для версий golang до 1.13, т.е. без поддержки модулей).
+
+Сначала настройте рабочее пространство Go, создав каталог ~/go_projects, который 
+является корнем вашего рабочего пространства. Рабочее пространство состоит из трех каталогов, 
+а именно:
+
+   bin, который будет содержать исполняемые двоичные файлы Go;
+   src, который сохранит ваши исходные файлы;
+   pkg, который будет хранить объекты пакета.
+
+Теперь создайте указанное выше дерево каталогов следующим образом:
+$ mkdir -p ~/go_projects/{bin,src,pkg}
+$ cd ~/go_projects
+
+Затем установите значения переменных среды GOPATH и GOBIN в файле профиля 
+пользователя (~/.profile или ~/bash_profile), чтобы указать на ваш каталог рабочей области.
+$ export GOPATH="$HOME/go_projects"
+$ export GOBIN="$GOPATH/bin
+
+Примечание! Если вы установили GoLang в пользовательский каталог, отличный от значения по умолчанию (/usr/local/), 
+вы должны указать этот каталог как значение переменной GOROOT. Например, если вы установили GoLang в 
+домашний каталог, добавьте строки приведенные ниже в файл $HOME/.profile или $HOME/.bash_profile. 
+
+$ export GOROOT=$HOME/go
+$ export PATH=$PATH:$GOROOT/bin
