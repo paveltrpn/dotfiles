@@ -151,6 +151,8 @@ require('packer').startup(function()
   -- Packer package manager
   use 'wbthomason/packer.nvim' 
 
+  use "nvim-lua/plenary.nvim"
+
   -- Color theme
   use 'folke/tokyonight.nvim'
   use 'sainnhe/sonokai'
@@ -158,6 +160,7 @@ require('packer').startup(function()
   use 'sainnhe/everforest'
   use "rebelot/kanagawa.nvim"
   use 'ayu-theme/ayu-vim'
+  use "ellisonleao/gruvbox.nvim"
 
   -- Fuzzy finder plugin
   -- I use this instead of 'ibhagwan/fzf-lua'  
@@ -177,8 +180,14 @@ require('packer').startup(function()
   }
 
   -- Powerful golang plugin written in vimsript
-  use 'fatih/vim-go'
-  
+  -- use 'fatih/vim-go'
+ 
+  use("petertriho/nvim-scrollbar")
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
+
   -- Neovim built-in LSP support plugin
   use 'neovim/nvim-lspconfig'
 
@@ -250,9 +259,12 @@ end)
 -- vim.cmd([[ colorscheme ayu]])
 
 -- Plugin theme 'sainnhe/everforest'
-vim.cmd([[set background=dark]]) -- for day theme
-vim.cmd([[let g:everforest_background = 'medium']])
-vim.cmd([[colorscheme everforest]])
+-- vim.cmd([[set background=dark]]) -- for day theme
+-- vim.cmd([[let g:everforest_background = 'medium']])
+-- vim.cmd([[colorscheme everforest]])
+
+vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[colorscheme gruvbox]])
 
 -- Plugin fuzzyfinder 'junegunn/fzf'
 -- if file already opened, show it's buffer
@@ -274,8 +286,14 @@ require "nvim-lspconfig-conf"
 
 -- Plugin'fatih/vim-go'
 -- ~/.config/nvim/lua/vim-go-conf.lua
-require "vim-go-conf"
+-- require "vim-go-conf"
 
 -- ~/.config/nvim/lua/nvim-cmp-conf.lua
 require "nvim-cmp-conf"
+
+-- ~/.config/nvim/lua/nvim-scrollbar-conf.lua
+require "nvim-scrollbar-conf"
+
+-- ~/.config/nvim/lua/lualine-conf.lua
+require "lualine-conf"
 

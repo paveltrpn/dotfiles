@@ -366,3 +366,52 @@ Recursive format all nested directories
 find . | grep "\..*\.cpp$\|\..*\.h$" | xargs clang-format --dry-run --Werror --verbose
 Or some directory nested directories
 find . | grep "\./src.*\.cpp$\|\./src.*\.h$" | xargs clang-format --dry-run --Werror
+
+============
+|21.09.2023|
+============
+
+<bullet3, OpenMW, build>
+Proper Bullet3 cmake configure command:
+cmake .. -DCMAKE_INSTALL_PREFIX=/mnt/Fdisk_ext4_ssd_sata/code/tiny-render/extern/bullet3-build \
+-DUSE_DOUBLE_PRECISION=ON
+
+<OpenSceneGraph, ffmpeg, build>
+There is a bug with build OpenSceneGraph with ffmpeg >= 5.0, some deprecated functions was deleted.
+So it is need to install 4.x version ffmpeg in Debian 12, which avaible as oldstable (or in bullseye).
+First you need to ensure that is bullsye repositories is in sources list and then:
+$ sudo apt -t bullseye install libffmpeg*dev
+
+<OpenMW - Elder Scrolls 3: Morrowind open engine, build>
+Some tips to configure and make OpenMW.
+
+Build OpenSceneGraph (... or see below), Bullet3, Qt6.
+Or build OpenMW fork of OpensceneGraph - https://github.com/OpenMW/osg.
+
+Build MyGUI with:
+To avoid string_view MyGUI patch, switch to pre 3.4.3 commit - 3.4.2 for instance (search bu changelog commit message).
+$ cmake .. -DMYGUI_RENDERSYSTEM=1 -DMYGUI_BUILD_DEMOS=OFF -DMYGUI_BUILD_TOOLS=OFF -DMYGUI_BUILD_PLUGINS=OFF \
+-DCMAKE_INSTALL_PREFIX=/.../mygui-build
+
+Dependencies:
+ffmpeg dev libs install as seen above (4.x version because of OSG bug).
+$ sudo apt install libyaml-cpp*dev liblz4-dev libsqlite3*dev libluajit2*dev libopenal*dev \
+build-essential libicu-dev libbz2-dev libboost-all-de
+
+$ export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/mnt/Fdisk_ext4_ssd_sata/playground/extern/qt6-build/qtbase/lib/cmake
+$ export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/.../mygui-build
+$ export OSG_DIR=/mnt/Fdisk_ext4_ssd_sata/playground/extern/OpenSceneGraph-build
+Or use OpenMW osg fork!!!
+
+cmake .. -DBULLET_ROOT=/mnt/Fdisk_ext4_ssd_sata/code/tiny-render/extern/bullet3-build \
+-DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_INSTALL_PREFIX/.../openmw-build
+
+============
+|22.09.2023|
+============
+
+<iso, mdf, mds, convert, mount>
+Convert *.mdf to *.iso file:
+$ iat --iso -i Morrowind.mdf -o Morrowind.iso
+$ sudo mount -o loop Morrowind.iso foo
+
