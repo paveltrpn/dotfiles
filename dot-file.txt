@@ -415,3 +415,30 @@ Convert *.mdf to *.iso file:
 $ iat --iso -i Morrowind.mdf -o Morrowind.iso
 $ sudo mount -o loop Morrowind.iso foo
 
+============
+|26.09.2023|
+============
+
+<linux, bash, shell>
+Search packets in deb apt (only by names!)
+$ apt search --names-only '^gcc-?[0-9]*$'
+
+============
+|28.09.2023|
+============
+
+<regex, example>
+Some example of regular expression, taken from Angie 1.3.0 (Nginx fork) release notes.
+location =/
+         ^~/images/
+         ~*\.(gif|jpg|jpeg)$ {
+      #общая конфигурация
+   }
+
+<c++, tips, dynamic_cast>
+https://stackoverflow.com/questions/44210012/dynamic-cast-pointer-exception-catch
+https://en.cppreference.com/w/cpp/language/dynamic_cast
+A dynamic_cast between pointer types will never throw, it will simply return nullptr. 
+If you want dynamic_cast to throw, convert between reference types. 
+The exception will be of type std::bad_cast.
+
