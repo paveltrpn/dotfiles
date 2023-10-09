@@ -442,3 +442,18 @@ A dynamic_cast between pointer types will never throw, it will simply return nul
 If you want dynamic_cast to throw, convert between reference types. 
 The exception will be of type std::bad_cast.
 
+============
+|06.10.2023|
+============
+
+<boost, boost test, build, clang llvm>
+Funny journey with building boost and boost unittest library with clang++ toolchain (including libc++)
+
+$ ./bootstrap.sh --with-toolset=clang
+$ ./b2 clean
+$ ././b2 toolset=clang cxxflags="-std=c++1y -stdlib=libc++ -I /usr/local/include/x86_64-unknown-linux-gnu/c++/v1" \
+linkflags="-stdlib=libc++ -L/usr/local/lib/x86_64-unknown-linux-gnu" -j 10
+
+Specifying include and link directories for this build is necessary because of without it
+clang generate missing errors, maybe issued by being manually compiled and installed along
+with default gcc compiler!
