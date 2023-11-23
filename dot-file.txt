@@ -9,14 +9,14 @@
 <llvm-clang, build, source>
 ============
 Сборка llvm-clang с lldb (да и вообще):
-cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
+cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb;lld" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind;compiler-rt" \
 -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" ../llvm
 
 !!!WARNING!!! - to build qt6 with qdoc required llvm toolchain and this toolchain must be
 built with RTTI support, but RTTI disable by default in llvm-clang config.
 It need to be enabled by this config command:
-$ cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
--DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=1 -DLLVM_ENABLE_EH=1 -G "Unix Makefiles" ../llvm
+$ cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb;lld" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind;compiler-rt" \
+-DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=1 -DLLVM_ENABLE_EH=1 ../llvm
 
 Чтобы не делать глобальный make install (хотя это можно и не делать, установка в /usr/local тоже нормально)
 clangbuild=~/apps/llvm-project-llvmorg-13.0.1/build
@@ -301,8 +301,16 @@ It need to be enabled by this config command:
 $ cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
 -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=1 -DLLVM_ENABLE_EH=1 -G "Unix Makefiles" ../llvm
 
+!!!WARNING!!! - Qt 5.15.2 can not be build by default in Debian 12.2 with gcc - there is a numeric_limits template
+error after run ./configure. Solved by adding #include <limits> in qt5/qtbase/src/corelib/global/qglobal.h within
+the #ifdef __cplusplus block to the file
+
 Download:
 $ git clone git://code.qt.io/qt/qt5.git qt6
+or just
+$ git clone git://code.qt.io/qt/qt5.git
+anyway there is many branches in this repo, including 6.x and 5.x
+
 Switch to latest:
 $ cd qt6
 $ git switch v6.5
@@ -311,8 +319,12 @@ $ perl init-repository
 Configure, make and install (optionaly):
 $ mkdir qt6-build
 $ cd qt6-build
-$ ../qt6/configure -prefix /path/to/install
+$ ../qt6/configure -release -nomake tests -prefix /path/to/install
+
 $ cmake --build . --parallel 4
+or
+$ gmake -j 12 - for Qt5.15.2
+
 $ cmake --install .
 
 
@@ -371,16 +383,37 @@ find . | grep "\./src.*\.cpp$\|\./src.*\.h$" | xargs clang-format --dry-run --We
 |21.09.2023|
 ============
 
-<bullet3, OpenMW, build>
+<bullet3, OpenMW, openmw, build>
 Proper Bullet3 cmake configure command:
-cmake .. -DCMAKE_INSTALL_PREFIX=/mnt/Fdisk_ext4_ssd_sata/code/tiny-render/extern/bullet3-build \
--DUSE_DOUBLE_PRECISION=ON
+cmake .. -DCMAKE_INSTALL_PREFIX=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/bullet3-build \
+-DCMAKE_EXPORT_COMPMPILE_COMMANDS=1 -DUSE_DOUBLE_PRECISION=ON -DINSTALL_LIBS=ON -DCMAKE_BUILD_TYPE=Release
 
 <OpenSceneGraph, ffmpeg, build>
+OSG build:
+$ cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_INSTALL_PREFIX=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/OpenSceneGraph-build
+$ ninja -j 16
+$ ninja install 
+
 There is a bug with build OpenSceneGraph with ffmpeg >= 5.0, some deprecated functions was deleted.
 So it is need to install 4.x version ffmpeg in Debian 12, which avaible as oldstable (or in bullseye).
-First you need to ensure that is bullsye repositories is in sources list and then:
-$ sudo apt -t bullseye install libffmpeg*dev
+
+watch install packages versions and candidates:
+$ sudo apt policy <package>
+
+and then you need to install ffmpeg with specific dev packages (installation order of dev 
+packs may be diffrent):
+$ sudo apt install ffmpeg=7:4.3.6-0+deb11u1
+$ sudo apt install libavutil-dev=7:4.3.6-0+deb11u1     
+$ sudo apt install libavcodec-dev=7:4.3.6-0+deb11u1    
+$ sudo apt install libavformat-dev=7:4.3.6-0+deb11u1   
+$ sudo apt install libavdevice-dev=7:4.3.6-0+deb11u1   
+$ sudo apt install libavfilter-dev=7:4.3.6-0+deb11u1    
+$ sudo apt install libswscale-dev=7:4.3.6-0+deb11u1     
+$ sudo apt install libswresample-dev=7:4.3.6-0+deb11u1  
+$ sudo apt install libpostproc-dev=7:4.3.6-0+deb11u1    
+
+Maybe installation from legacy bullsye repositories should work:
+$ sudo apt -t bullseye install ffmpeg
 
 <OpenMW - Elder Scrolls 3: Morrowind open engine, build>
 Some tips to configure and make OpenMW.
@@ -398,13 +431,13 @@ ffmpeg dev libs install as seen above (4.x version because of OSG bug).
 $ sudo apt install libyaml-cpp*dev liblz4-dev libsqlite3*dev libluajit2*dev libopenal*dev \
 build-essential libicu-dev libbz2-dev libboost-all-de
 
-$ export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/mnt/Fdisk_ext4_ssd_sata/playground/extern/qt6-build/qtbase/lib/cmake
-$ export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/.../mygui-build
-$ export OSG_DIR=/mnt/Fdisk_ext4_ssd_sata/playground/extern/OpenSceneGraph-build
+$ export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/qt6-build/qtbase/lib/cmake
+$ export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/mygui-build
+$ export OSG_DIR=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/OpenSceneGraph-build
 Or use OpenMW osg fork!!!
 
-cmake .. -DBULLET_ROOT=/mnt/Fdisk_ext4_ssd_sata/code/tiny-render/extern/bullet3-build \
--DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_INSTALL_PREFIX/.../openmw-build
+cmake .. -DBULLET_ROOT=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/bullet3-build -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+-DCMAKE_INSTALL_PREFIX=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/openmw-build
 
 ============
 |22.09.2023|
@@ -457,3 +490,36 @@ linkflags="-stdlib=libc++ -L/usr/local/lib/x86_64-unknown-linux-gnu" -j 10
 Specifying include and link directories for this build is necessary because of without it
 clang generate missing errors, maybe issued by being manually compiled and installed along
 with default gcc compiler!
+
+============
+|09.10.2023|
+============
+
+<vim, nvim, tips editing>
+Stole from https://gist.github.com/awidegreen/3854277
+
+Replace the word under cursor and all occurances:
+*     word under cursor 'foo'
+cw    change word (enter insert mode)
+bar   typed new word 'bar'
+ESC   exit insert mode
+n     next occurrence
+.     repeat previous command 
+
+Search for selected text:
+<select> Select text in VISUAL mode (v)
+y        Yank selection
+/        Search for
+C-r0     Press Ctrl-R and 0 to paste in
+
+============
+|13.11.2023|
+============
+
+<strace, file, syscall>
+Show files operated by some process
+$ strace -e trace=open,openat,close,read,write,connect,accept ./IntegraPlanetEarth 2> log.txt
+
+
+
+
