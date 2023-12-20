@@ -33,6 +33,16 @@ require'lspconfig'.pyright.setup {
    -- filetypes = {'python'}
 }
 
+require 'lspconfig'.tsserver.setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
+  settings = {
+    completions = {
+      completeFunctionCalls = true
+    }
+  }
+}
+
 -- clangd downloaded from https://github.com/clangd/clangd/releases/tag/15.0.1
 -- place symlink from ../bin/clangd to /usr/local/bin/
 -- or build whole llvm clang from source!

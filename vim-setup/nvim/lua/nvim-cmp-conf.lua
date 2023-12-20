@@ -2,6 +2,10 @@
 local cmp = require'cmp'
 
 cmp.setup({
+  -- autocomplete popup disable by default, use ctrl-space to call it and ctrl-e to wipe away
+  completion = {
+    autocomplete = false
+  },
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
@@ -80,6 +84,14 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 require('lspconfig')['gopls'].setup {
+  capabilities = capabilities
+}
+
+require('lspconfig')['clangd'].setup {
+  capabilities = capabilities
+}
+
+require('lspconfig')['tsserver'].setup {
   capabilities = capabilities
 }
 
