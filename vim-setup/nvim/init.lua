@@ -2,6 +2,8 @@
 -- === Basic options section === ---
 -- ============================= ---
 
+vim.o.guifont = "Hack:h10"
+
 -- Enable mouse. set mouse = - for disable
 vim.opt.mouse = "a"
 -- String numbers
@@ -119,6 +121,7 @@ vim.cmd([[
 ]])
 -- tabs switch and close current
 vim.cmd([[
+:noremap <leader>to :tabnew<CR>
 :noremap <leader>tn :tabn<CR>
 :noremap <leader>tp :tabp<CR>
 :noremap <leader>tc :tabc<CR>
