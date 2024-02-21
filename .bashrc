@@ -28,7 +28,7 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -79,18 +79,22 @@ if [ -x /usr/bin/dircolors ]; then
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -112,25 +116,29 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias tru='trans -from en -to ru'
-alias ll='ls -l -a -h'
-alias clang-format='clang-format-11'
-
-export HISTSIZE=10000
-export HISTFILESIZE=10000
-export HISTCONTROL=ignoreboth:erasedups
-#export HISTIGNORE='history*'
-
+# clang++18 libs
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/x86_64-unknown-linux-gnu
 
-#export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include/c++/v1
+# QT files for work
+export QTDIR=/mnt/main_disk/work/Qt/5.15.2/gcc_64
 
-#export LD_LIBRARY_PATH=~/share_sdc2_ext4/OpenSceneGraph/build/lib:$LD_LIBRARY_PATH 
-export LD_LIBRARY_PATH=/mnt/share_sdc2_ext4/editor/build/Ninja_RelWithDebInfo/IntegraPlanetEarth/lib:$LD_LIBRARY_PATH
-#export OSG_FILE_PATH=~/share_sdc2_ext4/OpenSceneGraph-Data:~/share_sdc2_ext4/OpenSceneGraph-Data/Images:$OSG_FILE_PATH  
-#export PATH=~/share_sdc2_ext4/OpenSceneGraph/build/bin:$PATH  
-#export OSG_ROOT=~/share_sdc2_ext4/OpenSceneGraph/build  
-#export OSG_DIR=~/share_sdc2_ext4/OpenSceneGraph
+# local build of Qt6.7
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/code/extern_libs/qt6-install/lib
 
-export QTDIR=/mnt/share_sdc2_ext4/work/Qt/5.15.2/gcc_64
-export Qt5_DIR=/mnt/share_sdc2_ext4/work/Qt/5.15.2/gcc_64
+# local santry native with crashpad beckend
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/sources/sentry-native/build-crashpad
+
+# set default cmake generator
+export CMAKE_GENERATOR=Ninja
+
+export QTWEBENGINE_DISABLE_SANDBOX=1
+
+# for "fetch" tool
+export PATH=$PATH:/mnt/main_disk/sources/depot_tools
+
+# golang
+export PATH=$PATH:/mnt/main_disk/go_1_22/bin
+export PATH=$PATH:/home/pavel/go/bin
+
+# python 2 for qt 5.15.2 webengine build
+export PATH=$PATH:/mnt/main_disk/sources/Python-2.7.18/build

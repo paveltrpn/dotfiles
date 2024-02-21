@@ -2,7 +2,10 @@
 -- === Basic options section === ---
 -- ============================= ---
 
-vim.o.guifont = "Hack:h10"
+-- font config for neovide gui client
+-- set to Hack because of Fira Code not working here...
+-- vim.o.guifont = "monospace:h10"
+vim.o.guifont = "Source Code Pro:h10"
 
 -- Enable mouse. set mouse = - for disable
 vim.opt.mouse = "a"
@@ -216,33 +219,33 @@ end)
 -- vim.cmd[[colorscheme tokyonight-night]]
 
 -- Plugin theme kanagawa
---require('kanagawa').setup({
---    compile = false,             -- enable compiling the colorscheme
---    undercurl = true,            -- enable undercurls
---    commentStyle = { italic = true },
---    functionStyle = {},
---    keywordStyle = { italic = false},
---    statementStyle = { bold = true },
---    typeStyle = {},
---    transparent = false,         -- do not set background color
---    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
---    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
---    colors = {                   -- add/modify theme and palette colors
---        palette = {},
---        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
---    },
---    overrides = function(colors) -- add/modify highlights
---        return {}
---    end,
---    theme = "wave",              -- Load "wave" theme when 'background' option is not set
---    background = {               -- map the value of 'background' option to a theme
---        dark = "wave",           -- try "dragon" !
---        light = "lotus"
---    },
---})
+require('kanagawa').setup({
+    compile = false,             -- enable compiling the colorscheme
+    undercurl = true,            -- enable undercurls
+    commentStyle = { italic = false },
+    functionStyle = {},
+    keywordStyle = { italic = false},
+    statementStyle = { bold = true },
+    typeStyle = {},
+    transparent = false,         -- do not set background color
+    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+    colors = {                   -- add/modify theme and palette colors
+        palette = {},
+        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+    },
+    overrides = function(colors) -- add/modify highlights
+        return {}
+    end,
+    --theme = "wave",              -- Load "wave" theme when 'background' option is not set
+    --background = {               -- map the value of 'background' option to a theme
+    --    dark = "wave",           -- try "dragon" !
+    --    light = "lotus"
+    --},
+})
 --require("kanagawa").load("dragon") -- night style
 --require("kanagawa").load("lotus") -- day style
--- require("kanagawa").load("wave")
+require("kanagawa").load("wave")
 
 -- Plugin theme 'sainnhe/sonokai'
 -- vim.opt.termguicolors = true
@@ -266,8 +269,8 @@ end)
 -- vim.cmd([[let g:everforest_background = 'medium']])
 -- vim.cmd([[colorscheme everforest]])
 
-vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme gruvbox]])
+-- vim.o.background = "dark" -- or "light" for light mode
+-- vim.cmd([[colorscheme gruvbox]])
 
 -- Plugin fuzzyfinder 'junegunn/fzf'
 -- if file already opened, show it's buffer
