@@ -5,7 +5,9 @@
 -- font config for neovide gui client
 -- set to Hack because of Fira Code not working here...
 -- vim.o.guifont = "monospace:h10"
-vim.o.guifont = "Source Code Pro:h10"
+-- vim.o.guifont = "Source Code Pro:h10"
+-- vim.o.guifont = "IBM Plex Mono:h10"
+vim.o.guifont = "Fira Code:h10"
 
 -- Enable mouse. set mouse = - for disable
 vim.opt.mouse = "a"
