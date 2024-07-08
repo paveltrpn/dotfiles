@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Encoding=UTF-8
+Exec=env 'PATH=$PATH:/usr/local/nvim/bin:/usr/local/bin:/usr/bin' /usr/local/bin/neovide
+GenericName[en_US]=
+GenericName=
+Icon=/home/pavel/neovide-128x128.png
+Keywords=neovide, ide;
+MimeType=
+Name[en_US]=neovide
+Name=neovide
+Path=
+StartupNotify=false
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

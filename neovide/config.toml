@@ -1,15 +1,13 @@
 wsl = false
 no-multigrid = false
 vsync = true
-maximized = truey
+maximized = true
 srgb = false
 idle = true
-neovim-bin = "/usr/bin/nvim" # in reality found dynamically on $PATH if unset
 frame = "full"
 title-hidden = true
 
 [font]
+normal = ["Fira Code"]
 size = 10
-normal = ["monospace"]
-italic = {family = "monospace", style = "Italic"}
-bold_italic = {family = "monospace", style = "Bold Italic"}
+weight = "medium"

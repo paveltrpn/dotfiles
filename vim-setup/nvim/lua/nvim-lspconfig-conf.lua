@@ -6,6 +6,7 @@ local lsp_flags = {
 
 util = require "lspconfig/util"
 
+-- golang
 require'lspconfig'.gopls.setup {
     on_attach = on_attach,
     flags = lsp_flags,
@@ -27,12 +28,14 @@ require'lspconfig'.gopls.setup {
 	    },
 }
 
+-- python
 require'lspconfig'.pyright.setup {
    on_attach = on_attach,
    flags = lsp_flags,
    -- filetypes = {'python'}
 }
 
+-- typescript
 require 'lspconfig'.tsserver.setup{
   on_attach = on_attach,
   flags = lsp_flags,
@@ -41,6 +44,21 @@ require 'lspconfig'.tsserver.setup{
       completeFunctionCalls = true
     }
   }
+}
+
+-- zig language server
+require 'lspconfig'.zls.setup = {
+  default_config = {
+    cmd = {"/mnt/main_disk/zig/zls"};
+    filetypes = {"zig"};
+    root_dir = util.root_pattern("build.zig", ".git");
+  };
+  docs = {
+    description = [[ ]];
+    default_config = {
+      root_dir = [[root_pattern("build.zig", ".git")]];
+    };
+  };
 }
 
 -- clangd downloaded from https://github.com/clangd/clangd/releases/tag/15.0.1

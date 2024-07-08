@@ -7,7 +7,7 @@
 -- vim.o.guifont = "monospace:h10"
 -- vim.o.guifont = "Source Code Pro:h10"
 -- vim.o.guifont = "IBM Plex Mono:h10"
-vim.o.guifont = "Fira Code:h10"
+vim.o.guifont = "Fira Code:h8"
 
 -- Enable mouse. set mouse = - for disable
 vim.opt.mouse = "a"
@@ -138,7 +138,7 @@ vim.cmd([[
  vim.g.netrw_winsize = 20
 
 -- Map to close quickfix window 
- map("n", "<leader>qq", ":cclose<CR>")
+map("n", "<leader>qq", ":cclose<CR>")
 
 -- Map to select quickfix window
 map("n", "<leader>qs", ":copen<CR>")
@@ -204,8 +204,8 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/nvim-cmp'
   
-  use 'hrsh7th/cmp-vsnip'
-  use 'hrsh7th/vim-vsnip'
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
 end)
 
 -- ============================= ---
@@ -221,39 +221,56 @@ end)
 -- vim.cmd[[colorscheme tokyonight-night]]
 
 -- Plugin theme kanagawa
-require('kanagawa').setup({
-    compile = false,             -- enable compiling the colorscheme
-    undercurl = true,            -- enable undercurls
-    commentStyle = { italic = false },
-    functionStyle = {},
-    keywordStyle = { italic = false},
-    statementStyle = { bold = true },
-    typeStyle = {},
-    transparent = false,         -- do not set background color
-    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
-    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
-    colors = {                   -- add/modify theme and palette colors
-        palette = {},
-        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-    },
-    overrides = function(colors) -- add/modify highlights
-        return {}
-    end,
-    --theme = "wave",              -- Load "wave" theme when 'background' option is not set
-    --background = {               -- map the value of 'background' option to a theme
-    --    dark = "wave",           -- try "dragon" !
-    --    light = "lotus"
-    --},
-})
+--require('kanagawa').setup({
+--    compile = false,             -- enable compiling the colorscheme
+--    undercurl = true,            -- enable undercurls
+--    commentStyle = { italic = false },
+--    functionStyle = {},
+--    keywordStyle = { italic = false},
+--    statementStyle = { bold = true },
+--    typeStyle = {},
+--    transparent = false,         -- do not set background color
+--    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+--    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+--    colors = {                   -- add/modify theme and palette colors
+--        palette = {},
+--        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+--    },
+--    overrides = function(colors) -- add/modify highlights
+--        return {}
+--    end,
+--    --theme = "wave",              -- Load "wave" theme when 'background' option is not set
+--    --background = {               -- map the value of 'background' option to a theme
+--    --    dark = "wave",           -- try "dragon" !
+--    --    light = "lotus"
+--    --},
+--})
 --require("kanagawa").load("dragon") -- night style
 --require("kanagawa").load("lotus") -- day style
-require("kanagawa").load("wave")
+--require("kanagawa").load("wave")
 
 -- Plugin theme 'sainnhe/sonokai'
--- vim.opt.termguicolors = true
--- vim.g.sonokai_style = 'default'
--- vim.g.sonokai_better_performance = 1
--- vim.cmd([[colorscheme sonokai]])
+--vim.cmd([[
+--set termguicolors
+--let g:sonokai_style = 'shusia'
+--let g:sonokai_better_performance = 1
+--let g:sonokai_colors_override = {'bg0': ['#1e1b1f', '235'], 'bg1': ['#232024', '236'], 'bg2': ['#2b282c', '236']}
+--colorscheme sonokai
+--]])
+
+-- Plugin theme 'sainnhe/everforest'
+vim.cmd([[
+set termguicolors
+set background=dark 
+let g:everforest_background = 'hard'
+let g:everforest_colors_override = {  'bg0': ['#1e1b1f', '235'], 
+                                    \ 'bg1': ['#232024', '236'],
+                                    \ 'bg2': ['#2b282c', '237'], 
+                                    \ 'yellow': ['#efcf91', '214'], 
+                                    \ 'green': ['#b1d975', '142'],
+                                    \ 'red' : ['#fa575a', '167']}
+colorscheme everforest
+]])
 
 -- Plugin theme 'Shatur/neovim-ayu'
 -- require('ayu').setup({
@@ -266,13 +283,8 @@ require("kanagawa").load("wave")
 -- vim.cmd([[ let ayucolor="dark"]])
 -- vim.cmd([[ colorscheme ayu]])
 
--- Plugin theme 'sainnhe/everforest'
--- vim.cmd([[set background=dark]]) -- for day theme
--- vim.cmd([[let g:everforest_background = 'medium']])
--- vim.cmd([[colorscheme everforest]])
-
--- vim.o.background = "dark" -- or "light" for light mode
--- vim.cmd([[colorscheme gruvbox]])
+--vim.o.background = "dark" -- or "light" for light mode
+--vim.cmd([[colorscheme gruvbox]])
 
 -- Plugin fuzzyfinder 'junegunn/fzf'
 -- if file already opened, show it's buffer
