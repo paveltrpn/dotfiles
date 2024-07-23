@@ -7,7 +7,7 @@
 -- vim.o.guifont = "monospace:h10"
 -- vim.o.guifont = "Source Code Pro:h10"
 -- vim.o.guifont = "IBM Plex Mono:h10"
-vim.o.guifont = "Fira Code:h8"
+vim.o.guifont = "Fira Code Medium:h9"
 
 -- Enable mouse. set mouse = - for disable
 vim.opt.mouse = "a"
@@ -263,7 +263,7 @@ vim.cmd([[
 set termguicolors
 set background=dark 
 let g:everforest_background = 'hard'
-let g:everforest_colors_override = {  'bg0': ['#1e1b1f', '235'], 
+let g:everforest_colors_override = {  'bg0': ['#0c0c0c', '235'], 
                                     \ 'bg1': ['#232024', '236'],
                                     \ 'bg2': ['#2b282c', '237'], 
                                     \ 'yellow': ['#efcf91', '214'], 
