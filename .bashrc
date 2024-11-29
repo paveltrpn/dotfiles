@@ -10,14 +10,14 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignorespace
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=999999
+HISTFILESIZE=524288
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -123,7 +123,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/x86_64-unknown-linux-gnu
 export QTDIR=/mnt/main_disk/work/Qt/5.15.2/gcc_64
 
 # local build of Qt6.7
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/code/extern_libs/qt6-install/lib
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/code/extern_libs/qt6-install/lib
 
 # local santry native with crashpad beckend
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/sources/sentry-native/build-crashpad
@@ -142,3 +142,15 @@ export PATH=$PATH:/home/pavel/go/bin
 
 # python 2 for qt 5.15.2 webengine build
 export PATH=$PATH:/mnt/main_disk/sources/Python-2.7.18/build
+
+# neovim
+export PATH=$PATH:/usr/local/nvim/bin
+
+# java kotlin scala gradle
+export PATH=$PATH:/mnt/main_disk/jdk/bin
+export PATH=$PATH:/mnt/main_disk/kotlinc/bin
+export PATH=$PATH:/mnt/main_disk/kotlin-native/bin
+export PATH=$PATH:/mnt/main_disk/gradle/bin
+export PATH=$PATH:/mnt/main_disk/scala/bin
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/work/editor/build/Ninja_RelWithDebInfo/IntegraPlanetEarth/lib
