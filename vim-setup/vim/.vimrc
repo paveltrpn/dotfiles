@@ -47,6 +47,7 @@ set softtabstop=0
 set shiftwidth=4           
 set expandtab
 
+" Always show cursor position.
 set ruler
 
 " Enable line highlighting when insert mode on
@@ -111,4 +112,16 @@ noremap <leader>tp :tabp<CR>
 noremap <leader>tc :tabc<CR>
 
 noremap <leader>ee :Lexplore<CR>
+
+" undo reopened files
+set undofile
+
+" Always display the status bar.
+set laststatus=2
+
+" Display command line's tab complete options as a menu.
+set wildmenu
+
+" Ignore case when searching.
+set ignorecase
 
