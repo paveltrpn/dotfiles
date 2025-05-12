@@ -60,14 +60,16 @@ vim.opt.undofile = true
 
 -- Always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appear/become resolved.
-vim.cmd([[
+vim.cmd(
+    [[
 if has("nvim-0.5.0") || has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
   set signcolumn=yes
 endif
-]])
+]]
+)
 
 --- NETRW file explorer settings (native vim file explorer)
 --- call by :Explore command
@@ -87,9 +89,9 @@ vim.opt.confirm = true
 ----vim.opt.listchars = {space = "¬"}
 
 -- Move newborn quickfix window to bottomest place.
--- This trigger takes advantage of the fact that the quickfix window 
--- can be easily distinguished by its file-type, qf. The wincmd J command 
--- is equivalent to the [Ctrl+W, Shift+J] shortcut sequence 
+-- This trigger takes advantage of the fact that the quickfix window
+-- can be easily distinguished by its file-type, qf. The wincmd J command
+-- is equivalent to the [Ctrl+W, Shift+J] shortcut sequence
 -- instructing Vim to move the current window to the very bottom of the screen
 vim.cmd([[
 :autocmd FileType qf wincmd J
@@ -101,7 +103,7 @@ vim.cmd([[
 
 -- Functional wrapper for mapping custom keybindings
 function map(mode, lhs, rhs, opts)
-    local options = { noremap = true }
+    local options = {noremap = true}
     if opts then
         options = vim.tbl_extend("force", options, opts)
     end
@@ -126,12 +128,14 @@ vim.cmd([[
 ]])
 
 -- tabs switch and close current
-vim.cmd([[
+vim.cmd(
+    [[
 :noremap <leader>to :tabnew<CR>
 :noremap <leader>tn :tabn<CR>
 :noremap <leader>tp :tabp<CR>
 :noremap <leader>tc :tabc<CR>
-]])
+]]
+)
 
 -- disable ctrl-z!!! in normal mode it immidiately
 -- close nvim
@@ -140,11 +144,11 @@ nnoremap <c-z> <nop>
 ]])
 
 -- Shortcuts to toggle vim explorer on far left pan
- map("n", "<leader>ee", ":Lexplore<CR>")
+map("n", "<leader>ee", ":Lexplore<CR>")
 -- Explorer pan size
- vim.g.netrw_winsize = 20
+vim.g.netrw_winsize = 20
 
--- Map to close quickfix window 
+-- Map to close quickfix window
 map("n", "<leader>qq", ":cclose<CR>")
 
 -- Map to select quickfix window
@@ -225,3 +229,4 @@ require("config.lazy")
 
 -- Plugin fuzzyfinder 'junegunn/fzf'
 -- if file already opened, show it's buffer
+
