@@ -116,11 +116,16 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# export TERM=bash
+
 # clang++18 libs
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/x86_64-unknown-linux-gnu
 
+# latest local qt build
+export LOCAL_LATEST_QT=/mnt/main/sources_build/qt6_9_rel
+
 # QT files for work
-export QTDIR=/mnt/main_disk/work/Qt/5.15.2/gcc_64
+export QTDIR=/mnt/main/work/Qt/5.15.2/gcc_64
 
 # local build of Qt6.7
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/code/extern_libs/qt6-install/lib
@@ -128,29 +133,71 @@ export QTDIR=/mnt/main_disk/work/Qt/5.15.2/gcc_64
 # local santry native with crashpad beckend
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/sources/sentry-native/build-crashpad
 
+#vulkan sdk
+export VULKAN_SDK=/mnt/main/vulkansdk_1.3.296.0/x86_64
+export VK_LAYER_PATH=$VULKAN_SDK/share/vulkan/explicit_layer.d
+export VK_SDK_PATH=$VULKAN_SDK
+export CPATH=$CPATH:$VULKAN_SDK/include
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$VULKAN_SDK/lib
+export PATH=$PATH:$VULKAN_SDK/bin
+
+# libuv
+export LIBUV_DIR=/mnt/main/sources_build/libuv
+
+# nlohmann json
+export NLOHMANN_JSON_DIR=/mnt/main/sources/json
+
 # set default cmake generator
 export CMAKE_GENERATOR=Ninja
 
 export QTWEBENGINE_DISABLE_SANDBOX=1
 
 # for "fetch" tool
-export PATH=$PATH:/mnt/main_disk/sources/depot_tools
+export PATH=$PATH:/mnt/main/sources/depot_tools
 
 # golang
-export PATH=$PATH:/mnt/main_disk/go_1_22/bin
+export PATH=$PATH:/mnt/main/go_latest/bin
 export PATH=$PATH:/home/pavel/go/bin
 
 # python 2 for qt 5.15.2 webengine build
-export PATH=$PATH:/mnt/main_disk/sources/Python-2.7.18/build
+export PATH=$PATH:/mnt/main/sources/Python-2.7.18/build
 
 # neovim
 export PATH=$PATH:/usr/local/nvim/bin
 
 # java kotlin scala gradle
-export PATH=$PATH:/mnt/main_disk/jdk/bin
-export PATH=$PATH:/mnt/main_disk/kotlinc/bin
-export PATH=$PATH:/mnt/main_disk/kotlin-native/bin
-export PATH=$PATH:/mnt/main_disk/gradle/bin
-export PATH=$PATH:/mnt/main_disk/scala/bin
+export PATH=$PATH:/mnt/main/jdk/bin
+export PATH=$PATH:/mnt/main/kotlinc/bin
+export PATH=$PATH:/mnt/main/kotlin-native/bin
+export PATH=$PATH:/mnt/main/gradle/bin
+export PATH=$PATH:/mnt/main/scala/bin
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/work/editor/build/Ninja_RelWithDebInfo/IntegraPlanetEarth/lib
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/work/editor/build/Ninja_RelWithDebInfo/IntegraPlanetEarth/lib
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export LOCAL_QT_DIR=/mnt/main/sources_build/qt6_8_rel
+export LOCAL_USERVER_DI=/mnt/main/sources_build/userver
+
+# android dev tools
+export ANDROID_SDK_ROOT=/mnt/main/android-sdk
+export ANDROID_HOME=/mnt/main/android-sdk
+export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.2.12479018
+
+export BULLET3_DIR=/mnt/main/sources_build/bullet3
+
+export JOLT_PHYSICS_DIR=/home/pavel/sources/JoltPhysics
+
+# libcurl path
+export LIBCURL_DIR=/mnt/main/sources_build/curl
+
+# gcc latest path
+export GCC_LATEST=/usr/local/gcc-15.1.0
+export PATH=/usr/local/gcc-15.1.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/gcc-15.1.0/lib64:$LD_LIBRARY_PATH
+# is it working? clangd still don't find proper inlude path until set new
+# compiler in .clang config file
+export CPLUS_INCLUDE_PATH=/usr/local/gcc-15.1.0/include:$CPLUS_INCLUDE_PATH
+export C_INCLUDE_PATH=/usr/local/gcc-15.1.0/include:$C_INCLUDE_PATH
