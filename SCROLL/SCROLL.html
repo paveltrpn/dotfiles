@@ -1,0 +1,1630 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SCROLL</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/prism.css" />
+  </head>
+  <body>
+    <!-- Подключение скрипта Prism -->
+    <script src="js/prism.js"></script>
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Загрузка дистрибутива Golang.</b>
+      </p>
+
+      <p>
+        Скачиваем дистрибутив, например отсюда —
+        <span>https://golang.org/dl/</span>, или так
+      </p>
+
+      <pre><code class="language-shell">$ wget -c https://storage.googleapis.com/golang/go1.17.5.linux-amd64.tar.gz</code></pre>
+
+      <p>
+        Распаковываем в <span>/home/{USER}/go</span>, потом переименуем в
+        <span>/home/{USER}/go-{VERSION}:</span>
+      </p>
+
+      <pre><code class="language-shell">$ tar -xzf go$VERSION.$OS-$ARCH.tar.gz
+$ mv /home/{USER}/go /home/{USER}/go-{VERSION}</code></pre>
+
+      <p>
+        Теперь добавляем <span>/home/{USER}/go-{VERSION}/bin</span> в переменную
+        среды <span>PATH</span>, вставив строку приведенную ниже в файл
+        /etc/profile для общесистемной установки или
+        <span>$HOME/.profile</span> и
+        <span>$HOME/.bashrc (или $HOME./bash_profile)</span>
+        для пользовательской установки, используя ваш любимый редактор, откройте
+        соответствующий файл профиля пользователя в соответствии с вашим
+        дистрибутивом и добавьте строку приведенную ниже, сохраните файл и
+        выйдите из него:
+      </p>
+
+      <pre><code class="language-shell">export PATH=$PATH:/home/{USER}/go-{VERSION}/bin
+export PATH=$PATH:/home/go/bin</code></pre>
+
+      <p>
+        Чтобы go запускался сразу, без перезапуска терминала, можно внести
+        изменения в профиль пользователя в текущем сеансе bash следующим
+        образом:
+      </p>
+
+      <pre><code class="language-shell">$ source ~/.bash_profile
+или
+$ source ~/.profile
+или
+$ source ~/.bashrc</code></pre>
+
+      <p>
+        <b>VSCode под Linux</b> может выдавать ошибку о том, что не нашел
+        бинарники golang -
+        <span>failed to find the go binary in either goroot() or path</span>,
+        чтобы исправить можно захарткодить GOROOT в settings.json
+      </p>
+
+      <pre>
+<code class="language-json">...
+    "go.goroot": "/home/paveltrpn/go-1.17.5",
+...</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Настройка среды GoLang в Linux</b> (для версий golang до 1.13, т.е.
+        без поддержки модулей).
+      </p>
+
+      <p>
+        Сначала настройте рабочее пространство Go, создав каталог ~/go_projects,
+        который является корнем вашего рабочего пространства. Рабочее
+        пространство состоит из трех каталогов, а именно:
+      </p>
+
+      <p>
+        <i>
+          &emsp;&emsp; bin, который будет содержать исполняемые двоичные файлы
+          Go;<br />
+          &emsp;&emsp; src, который сохранит ваши исходные файлы;<br />
+          &emsp;&emsp; pkg, который будет хранить объекты пакета.<br />
+        </i>
+      </p>
+
+      <p>Теперь создайте указанное выше дерево каталогов следующим образом:</p>
+
+      <pre>
+<code class="language-shell">$ mkdir -p ~/go_projects/{bin,src,pkg}
+$ cd ~/go_projects
+$ ls</code></pre>
+
+      <p>
+        Затем установите значения переменных среды GOPATH и GOBIN в файле
+        профиля пользователя (~/.profile или ~/bash_profile), чтобы указать на
+        ваш каталог рабочей области.
+      </p>
+
+      <pre>
+<code class="language-shell">export GOPATH="$HOME/go_projects"
+export GOBIN="$GOPATH/bin"</code></pre>
+
+      <p>
+        <b>Примечание.</b> Если вы установили GoLang в пользовательский каталог,
+        отличный от значения по умолчанию (/usr/local/), вы должны указать этот
+        каталог как значение переменной GOROOT. Например, если вы установили
+        GoLang в домашний каталог, добавьте строки приведенные ниже в файл
+        <span>$HOME/.profile или $HOME/.bash_profile.</span>
+      </p>
+
+      <pre>
+<code class="language-shell">export GOROOT=$HOME/go
+export PATH=$PATH:$GOROOT/bin</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Выключаем go-lint в vs code.</b>
+      </p>
+
+      <p>
+        После установки расширений golang в vs code среди прочего начинает
+        работать go-lint, ругаясь на все стиливые недочёты кода. Исправляется
+        редактирование settings.json. Выключаем так:
+      </p>
+
+      <p>
+        <i>
+          &emsp;&emsp;File &rArr; Preferences &rArr; Settings;<br />
+          &emsp;&emsp;Выбираем где угодно - Edit in settings.json;<br />
+          &emsp;&emsp;Добавляем - "go.lintFlags": ["--disable=all"]<br />
+        </i>
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Ручная установка инструментов golang.</b>
+      </p>
+
+      <p>
+        Если через vscode не удаётся установить весь набор инструментов для
+        golang (такое случается в Ubuntu, трейс выдаёт permission denied), их
+        там штук десять, можно сделать это через терминал:
+      </p>
+
+      <pre>
+<code class="language-shell">go install -v github.com/ramya-rao-a/go-outline@latest
+go install -v github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest
+go install -v github.com/cweill/gotests/gotests@latest
+go install -v github.com/fatih/gomodifytags@latest
+go install -v github.com/josharian/impl@latest
+go install -v github.com/haya14busa/goplay/cmd/goplay@latest
+go install -v github.com/go-delve/delve/cmd/dlv@latest
+go get -x -d github.com/go-delve/delve/cmd/dlv@master
+go install -v honnef.co/go/tools/cmd/staticcheck@latest
+go install golang.org/x/tools/cmd/goimports@latest
+go install -v golang.org/x/tools/gopls@latest
+go install github.com/mgechev/revive@latest</code></pre>
+      <p>
+        После этого нужно собрать аддон для дебагера golang - glv-dap, как это
+        делает автоматом vs code, но из консоли не получилось, трейс выдал
+        отсутствие каких-то зависимостей.
+      </p>
+
+      <pre>
+<code class="language-javascript">sudo go build -o /usr/paveltrpn/go/bin/dlv-dap github.com/go-delve/delve/cmd/dlv</code></pre>
+
+      <p>Потом прописываем путь к ним в settings.json:</p>
+
+      <pre>
+<code class="language-javascript">"go.toolsEnvVars": {
+    "GOBIN": "/usr/paveltrpn/go/bin",
+}</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Выключаем golang language server (gopls)</b>, помогает при
+        "бесконечном" сохранении файла в vs code. В settings.json нужно
+        добавить:
+      </p>
+
+      <pre>
+<code class="language-json">"go.useLanguageServer": false</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Отключаем старые модули golang</b>, чтобы локальный импорт работал:
+      </p>
+
+      <pre>
+<code class="language-bash">go env -w GO111MODULE=off
+set GOPATH=~\code</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Зависимости для сборки golang glfw</b>:</p>
+
+      <pre>
+<code class="language-bash">sudo apt-get install libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev
+sudo apt-get install libglx-dev libgl-dev libxxf86vm-dev pkg-config</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <div>
+      <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+
+      <p>
+        <b>Настройка нового проекта.</b> В среде Ubuntu 21.10, Golang 1.17.5,
+        VSCode.
+      </p>
+
+      <p>
+        Дерево каталога организуем согласно
+        https://github.com/golang-standards/project-layout - ./prj-name/cmd;
+        ./prj-name/internal; ./prj-name/pkg и т.д. В ./prj-name запускаем:
+      </p>
+
+      <pre>
+<code class="language-bash">go mod init prj-name</code></pre>
+
+      <p>
+        Если в родительской директории есть ещё код, то gopls выпадет с ошибкой
+        некорректной настройки workspace. Для исправления ситуации нужно
+        настроить gopls для работы с т.н. "Multiple modules". Пока что фича
+        эксперементальная, немного описано тут -
+        https://go.googlesource.com/tools/+/refs/heads/master/gopls/doc/workspace.md.
+        Для начала работы дописываем в settings.json:
+      </p>
+
+      <pre>
+<code class="language-bash">"gopls": {
+    "build.experimentalWorkspaceModule": true
+}</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Python setup</b>.</p>
+
+      <p>
+        <b>Установка python 3.9</b> в Linux Mint 20.0 (после установки
+        запускаться будет как :~$python3.9).
+      </p>
+
+      <pre><code class="language-bash">sudo apt-get update
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install python3.9
+sudo apt install python3.9-dev
+sudo apt install python3.9-distutils</code></pre>
+
+      <p>
+        По умолчанию в Linux Mint 20.2 не установлен pip, поэтому нужно сделать:
+      </p>
+
+      <pre><code class="language-bash">sudo apt install python3-pip</code></pre>
+
+      <p>
+        Зависимости для конкретной версии python через pip устанавливаются так:
+      </p>
+
+      <pre><code class="language-bash">python3.9 -m pip install numpy</code></pre>
+
+      <p class="plain"><b>Установка python 3.10</b> в Linux Manjaro 21.2.0.</p>
+
+      <pre><code class="language-bash">git clone https://aur.archlinux.org/python310.git
+cd python310
+makepkg -si</code></pre>
+
+      <p>
+        Pip-а по умолчанию тоже нету, поэтому закачиваем
+        <span>https://pip.pypa.io/en/stable/installation/#get-pip-py</span>
+        и потом:
+      </p>
+
+      <pre><code class="language-bash">python3.10 get-pip.py</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============= -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Исправляем работу (или неработу) PyImgui в Linux Mint 20.2.</b>
+        <br /><br />
+        Имеется стек - VirtualBox 6.1 -&gt; Linux Mint 20.2 -&gt; Python 3.9 +
+        PyOpenGL + GLFW, на котором с аппартным ускорением работает OpenGL не
+        выше 2.1. При этом хочется использовать PyImgui (pip-ом устанавливается
+        в версии 1.65) но завести всё это не получается т.к. PyOpenGL выпадает с
+        ошибками GL_INVALID_OPERATION при вызовах glUniform*, glAttribLocation*
+        и т.д. видимо из-за попытки PyImgui использовать программируемый
+        пайплайн рендера OpenGL 3.3+.
+        <br /><br />
+        В файле ~/.local/lib/python3.9/site-packages/imgui/integrations/glfw.py
+        имеется следующее:
+      </p>
+
+      <pre>
+    <code class="language-python">...
+from .opengl import ProgrammablePipelineRenderer
+
+class GlfwRenderer(ProgrammablePipelineRenderer):
+    def __init__(self, window, attach_callbacks=True):
+...</code></pre>
+
+      <p>
+        Хотя класс GlfwRenderer унаследован от ProgrammablePipelineRenderer, в
+        файле ~/.local/lib/python3.9/site-packages/imgui/integrations/opengl.py
+        так же определён класс FixedPipelineRenderer и если внести небольшие
+        изменения, то всё заведётся на старом профайле OpenGL 2.1:
+      </p>
+
+      <pre>
+    <code class="language-python">...
+from .opengl import ProgrammablePipelineRenderer
+from .opengl import FixedPipelineRenderer
+
+class GlfwRenderer(FixedPipelineRenderer):
+def __init__(self, window, attach_callbacks=True):
+...</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============= --!>
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Модуль для автокомплита из bpy для Blender.</b>
+      </p>
+
+      <pre><code class="language-bash">python3.9 -m pip install fake-bpy-module-2.93</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <div>
+      <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+
+      <p>
+        <b>Зависимости для OpenGL проектов Python.</b>
+      </p>
+
+      <pre><code class="language-bash">python3.10 -m pip install numpy
+python3.10 -m pip install PyOpenGL
+python3.10 -m pip install PyOpenGL-accelerate
+python3.10 -m pip install imgui
+python3.10 -m pip install glfw</code></pre>
+
+      <p>
+        В Ubuntu 21.10 с Wayland обнаружился баг (видимо), который не даёт
+        поднять glfw контекст.
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <div>
+      <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+
+      <p>
+        <b>Инициализация venv и работа с requirements.txt.</b>
+      </p>
+
+      <pre><code class="language-bash"># Установим, собственно venv
+sudo apt install python3.10-venv
+# Инициализация виртуального окружения в папке ./venv
+python3 -m venv ./venv
+# Активируем окружение
+source venv/bin/activate
+# Деактиворуем окружение
+deactivate
+# Установка пакетов согласно requirements.txt
+pip install -r requirements.txt
+# Создание requirements.txt
+pip freeze &gt; requirements.txt</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Установка ядра 5.8 под Linux Mint 20</b>
+      </p>
+
+      <p>
+        Ядро по умолчанию в Mint 20 - 5.4. Ядро 5.8 понадобилось, чтобы в VMWare
+        Player 16 заработал OpenGL 4.1. Установка ядра 5.8 без сборки из *.deb
+        пакетов очень проста. Скачиваем:
+      </p>
+
+      <p style="text-align: left">
+        &emsp;&emsp;
+        <span
+          >-
+          https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.8/amd64/linux-headers-5.8.0-050800-generic_5.8.0-050800.202008022230_amd64.deb<br />
+          &emsp;&emsp; -
+          https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.8/amd64/linux-image-unsigned-5.8.0-050800-generic_5.8.0-050800.202008022230_amd64.deb<br />
+          &emsp;&emsp; -
+          https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.8/amd64/linux-modules-5.8.0-050800-generic_5.8.0-050800.202008022230_amd64.deb</span
+        >
+      </p>
+
+      <p>
+        Нужно убедиться что в папке нет других *.deb пакетов. Далее просто
+        запускаем:
+      </p>
+
+      <pre><code class="language-bash">sudo dpkg -i *.deb</code></pre>
+
+      <p>После перезагрузки ваполним:</p>
+
+      <pre><code class="language-bash">uname -a</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <div>
+      <p>
+        <b>Cборка Mesa3d 20.2</b>
+      </p>
+
+      <p>
+        Скачиваем и паспаковываем дистрибутив с сайта Mesa 3d
+        <span>https://docs.mesa3d.org/download.html</span>
+      </p>
+
+      <p>
+        Вообще, сборка описана там же на сайте. Собираем по инструкции
+        <span>https://docs.mesa3d.org/install.html</span>. Если в кратце, то:
+      </p>
+
+      <pre><code class="language-bash">meson builddir/
+ninja -C builddir/
+sudo ninja -C builddir/ install</code></pre>
+
+      <p>
+        Там будет много зависимостей от X11, устанавливаем все, конфигурирум и
+        собираем через Meson и Ninja. После сборки Ninja закинет собраные
+        бинарники в - <span>/usr/local/lib/x86_64-linux-gnu</span>, перемещаем
+        всё это добро в <span>/usr/lib/x86_64-linux-gnu</span>.
+      </p>
+    </div>
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+
+    <div>
+      <p>
+        <b>Command line tips</b>
+      </p>
+
+      <pre><code class="language-bash"># pockets, that must be installed on clear system (deb)
+sudo apt-get install git mc exa tree g++ cmake pkg-config translate-shell batcat
+
+# common development libraries and sdk's
+sudo apt-get install libmesa-dev
+
+# .bashrc file tweak for support frequently used commands
+alias ll='exa -l'
+alias la='ls -A'
+alias l='ls -CF'
+alias tt='tree'
+# translate-shell aliases for russian to english and opposite translations
+alias tru='trans :ru'
+alias ten='trans :en'
+alias bat='batcat'
+
+# locate the binary, source, and manual page files for a command
+whereis {command}
+    
+# locate a command
+which {command}
+
+# fency ls alternative
+# sudo apt-get install exa
+exa
+
+# Логи после выключения
+journalctl -b-1 | grep systemd
+
+# Информация о последних выключениях
+last reboot | head
+
+# NVIDIA system managment interface
+nvidia-smi
+
+# keyboard shortcut power off
+# keybouard -&gt; shortcuts -&gt; custom shortcuts
+cinnamon-session-quit --power-off
+
+# Search text in file in all subderictories
+rg . --line-number | fzf --print0 -e --print0 - no new line
+rg . -n | fzf -e
+# or make aliases as shown beyond
+
+# How to make local copy of remote branch
+git checkout -b 12331 --no-track origin/12331
+
+# Run clang-format
+#   --verbose:  verbose output
+#   --dry-run:  do not modify any files
+#   --Werror:   reaport errors
+#   -i:         format and write files
+# Recursive format all nested directories
+find . | grep "\..*\.cpp$\|\..*\.h$" | xargs clang-format --verbose --dry-run --Werror 
+
+# Or some directory and all nested directories
+find . | grep "\./src.*\.cpp$\|\./src.*\.h$" | xargs clang-format --verbose --dry-run --Werror
+
+# Convert *.mdf to *.iso file:
+iat --iso -i Morrowind.mdf -o Morrowind.iso
+sudo mount -o loop Morrowind.iso foo
+
+# Search packets in deb apt (only by names!)
+apt search --names-only '^gcc-?[0-9]*$'
+
+# Show files operated by some process
+strace -e trace=open,openat,close,read,write,connect,accept ./IntegraPlanetEarth 2&gt; log.txt
+
+# How to install latest cmake from binary - download latest targz and sh install script and do this:
+sudo ./cmake-3.28.1-linux-x86_64.sh --prefix=/usr/local/ --exclude-subdir
+
+# fency cat alternative
+# sudo apt-get install bat
+batcat</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Работа с пакетами в Ubuntu</b>
+      </p>
+
+      <pre><code class="language-bash"># Вывести список установленных пакетов (и отфильтровать по имени)
+sudo apt list --installed | grep {package-name}
+# или
+dpkg-query -l {package-name}
+
+# Вывести список пакетов к которым доступны обновления (И посчитать сколько их)
+apt list --upgradable | wc -l
+
+# добавить репозиторий
+sudo add-apt-repository ppa:{repo-name}/ppa
+
+# удалить репозиторий
+sudo add-apt-repository --remove ppa:{repo-name}/ppa
+
+# и потом не забыть сделать
+sudo apt update
+
+# установить из *.deb пакета (на примере vs code)
+apt-get install -f ./code_1.39.2-1571154070_amd64.deb
+
+# Обновить один конкртный пакет
+sudo apt-get install --only-upgrade {package-name}</code></pre>
+
+      <p><b>Принудительно включаем X.Org</b> вместо Wayland в Ubuntu</p>
+
+      <pre><code class="language-bash">sudo xed /etc/gdm3/custom.conf
+# и там раскомментируем строку
+# WaylandEnable=false</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Собираем xed под Ubuntu 21.10</b>, полезная замена gedit, почему то
+        не включённая в дистрибутив по умолчанию
+      </p>
+
+      <p>Скачиваем:</p>
+
+      <pre><code class="language-bash">git clone https://github.com/linuxmint/xed</code></pre>
+
+      <p>Устанавливаем зависимости:</p>
+
+      <pre><code class="language-bash">sudo apt-get install meson
+sudo apt-get install libxml2*dev
+sudo apt-get install libglib2*dev
+sudo apt-get install build-essential libgtk-3-dev
+sudo apt-get install gir1.2-gtksource
+sudo apt-get install libgtksourceview-4-dev
+sudo apt-get install libpeas*dev
+sudo apt-get install libxapp*dev
+sudo apt-get install libgspell-1*dev
+sudo apt-get install intltool
+sudo apt-get install itstool</code></pre>
+
+      <p>Компилируем, собираем и устанавливаем:</p>
+
+      <pre><code class="language-bash">ninja -v -C build
+sudo ninja install -v -C build
+// Это нужно чтобы избежать рантайм ошибки
+sudo /usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Сборка и установка gcc из исходников под Ubuntu</b>
+      </p>
+
+      <p>
+        По умолчанию Ubuntu 20.04 имеет GCC версии 9.3, которя не плоха, однако
+        версия 10 имеет законченную поддержку стандартов C++11, C++14, C++17 и
+        частичную поддержку стандарта C++20. GCC 10 поддерживает C11 и C++14 по
+        умолчанию, больше нет необходимости использовать ключи -std=c11 или
+        -std=c++14.
+      </p>
+
+      <pre><code class="language-shell">$ sudo apt update
+$ sudo apt upgrade</code></pre>
+
+      <p>
+        Теперь, установим тулчейн GCC и несколко дополнительных утилит вместе с
+        ним:
+      </p>
+
+      <pre><code class="language-shell">$ sudo apt install build-essential wget m4 flex bison</code></pre>
+
+      <p>
+        Далее, загрузим исходный код GCC и пререквизиты (prerequisites) с
+        сайта <span>http://gcc.gnu.org/mirrors.html</span>:
+      </p>
+
+      <pre><code class="language-shell">$ cd ~
+$ wget https://ftpmirror.gnu.org/gcc/gcc-XX.Y.Z/gcc-XX.Y.Z.tar.xz
+$ tar xf gcc-XX.Y.Z.tar.xz
+$ cd gcc-XX.Y.Z
+# execute at top level of gcc directory
+$ ./contrib/download_prerequisites
+# some dependencies
+$ sudo apt-get install flex bison</code></pre>
+
+      <p>
+        Теперь мы можем сконфигурировать и собрать исходный код. Чтобы сохранить
+        систему чистой, будем использовать папку
+        <span>/usr/local/gcc-XX.Y.Z</span> для установки и добавим суффикс -XX.Y {-13.2}
+        к компиляторам GCC из данного пакета. Обычно, мы не хотим смешивать
+        установленный по умолчанию GCC с новой версией, потому что другие пакеты
+        могут зависеть от него.
+      </p>
+
+      <pre><code class="language-shell">$ cd ~
+$ mkdir build &amp;&amp; cd build
+$ ../configure {-v} --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+ --prefix=/where/to/install{/usr/local/gcc-xx.yy.zz} --enable-checking=release --enable-languages=c,c++,fortran
+ --disable-multilib {--disable-libsanitize} --program-suffix=-xx.y {-13.2}
+$ make -j 256
+$ sudo make install-strip</code></pre>
+
+      <p>
+        Чтобы установить компилятор перманентно добавляем эти строки в конец
+        .bashrc.
+      </p>
+
+      <pre><code class="language-shell">export PATH=/usr/local/gcc-10.1.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/gcc-10.1.0/lib64:$LD_LIBRARY_PATH
+# is it working? clangd still don't find proper inlude path until set new
+# compiler in .clang config file
+export CPLUS_INCLUDE_PATH=/usr/local/gcc-13.1.0/include:$CPLUS_INCLUDE_PATH
+export C_INCLUDE_PATH=/usr/local/gcc-13.1.0/include:$C_INCLUDE_PATH</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Настройка Manjaro (на примере 21.2.0)</b></p>
+
+      <p>По умолчанию vmware linux tools установлены, можно проверить:</p>
+
+      <pre><code class="language-shell">sudo pacman -Q | grep open-vm-tools</code></pre>
+
+      <p>
+        <b>Устанавливаем</b> основные зависимости (пакетный менеджер тут
+        pacman):
+      </p>
+
+      <pre><code class="language-shell">$ sudo pacman -Syu git # если ещё не установлен
+$ sudo pacman -Syu xed mc conky cmake
+$ sudo pacman -Syu binutils make gcc pkg-config fakeroot</code></pre>
+
+      <p>памятка по pacman:</p>
+
+      <pre><code class="language-shell"># Синхронизовать локальную базу данных репозиториев и обновить все пакеты
+$ sudo pacman -Syu {name}
+
+# Установить новый пакет или обновить старый, 
+# в manjaro "установка" равно "синхронизация"
+$ sudo pacman -S {name}
+
+# Удалить пакет не трогая зависимости
+$ sudo pacman -R {name}
+
+# Удалить пакет и его зависимости
+$ sudo pacman -Rs {name}
+
+# Поиск пакета в базе данных по регулярному выражению или ключевому слову
+$ sudo pacman -Ss {search_pattern}
+
+# Вывести список установленных пакетов и их версии
+$ sudo pacman -Q 
+
+# Вывести список явно установленных пакетов и их версии
+$ sudo pacman -Qe 
+
+# Определить, какому из пакетов принадлежит данный файл
+$ sudo pacman -Qo
+
+# Вывести список пакетов с доступными обновлениями
+$ sudo pacman -Qu
+
+# Очистить кеш пакетов для высвобождения дискового пространства
+$ sudo pacman -Scc 
+
+# Обновить кэш pacman. Проверит есть ли доступные обновления
+$ sudo pacman -Syy</code></pre>
+
+      <p>
+        Для <b>устанавки</b> VSCode или любого другого пакета, который
+        собирается из репозитория AUR (исходников) нужно что бы в системы были
+        установлены зависимости для сборки -
+        <span>binutils, make, gcc, pkg-config, fakeroot</span>, далее пакет
+        выкачевается и собирается (на примере VSCode):
+      </p>
+
+      <pre><code class="language-shell">$ git clone https://aur.archlinux.org/visual-studio-code-bin.git
+$ cd visual-studio-code-bin/
+# Далее собираем, но по умолчанию makepkg использует
+# один поток, можно подправить конфиг для исправления
+$ xed /etc/makepkg.conf 
+# Строка MAKEFLAGS="-j8"
+$ makepkg -si
+# Тут -s - Install missing dependencies using pacman
+# -i - Install or upgrade the package after a successful build using pacman</code></pre>
+
+      <p><b>Добавляем автозапуск</b> через gnome-tweaks:</p>
+
+      <pre><code class="language-shell">$ gnome-tweaks</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Как изменить shell?</b>
+      </p>
+
+      <pre><code class="language-bash">$ echo $SHELL # используемая оболочка
+$ cat /etc/shells # доступные оболочки   
+$ chsh -s {path} # например /bin/bash </code></pre>
+
+      <p>
+        <span>PS1</span> - переменная в bashrc, которая отвечает за формат
+        строки преглашения в шеле.
+        <br />
+        <span>\u и \h</span> - имя пользователя и хоста соответственно. Их можно
+        сократить заменив на такие конструкции -
+        <span>${USER:a:b}@${HOSTNAME:c:d}</span>, где a, b, c, d - стартовый
+        сомвол и количество символов в оставшейся строке. <span>-w</span> -
+        полный путь в приглашении (именно строчная w).
+      </p>
+
+      <pre><code class="language-bash"># алиас на ls для вывода всех файлов в список в алфавитном порядке
+alias ls='ls --color=auto -l -A -X'</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <div>
+      <p>
+        <b>Convert input.mp4 to output gif </b>with scale to 320p, and trim from
+        0s to 10s
+      </p>
+
+      <pre><code class="language-bash">ffmpeg -t 00.00.10.000 -i input.mp4 -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 output.gif</code></pre>
+    </div>
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Change system languge in ubuntu 22.04</b>, useful for preserve
+        difficulties with iteraction with command line apps (like vim etc.)
+        <span>/etc/default/locale</span> - change to en_U
+      </p>
+    </div>
+
+    <div>
+      <p><b>Download files from Youtube</b> using yt-dlp - yt fork.</p>
+
+      <pre><code class="language-bash"># Download yt-dlp from github
+# в mp4 и качестве не выше 720p 
+# и автоматическими субтитрами
+yt-dlp -f "bestvideo[ext=mp4][height<=720]+bestaudio[ext=m4a]/best[ext=mp4]/best" --write-auto-sub --embed-subs {URL}
+
+# mp3 audio part download
+yt-dlp -x --audio-format mp3 --audio-quality 0 {URL}
+
+# download through tor proxy, tor broweser must be launched
+./yt-dlp_linux -f "bestvideo[ext=mp4][height<=720]+bestaudio[ext=m4a]/best[ext=mp4]/best" {URL} \
+--proxy "socks5://127.0.0.1:9150/"</code></pre>
+
+      <p>Download 720p format with single file/stream.</p>
+<pre><code class="language-bash">yt-dlp -f 95 'https://youtu.be/eUyr9MJnj4w' \
+--extractor-arg "youtube:player_client=mediaconnect"</code></pre>
+
+      <p>Play 720p format with single file/stream.</p>
+<pre><code class="language-bash">mpv --ytdl-format=95 'https://youtu.be/eUyr9MJnj4w' \
+--ytdl-raw-options=extractor-arg="youtube:player_client=mediaconnect"</code></pre>
+
+    </div>
+
+    <div>
+      <p>
+        <b
+          >Remove Linux Mint grub settings (splashscreen, boot options order
+          etc.)</b
+        >
+        For boot menu default option numeration see
+        <span>/boot/grub/grub.cfg</span>, see "menuentry".
+      </p>
+
+      <pre><code class="language-bash">sudo nvim /etc/default/grub
+# for disable splashscreen  
+# set GRUB_CMDLINE_DEFAULT=""
+
+# set default boot option
+# GRUB_DEFAULT={x} where x - number
+# start from zero
+
+sudo update_grub
+# also here you can set grub timeuot</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Build llvm-clang с lldb</b>:</p>
+      <p>
+        llvm скачивам отсуда
+        <span>git clone https://github.com/llvm/llvm-project.git</span>. Всё что
+        нужно есть - линтер, lsp сервер, format и т.д.<br />There is a two
+        moments that need to consider:<br />
+        1) Building qt6 with qdoc required llvm toolchain and this toolchain
+        must be built with RTTI support, but RTTI disable by default in
+        llvm-clang config - <span>-DLLVM_ENABLE_RTTI=1</span><br />
+        2) Using lldb with qt creator need that lldb having a python support
+        (vscode not requires python support), therefore we must pass additional
+        parameter to cmake - <span>-DLLDB_ENABLE_PYTHON=ON</span>.<br />
+        In summary:
+      </p>
+      <pre><code class="language-bash"># dependency for lldb python support
+sudo apt install swig build-essential swig python3-dev libedit-dev libncurses5-dev libxml2-dev
+
+mkdir build &amp;&amp; cd build
+
+cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb;lld" \
+-DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind;compiler-rt" \
+-DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=1 -DLLVM_ENABLE_EH=1 \
+-DLLDB_ENABLE_PYTHON=ON -DCMAKE_INSTALL_PREFIX=/usr/local ../llvm
+
+cmake --build . --parallel {N}
+cmake --install .</code></pre>
+      <p>
+        Чтобы не делать глобальный make install (хотя это можно и не делать,
+        установка в /usr/local тоже нормально)
+      </p>
+
+      <pre><code class="language-bash">clangbuild=~/apps/llvm-project-llvmorg-13.0.1/build
+export PATH=$clangbuild/bin:$PATH
+export LD_LIBRARY_PATH=$clangbuild/lib:$LD_LIBRARY_PATH</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Infolada dns servers</b><br />
+        <span>217.113.115.150; 217.113.114.100</span>
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Install nvidia drivers on debian 12.1.</b> pkgconfig must be
+        installed switch to terminal ctrl-alt-F1 (F2 and so on)
+      </p>
+
+      <pre><code class="language-bash">sudo service lightdm stop
+# nvidia run file must have to execution permissions
+sudo chmod 777 NVIDIA-....run</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p></p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Some git aliases</b></p>
+      <pre><code class="language-bash">git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.br branch
+git config --global alias.hist "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
+git config --global alias.type 'cat-file -t'
+git config --global alias.dump 'cat-file -p'
+git log -p -2 --oneline --max-count=2 --pretty=oneline</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Git tips</b></p>
+      <pre><code class="language-bash"># Erase last commit locally and at remote brunch
+git reset --hard HEAD~1
+git push -f origin {branch}
+
+# посмотреть коммиты, затрагивающие строчки с 1409 по 1412
+git blame -L 1409,+3 {file}
+
+# довольно подробная инфа о коммитах, включая
+# commit message и автора о коммитах, внёсших изменения в строчки.
+git log --pretty=short -u -L 1410,1410:{file}</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>In c++ 'this'</b> - is a expression, 'new' - is a expression. Every
+        expression has a value and this value can be ignored, so that
+        constructions is valid
+      </p>
+      <pre><code class="language-cpp">....
+    this;   // evaluate expression which result is implicit object parameter 
+            // pointer and ignore returned value
+    new FooBar; // evaluate expression - allocate memory and call FooBar ctor
+                // and ignore return value - pointer to allocated memory
+....</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Neovim build, install and first start</b></p>
+      <pre><code class="language-bash"># dependencies
+sudo apt install ninja-build gettext libtool libtool-bin autoconf \
+automake pkg-config unzip lua-luv lua-luv-dev lua-lpeg-dev lua-mpack
+
+# get sources
+git clone https://github.com/neovim/neovim
+
+# latest build tip
+#
+# maybe do not install dependencies manually!
+#
+# in ../../neovim directory
+make CMAKE_BUILD_TYPE=Release -j 14 
+sudo make CMAKE_INSTALL_PREFIX=/usr/local install
+# patch ~/.bashrc with
+export PATH=$PATH:/usr/local/nvim/bin
+
+# packer install
+$ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+# install fzf and lazygit manually, these 
+# binaries avaible on github</code></pre>
+
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Для загрузки старого clang-format-11</b> в Debian 12.1. По умолчанию
+        в нём 14-й. Рабочее решение - подключить репозитории от 11-го Debian
+        bullseye.
+        <span>sudo nvim /etc/apt/sources.list</span>
+        туда добавляем
+        <span
+          >deb http://deb.debian.org/debian bullseye non-free-firmware main
+          non-free <br />
+          deb-src http://deb.debian.org/debian bullseye non-free-firmware main
+          non-free</span
+        >
+      </p>
+      <pre><code class="language-bash">sudo apt update
+# и можно устанавливать
+sudo apt install clang-format-11</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Библиотека </b> для векторизации на с++ - EVE
+        <span>https://github.com/jfalcou/eve</span>
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Debian 12.1 Firefox stable (non ESR) install </b>download from
+        official site tarball archive, delete previous install
+      </p>
+      <pre><code class="language-bash">sudo rm -r /opt/firefox
+sudo tar -jxf ~/Downloads/firefox-*.tar.bz2 -C /opt/
+mkdir -p ~/.local/share/applications
+nvim ~/.local/share/applications/firefox.desktop</code></pre>
+      <p>
+        Then copy and paste the lines below into file (the terminal window):
+      </p>
+      <pre><code class="language-bash">[Desktop Entry]
+Name=Firefox Stable
+Comment=Web Browser
+Exec=/opt/firefox/firefox %u
+Terminal=false
+Type=Application
+Icon=/opt/firefox/browser/chrome/icons/default/default128.png
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+Actions=Private;
+[Desktop Action Private]
+Exec=/opt/firefox/firefox --private-window %u
+Name=Open in private mode</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Install Google Chrome in Debian 12.1 </b></p>
+      <pre><code class="language-bash">sudo apt install apt-transport-https curl -y
+curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/google-chrome.gpg >> /dev/null
+echo deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt update
+sudo apt install google-chrome-stable</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>QT debug flags for QtWebWidget </b></p>
+      <pre><code class="language-bash">export QTWEBENGINE_DISABLE_SANDBOX=1
+export QTWEBENGINE_CHROMIUM_FLAGS=--no-sandbox</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>VS Code (CTRL+Shift+P) </b>In order to have two separate VSCode
+        windows open that point to the same workspace, press CTRL+Shift+P and
+        then search for Duplicate As Workspace in New Window. This will open a
+        new window that is associated with the current workspace
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>VSCode - change "show call hierarchy"</b> command shortcut (it
+        shift-alt-H by default): call command pallete - shift-alt-p search "show
+        call hierarchy" and press "gear" icons set new shortcut, ctrl-shift-h
+        for instance, but it shadows a existing shortcut (replace files or
+        something...)
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Formatting with clang daemon. </b>Clang daemon uses last version of
+        clang-format tool and maybe link it to itself when building llvm-clang
+        toolchain performed. There is no obvious way to specify custom
+        clang-format binary or clang-format config file in clangd options.
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Grill the Committee 2018</b> - Herb Sutter first reason to use almost
+        always auto is - not forget to initialize variable by some value, not
+        deduction reason. And c++17 it guarantie move elision
+      </p>
+      <pre><code class="language-bash">....
+    auto x = std::vector&lt;int&gt; {};
+....</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Nice ripgrep and fzf</b> shortcuts to convinient search of
+        directories to come and string in files. Add to .bashrc
+      </p>
+      <pre><code class="language-bash">alias rgfzf='rg . -n | fzf -e'
+alias cdfzf="cd / &amp;&amp; cd \$(find * -type d 2&gt;&amp;1 | rg -v \"Permission denied\" | fzf)"</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>vscode shortcuts</b> stored at ~/.config/Code/user/keybindings.json
+        To change or find some shortcuts - ctrl+k ctrk+s. I change<br /><span>
+          "show call hierarchy" - ctrl+shift+t<br />
+          "tuggle debug panel" - ctrl+shift+d<br />
+          "debug disconnect" - ctrl+shift+F5 -- may not work<br />
+          also press alt and click at detach icon</span
+        >
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>C++ templates</b></p>
+      <pre><code class="language-cpp">....
+    double foo, bar;
+    auto baz = make_pair&lt;double, double&gt;(foo, bar);
+....
+// not working since c++11, because in modern c++ make_pair() function template
+// defined as
+....
+    template&lt;typename T1, typename T2&gt;
+    std::pair&lt;T1, T2&gt; make_pair(T1 &amp;&amp;u, T2 &amp;&amp;v)
+....</code></pre>
+      <p>
+        and this template expects a reference, not an lvalue. If you try to
+        explicitly instatiate template with non reference parameter then there
+        will be a error that "can't bind rvalue reference with lvalue".
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>For neovim config</b> see note_book/nvim_conf/nvim_setup.txt (maybe
+        outdated) Basic usage. vim config file (.vimrc) location is ~/.vimrc.
+        neovim config file (init.lua or init.vim) is ~/.config/nvim, anf it must
+        be created manually. Remember that you can always paste into vim by
+        shift-Ins, like in any regular terminal!!!
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>To use tab wrapping</b> instead of straight line of tabs Preferences
+        -&gt; Settings -&gt; search by "wrap tabs" or Workbench-&gt;Editor: Wrap
+        Tabs option
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>To build vim from source</b> (primarily for +clipboard)</p>
+      <pre><code class="language-bash">sudo apt-get install xclip libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+./configure --with-features=huge --enable-pythoninterp=yes --enable-cscope --with-x
+make -j 10
+sudo make install</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+      <b>Build Qt5 from sources</b> (see also https://doc.qt.io/qt-5/configure-options.html,
+        https://wiki.qt.io/Building_Qt_5_from_Git, https://wiki.qt.io/Building_Qt_6_from_Git) !!!WARNING!!! - to build qt5
+        with qdoc required llvm toolchain and this toolchain must be built with
+        RTTI support, but RTTI disable by default in llvm-clang config. It need
+        to be enabled by this config command:
+      </p>
+      <pre><code class="language-bash">$ cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
+-DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=1 -DLLVM_ENABLE_EH=1 -G "Unix Makefiles" ../llvm</code></pre>
+      <p>
+        !!!WARNING!!! - Qt 5.15.2 can not be build by default in Debian 12.2 (Kubuntu 23.10)
+        with gcc (gcc-13) - there is a numeric_limits template error after run
+        ./configure. Solved by adding <span>#include &lt;limits&gt;</span> in
+        <span>qt5/qtbase/src/corelib/global/qglobal.h</span> and some others in qtwebengine/src/3rdparty 
+        For more info see - https://wiki.qt.io/Building_Qt_5_from_Git
+      </p>
+      <p>
+        !!!WARNING!!! - QtWebEngine in Qt 5.15.2 can not be build with gcc-13 cause of some compile
+        errors - lack of uintptr_t declaration (no <cstdint> include), substitution error in std::max() template
+        with an int and long int arguments, ffmpeg build fail because of some assembler instruction.
+        Solved by adding <span>#include &lt;cstdint&gt;</span>, cast second argument to int 
+        <span>std::max(16384, int(SIGSTKSZ))</span>, patch <span>3rdparty/chromium/third_party/ffmpeg/libavcodec/x86mathops.h</span>
+        (replace entire file) like suggest <span>https://git.ffmpeg.org/gitweb/ffmpeg.git/commitdiff/effadce6c756247ea8bae32dc13bb3e6f464f0eb</span> 
+      </p>
+      <pre><code class="language-bash"># dependencies (essential for multimedia and webengine)
+sudo apt install python3-html5lib libfontconfig1-dev libvulkan-dev libfreetype6-dev \
+libx11-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev \
+libxcb-cursor-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev \
+libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev \
+libxcb-render-util0-dev libxcb-util-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev \
+libxkbcommon-x11-dev nodejs yacc bison chrpath libicu-dev libxslt-dev ruby \
+libxcursor-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxtst-dev libxss-dev \ 
+libdbus-1-dev libevent-dev libcap-dev libpulse-dev libudev-dev libcups2-dev\ 
+libpci-dev libasound2-dev libegl1-mesa-dev gperf flex libnss3-dev libxshmfence-dev libgles2-mesa-dev \
+libnode-dev libnode108 nodejs-doc libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
+libgstreamer-plugins-good1.0-dev libgstreamer-plugins-bad1.0-dev
+
+# to build qt 5 with web engine python2 must be located in system.
+# try to install them manually:
+# download latest (2.7.18) zip source archive, unpack and:
+cd /../{some}/location}/python2
+mkdir build
+cd build
+../configure
+make
+# add to path /../{some}/{location}/python2/build
+
+# download, build and install
+git clone git://code.qt.io/qt/qt5.git qt5{version}
+cd qt5{version}
+# switch to desire branch
+git checkout {branch}
+# Init repo:
+perl init-repository {--module-subset=default} 
+# configure, make and install (optionaly):
+mkdir qt_build
+cd qt_build
+
+# Use string below to build. Exclude {-shared}, {-webengine-embedded-build} to build with multimedia
+# but further you need manually build qquickcontols2 and qtwebengine
+../qt{version}/configure -inotify -prefix ../{path}/{to}/{install} {-shared} -debug -opensource \ 
+-confirm-license -make libs -make tools -nomake tests -nomake examples -feature-vulkan \ 
+-feature-webengine-qml -feature-webengine-widgets -feature-build-qtwebengine-core \
+-feature-accessibility {-webengine-embedded-build} -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+
+make -j {n}
+make install -j {n} # beacuse durning installation some pakages still will be compiled 
+
+cd ../sources/qt5{version}/qtwebengine
+/{path}/{to}/{installed qt}/qtbase/bin/qmake
+make -j {n}
+# end solve all compile errors when using gcc-13
+make install</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+      <b>Build Qt6 from sources.</b> See tips below about llvm support, build for android and other things. For android build android sdk must be installed.
+      </p>
+      <pre><code class="language-bash"># use same dependencies as for qt5
+# download:
+git clone git://code.qt.io/qt/qt5.git qt6{version}
+cd qt6{branch}
+git checkout {branch}
+# Init repo:
+perl init-repository
+# configure, make and install (optionaly):
+mkdir qt6-build
+cd qt6-build
+../qt6/configure -release {-debug} {-developer-build, maybe necessary for android host build} -nomake tests -prefix /path/to/install \
+-inotify -feature-vulkan -make tools -make examples -- -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+
+# another example config
+./configure -prefix /path/to/install -c++std c++20 -skip qtwebengine \
+-inotify -sctp -eventfd -feature-vulkan -make tools \
+-make examples -I $VULKAN_HEADERS_INSTALL_DIR/include \
+-L $VULKAN_LOADER_INSTALL_DIR/lib 
+
+# build with clang++, with vulkan without web engine,
+# may be remove "-c++std c++20"?
+../qt6/configure -release -nomake tests -prefix /path/to/qt6-clang-install -c++std c++20 \
+-skip qtwebengine -feature-vulkan -platform linux-clang-libc++
+
+cmake --build . --parallel {N}
+cmake --install .
+
+# Also qt can be build for android.
+# For this you need to build Qt for the desktop platform used as a host (that is, Linux, macOS, or Windows).
+# Qt for Android supports the following device architectures (ABIs): arm64-v8a, x86_64, x86, and armeabi-v7a/
+# Maybe host qt must be build with -developer-build
+
+# And then:
+mkdir qt6_build_android
+cd qt6_build_android
+../qt6/configure -prefix /where/to/install -qt-host-path /path/to/desktop_qt_build \
+-android-abis x86_64 -android-sdk /path/to/android-sdk -android-ndk /path/to/android-sdk/ndk/{28.0.12916984}</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+      <b>Build qt-creator from sources</b>
+      </p>
+      <pre><code class="language-bash"># qt-creator obtain sources
+git clone https://github.com/qt-creator/qt-creator
+cd qt-creator
+git submodule update --init --recursive
+# dependencies for perfparser and perf tool install
+sudo apt-get install libdw-dev linux-tools-common linux-tools-generic linux-tools-`uname -r`
+# make perf tool work
+sudo sysctl kernel.perf_event_paranoid=-1
+
+# configure, build
+mkdir qt-creator-build
+cmake -DCMAKE_BUILD_TYPE=Release -G Ninja -DCMAKE_PREFIX_PATH=/path/to/qt6-install ../qt-creator
+cmake --build . --parallel 14
+
+# install bold qt creator
+cmake --install . --prefix /path/to/install/directory
+
+# or with dependecies libs (need chrpath to install):
+cmake --install . --prefix /patj/to/install --component Dependencies</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>In windows to make a link</b> to exe file executable from console add
+        the .LNK text to PATHEXT environment variable search переменные and in
+        bottom panel find PATHEXT
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>To call msbuild</b> on .vxcproj file like that
+        <span>msbuild some_proj.vcxproj /p:Configuration=RelWithDebInfo</span>
+        Is need to be set VS env vars, it could be done by calling some .bat
+        files, for example
+        <span
+          >"C:\Program Files\Microsoft Visual
+          Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"</span
+        >
+        Or it can be vcvarsall.bat and so on. Setup VS env vars
+        <span
+          >"C:\Program Files\Microsoft Visual
+          Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"</span
+        >
+
+        Build
+        <span
+          >cd "work\editor\build\{bla-bla-bla}\vcproj"<br />
+          msbuild {bla-bla-bla}.vcxproj /p:Configuration=RelWithDebInfo</span
+        >
+
+        Run app
+        <span
+          >"E:\work\editor\build\Visual Studio 17
+          2022_RelWithDebInfo\vcproj\{some-executable}.cmd"</span
+        >
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Stackoverflow question</b> that exactly math to mine
+        https://stackoverflow.com/questions/75734617/setting-the-main-window-qwidget-as-parent-of-qml-windows
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Build Bullet Physics</b> cmake configure command:</p>
+      <pre><code class="language-bash">cmake .. -DCMAKE_INSTALL_PREFIX=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/bullet3-build \
+-DCMAKE_EXPORT_COMPMPILE_COMMANDS=1 -DUSE_DOUBLE_PRECISION=ON -DINSTALL_LIBS=ON -DCMAKE_BUILD_TYPE=Release</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Build OpenSceneGraph: </b></p>
+      <pre><code class="language-bash">cmake .. {-DOpenGL_GL_PREFERENCE=GLVND} -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+cmake --build . --parallel 6
+cmake --install . --prefix=/install/dir</code></pre>
+      <p>
+        There is a bug with build OpenSceneGraph with ffmpeg &gt;= 5.0, some
+        deprecated functions was deleted. So it is need to install 4.x version
+        ffmpeg in Debian 12, which avaible as oldstable (or in bullseye).
+      </p>
+      <pre><code class="language-bash"># watch install packages versions and candidates:
+sudo apt policy &lt;package&gt;
+
+# and then you need to install ffmpeg with specific dev packages (installation order of dev 
+# packs may be diffrent):
+sudo apt install ffmpeg=7:4.3.6-0+deb11u1
+sudo apt install libavutil-dev=7:4.3.6-0+deb11u1     
+sudo apt install libavcodec-dev=7:4.3.6-0+deb11u1    
+sudo apt install libavformat-dev=7:4.3.6-0+deb11u1   
+sudo apt install libavdevice-dev=7:4.3.6-0+deb11u1   
+sudo apt install libavfilter-dev=7:4.3.6-0+deb11u1    
+sudo apt install libswscale-dev=7:4.3.6-0+deb11u1     
+sudo apt install libswresample-dev=7:4.3.6-0+deb11u1  
+sudo apt install libpostproc-dev=7:4.3.6-0+deb11u1    
+
+# Maybe installation from legacy bullsye repositories should work:
+sudo apt -t bullseye install ffmpeg</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Some tips to configure and make OpenMW.</b> Build OpenSceneGraph (...
+        or see below), Bullet3, Qt6. Or build OpenMW fork of OpensceneGraph -
+        https://github.com/OpenMW/osg. Build MyGUI with:
+      </p>
+      <pre><code class="language-bash">cmake .. -DMYGUI_RENDERSYSTEM=1 -DMYGUI_BUILD_DEMOS=OFF -DMYGUI_BUILD_TOOLS=OFF -DMYGUI_BUILD_PLUGINS=OFF \
+-DCMAKE_INSTALL_PREFIX=/.../mygui-build
+
+# Dependencies:
+ffmpeg dev libs install as seen above (4.x version because of OSG bug).
+sudo apt install libyaml-cpp*dev liblz4-dev libsqlite3*dev libluajit2*dev libopenal*dev \
+build-essential libicu-dev libbz2-dev libboost-all-de
+
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/qt6-build/qtbase/lib/cmake
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/mygui-build
+export OSG_DIR=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/OpenSceneGraph-build
+# Or use OpenMW osg fork!!!
+
+cmake .. -DBULLET_ROOT=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/bullet3-build -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+-DCMAKE_INSTALL_PREFIX=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/openmw-build</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Some example of regular expression</b> , taken from Angie 1.3.0
+        (Nginx fork) release notes.
+      </p>
+      <pre><code class="language-bash">location =/
+         ^~/images/
+         ~*\.(gif|jpg|jpeg)$ {
+      #общая конфигурация
+   }</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>C++ tips</b
+        ><span>
+          https://stackoverflow.com/questions/44210012/dynamic-cast-pointer-exception-catch<br />
+          https://en.cppreference.com/w/cpp/language/dynamic_cast</span
+        >
+        A dynamic_cast between pointer types will never throw, it will simply
+        return nullptr. If you want dynamic_cast to throw, convert between
+        reference types. The exception will be of type std::bad_cast.
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p>
+        <b>Funny journey with building boost</b> and boost unittest library with
+        clang++ toolchain (including libc++)
+      </p>
+      <pre><code class="language-bash"># build with clang c++ std library (instead of gcc std library)
+./bootstrap.sh --with-toolset=clang --prefix={DST_DIR} --with-libraries=all 
+./b2 clean
+./b2 toolset=clang cxxflags="-std=c++1y -stdlib=libc++ -I /usr/local/include/x86_64-unknown-linux-gnu/c++/v1" \
+linkflags="-stdlib=libc++ -L/usr/local/lib/x86_64-unknown-linux-gnu" -j 10
+./b2 {--prefix={DST_DIR}} install</code></pre>
+      <p>
+        Specifying include and link directories for this build is necessary
+        because of without it clang generate missing errors, maybe issued by
+        being manually compiled and installed along with default gcc compiler!
+      </p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Neovim tip, stolen from </b> https://gist.github.com/awidegreen/3854277</p>
+      <pre><code class="language-bash">Replace the word under cursor and all occurances:
+*     word under cursor 'foo'
+cw    change word (enter insert mode)
+bar   typed new word 'bar'
+ESC   exit insert mode
+n     next occurrence
+.     repeat previous command 
+
+Search for selected text:
+&lt;select&gt; Select text in VISUAL mode (v)
+y        Yank selection
+/        Search for
+C-r0     Press Ctrl-R and 0 to paste in</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Install and use</b> typescript, ts language server, prettier for js, css and html format. Update nodejs.</p>
+      <pre><code class="language-bash"># prerequisites - nodejs
+# typescript, tsserver globally
+sudo npm install -g typescript-language-server typescript
+
+# install via npm
+npm install --save-dev --save-exact prettier
+
+# update nodejs via n
+sudo npm install -g n
+sudo n latest
+
+# use on existing code base with already configured .prettierrc.json
+npx prettier . --write</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Set vm.dirty_bytes</b> for optimal linux usb flash drive write.</p>
+      <pre><code class="language-bash"># the value is 128mb
+sudo sysctl vm.dirty_bytes=134217728</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Disable auto-update</b> in Ubuntu (Kubuntu 23.10)</p>
+      <pre><code class="language-bash">sudo nvim /etc/apt/apt.conf.d/20auto-upgrades
+# set all this options to zero
+APT::Periodic::Update-Package-Lists "0";
+APT::Periodic::Download-Upgradeable-Packages "0";
+APT::Periodic::AutocleanInterval "0";
+APT::Periodic::Unattended-Upgrade "0";</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>PostgrgeSQL build</b> from sources</p>
+      <pre><code class="language-bash"># исходники
+git clone https://github.com/postgres/postgres
+./configure --prefix=/path/to/bin
+make -j {n}
+make install</code></pre>
+      <p><b>PostgrgeSQL database setup</b> on Linux</p>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Try to mange linux laptop keyboard issue.</b> When install fresh linux distro on acer a15 laptop
+            (try Mint 23.1, Kubuntu 25.04) keyboard occasionally disables when rapidetly key tapping. This
+            issue occurs since 5.15 kernel. After rebooting or in/out sleep mode KB works fine. Here 
+            some tips from internet that suggest ro workaround this issue.</p>
+      <pre><code class="language-bash"># At first reload keyboard kernel modules
+sudo rmmod usbhid; sleep 3; sudo modprobe usbhid
+# or
+sudo rmmod atkbd ; sudo modprobe atkbd
+# Reloading kernel modules workaround really dose not help for me
+
+# Another solution add to /etc/default/grub next thing seems to work
+GRUB_CMDLINE_LINUX_DEFAULT='i8042.nopnp'
+# And here more complete but not tested and seemed redudant version
+#GRUB_CMDLINE_LINUX_DEFAULT='i8042.reset i8042.nomux i8042.nopnp i8042.noloop'</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b></b></p>
+      <pre><code class="language-bash"></code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b></b></p>
+      <pre><code class="language-bash"></code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b></b></p>
+      <pre><code class="language-bash"></code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b></b></p>
+      <pre><code class="language-bash"></code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b></b></p>
+      <pre><code class="language-bash"></code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b></b></p>
+      <pre><code class="language-bash"></code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b></b></p>
+      <pre><code class="language-bash"></code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b></b></p>
+      <pre><code class="language-bash"></code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b></b></p>
+      <pre><code class="language-bash"></code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+  </body>
+</html>
