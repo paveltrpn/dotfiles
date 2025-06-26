@@ -18,6 +18,24 @@
     <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
     <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
     <div>
+      <p><b>Solve little problem with openvpn and apparmor</b> in` Kubuntu 25.04.
+            This distro have strange effect with apparmor profile for openvpn 
+            (for "update-resolv" sub profile, strictly speaking). To enforce
+                openvpn work need do this:<br>
+                1) Use default name for up/down script because it have been hardcoded in profile, i.e.
+                update-resolv-conf{.sh} only.<br>
+                2) Add "sed" to update-resolv sub profile:
+            </p>
+      <pre><code class="language-bash">...
+profile update-resolv {
+...
+file rix /usr/bin/sed
+...
+}</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
       <p><b>Try to mange linux laptop keyboard issue.</b> When install fresh linux distro on acer a15 laptop
             (try Mint 23.1, Kubuntu 25.04) keyboard occasionally disables when rapidetly key tapping. This
             issue occurs since 5.15 kernel. After rebooting or in/out sleep mode KB works fine. Here 
