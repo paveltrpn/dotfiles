@@ -12,6 +12,115 @@
 
     <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
     <div>
+      <p><b> POST A NEW SCROLL RECORD HERE</b></p>
+      <pre><code class="language-bash"></code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>Try to mange linux laptop keyboard issue.</b> When install fresh linux distro on acer a15 laptop
+            (try Mint 23.1, Kubuntu 25.04) keyboard occasionally disables when rapidetly key tapping. This
+            issue occurs since 5.15 kernel. After rebooting or in/out sleep mode KB works fine. Here 
+            some tips from internet that suggest ro workaround this issue.</p>
+      <pre><code class="language-bash"># At first reload keyboard kernel modules
+sudo rmmod usbhid; sleep 3; sudo modprobe usbhid
+# or
+sudo rmmod atkbd ; sudo modprobe atkbd
+# Reloading kernel modules workaround really dose not help for me
+
+# Another solution add to /etc/default/grub next thing seems to work
+GRUB_CMDLINE_LINUX_DEFAULT='i8042.nopnp'
+# And here more complete but not tested and seemed redudant version
+#GRUB_CMDLINE_LINUX_DEFAULT='i8042.reset i8042.nomux i8042.nopnp i8042.noloop'</code></pre>
+
+    <p><b>Some notes collected across the net about this topic above:</b></p>
+
+    <pre>=== https://bbs.archlinux.org/viewtopic.php?id=291569 ===
+
+Sorry everyone for a very, very late answer, I was very busy in my job;
+Today I found a solution with just one kernel parameter!!!
+In the "GRUB_CMDLINE_LINUX_DEFAULT" I just appended "pnpacpi=off" and the keyboard worked like a charm!!!!
+My hypothesis is that acpi method conflicts with legacy methods (possibly PS/2 can't communicate properly by ACPI) 
+causing irq conflicts where the keyboard can't be detected at normal state and with dumbkbd=true (in my case) detects 
+but with crazy interruption turning unusable.
+
+I hope this helps many others with similar issue but as I'm not a hardware specialist I don't know how much 
+absence of ACPI PNP affects other parts, at this moment everything looks normal in my system.
+
+Thank you guys so much and sorry for the hassle
+Best regards,
+Eddie
+
+==========
+
+This kernel options can be used as workaroun this issue:
+
+i8042.nomux=1 i8042.reset  
+i8042.noaux=1
+i8042.dritek=1
+i8042.noloop
+i8042.kbdreset=1
+i8042.dumbkbd=1 - !!!
+
+==========
+
+[    0.474577] i8042: PNP: PS/2 appears to have AUX port disabled, if this is incorrect please boot with i8042.nopnp
+
+==========
+
+=== https://www.kernel.org/pub/linux/kernel/people/akpm/patches/2.6/2.6.9-rc1/2.6.9-rc1-mm3/broken-out/acpi-based-i8042-keyboard-aux-controller-enumeration.patch ===
+From: Bjorn Helgaas 
+
+This is based on 2.6.9-rc1-mm2, i.e., it applies after bk-acpi.patch,
+bk-input.patch, and fix-smm-failures-on-e750x-systems.patch from -mm2.
+
+Add ACPI-based i8042 keyboard and aux controller enumeration.
+
+This can be disabled with "i8042.no_acpi=1".  If you need to disable it,
+please let me know so I can fix it.
+
+The main reason we need this is because i8042_check_aux() does a
+request_irq(12) before it knows whether the AUX controller is even present.
+ Some boards with a keyboard controller but no AUX controller reuse IRQ 12
+for PCI interrupts.  And apparently the BIOS on some of those boards leaves
+IRQ 12 programmed as edge-triggered, active high, even though the PCI
+interrupt is level-triggered, active low.  So if i8042 comes along and
+requests IRQ 12 before the PCI driver enables the device and programs the
+IOAPIC correctly, i8042 gets an endless stream of interrupts.
+
+This patch avoids that situation by only poking at ports that ACPI tells us
+about.  If ACPI doesn't tell us about an AUX controller, we don't touch IRQ
+12.
+
+Signed-off-by: Bjorn Helgaas 
+Signed-off-by: Andrew Morton 
+
+=== https://www.kernelconfig.io/config_serio_i8042 ===
+
+In linux kernel since version 2.6.20 (release Date: 2007-02-04)  
+
+i8042 is the chip over which the standard AT keyboard and PS/2
+mouse are connected to the computer. If you use these devices,
+you'll need to say Y here.
+
+If unsure, say Y.
+
+To compile this driver as a module, choose M here: the
+module will be called i8042.
+
+=== https://bugzilla.kernel.org/show_bug.cgi?id=215017 ===
+Bug 215017 - i8042 keyboard and mouse randomly stop working (HP 250 G7 notebook)
+
+=== https://opennet.ru/kernel/5.15.168.html ===
+
+Some TongFang barebones have touchpad and/or keyboard issues after
+suspend, fixable with nomux + reset + noloop + nopnp. Luckily, none of
+them have an external PS/2 port so this can safely be set for all of
+them.</pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
       <p>
         <b>Загрузка дистрибутива Golang.</b>
       </p>
@@ -1552,30 +1661,6 @@ git clone https://github.com/postgres/postgres
 make -j {n}
 make install</code></pre>
       <p><b>PostgrgeSQL database setup</b> on Linux</p>
-    </div>
-    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
-    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
-    <div>
-      <p><b>Try to mange linux laptop keyboard issue.</b> When install fresh linux distro on acer a15 laptop
-            (try Mint 23.1, Kubuntu 25.04) keyboard occasionally disables when rapidetly key tapping. This
-            issue occurs since 5.15 kernel. After rebooting or in/out sleep mode KB works fine. Here 
-            some tips from internet that suggest ro workaround this issue.</p>
-      <pre><code class="language-bash"># At first reload keyboard kernel modules
-sudo rmmod usbhid; sleep 3; sudo modprobe usbhid
-# or
-sudo rmmod atkbd ; sudo modprobe atkbd
-# Reloading kernel modules workaround really dose not help for me
-
-# Another solution add to /etc/default/grub next thing seems to work
-GRUB_CMDLINE_LINUX_DEFAULT='i8042.nopnp'
-# And here more complete but not tested and seemed redudant version
-#GRUB_CMDLINE_LINUX_DEFAULT='i8042.reset i8042.nomux i8042.nopnp i8042.noloop'</code></pre>
-    </div>
-    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
-    <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
-    <div>
-      <p><b></b></p>
-      <pre><code class="language-bash"></code></pre>
     </div>
     <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
     <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
