@@ -71,6 +71,11 @@ endif
 ]]
 )
 
+vim.cmd([[
+set clipboard+=unnamedplus
+]])
+
+
 --- NETRW file explorer settings (native vim file explorer)
 --- call by :Explore command
 vim.g.netrw_banner = 0
