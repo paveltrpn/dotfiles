@@ -19,11 +19,30 @@
     <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
     <div>
       <p><b>Kotlin environment</b> shortcuts:</p>
-      <pre><code class="language-bash">$ wget https://download.jetbrains.com/idea/ideaIC-latest.tar.gz
-$ wget https://download.oracle.com/java/24/latest/jdk-24_linux-x64_bin.tar.gz 
-$ wget https://services.gradle.org/distributions/gradle-8.14.2-bin.zip
-$ wget https://github.com/JetBrains/kotlin/releases/download/v2.2.0/kotlin-compiler-2.2.0.zip
-</code></pre>
+      <pre><code class="language-bash"># Get IDEA ide:
+$ wget https://download.jetbrains.com/idea/ideaIC-latest.tar.gz
+
+# JDK itself:
+$ wget https://download.oracle.com/java/24/latest/jdk-{24}_linux-x64_bin.tar.gz 
+
+# Gradle
+$ wget https://services.gradle.org/distributions/gradle-{8.14.2}-bin.zip
+
+# Kotlin JVM kompiler:
+$ wget https://github.com/JetBrains/kotlin/releases/download/{v2.2.0}/kotlin-compiler-{2.2.0}.zip
+
+# Official kotlin language server:
+https://github.com/Kotlin/kotlin-lsp/releases/
+
+$ unzip /{some}/{path}/kotlin-{0.253.10629}.zip -d {some}/{path}/kotlin-lsp
+
+# Strip .sh extension from run script ".../kotlin-lsp.sh"
+
+$ cd {some}/{path}
+$ chmod +x kotlin-lsp
+
+# Add to .bashrc
+export PATH=$PATH:{some}/{path}/kotlin-ls</code></pre>
     </div>
     <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
     <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
@@ -83,9 +102,7 @@ Eddie
 
 This kernel options can be used as workaroun this issue:
 
-pnpacpi=off
-i8042.nomux=1 
-i8042.reset  
+i8042.nomux=1 i8042.reset  
 i8042.noaux=1
 i8042.dritek=1
 i8042.noloop
