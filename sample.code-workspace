@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"path": "sample"
+		}
+	],
+	"settings": {
+		"editor.fontFamily": "Fira Code Medium",
+		"editor.fontSize": 12.0,
+		"editor.fontWeight": 500,
+		"workbench.colorTheme": "Gruvbox Dark Hard",
+		"zenMode.hideLineNumbers": false,
+		"zenMode.hideStatusBar": false,
+		"explorer.sortOrder": "type",
+		"workbench.activityBar.location": "hidden",
+		"window.zoomLevel": 0.5,
+		"workbench.colorCustomizations": {
+			"list.inactiveSelectionBackground": "#C5DEF0",
+			"sideBar.background": "#090909",
+			"sideBar.foreground": "#d18800",
+			"editor.background": "#090909",
+			"editor.foreground": "#ffffff",
+			"sideBarSectionHeader.background": "#090909",
+			"sideBarSectionHeader.foreground": "#ffffff",
+			"activityBar.border": "#FFFFFF",
+			"statusBar.background": "#090909",
+			"scrollbarSlider.activeBackground": "#514b466c",
+			"scrollbarSlider.hoverBackground": "#514b466c",
+			"badge.background": "#81CA91",
+			"tab.activeBackground": "#191919",
+			"tab.inactiveBackground": "#090909"
+		}
+	}
+}

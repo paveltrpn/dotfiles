@@ -80,6 +80,30 @@ GRUB_CMDLINE_LINUX_DEFAULT='i8042.nopnp'
 # And here more complete but not tested and seemed redudant version
 #GRUB_CMDLINE_LINUX_DEFAULT='i8042.reset i8042.nomux i8042.nopnp i8042.noloop'</code></pre>
 
+            <p><b>Good solution that probably</b> works:</p>
+            <p>Try to use script that force reload i8042 driver. It can be used
+            only if touchpad still works. Just place code below in bash script file (
+            something like "8042"), give to it execute permissions and say to sudo
+            that it can be executed without password.</p>
+      <pre><code class="language-bash"># The script itself:
+
+#!/usr/bin/bash
+if [ "`id -u`" -ne 0 ]; then
+ echo "Switching from `id -un` to root"
+ exec sudo "$0"
+ exit 99
+fi
+
+echo "unbind"
+echo -n "i8042" > /sys/bus/platform/drivers/i8042/unbind
+echo "bind"
+echo -n "i8042" > /sys/bus/platform/drivers/i8042/bind
+echo "finish"</code></pre>
+            <p>Place this at the end of /etc/sudoers file:</p>
+            <pre>
+...
+{username}	ALL = NOPASSWD: /home/{username}/Desktop/8042
+...</pre>
     <p><b>Some notes collected across the net about this topic above:</b></p>
 
     <pre>=== https://bbs.archlinux.org/viewtopic.php?id=291569 ===
