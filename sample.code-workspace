@@ -16,7 +16,7 @@
 		"editor.minimap.enabled": false,
 		"editor.minimap.renderCharacters": false,
 		"editor.fontFamily": "Fira Code Medium",
-		"editor.fontSize": 13.0,
+		"editor.fontSize": 11.0,
 		"editor.fontWeight": 500,
 		"workbench.colorTheme": "Gruvbox Dark Hard",
 		"zenMode.hideLineNumbers": false,
@@ -24,6 +24,7 @@
 		"explorer.sortOrder": "type",
 		"workbench.activityBar.location": "hidden",
 		"window.zoomLevel": 0.5,
+		"window.commandCenter": false,
 		"workbench.colorCustomizations": {
 			"list.inactiveSelectionBackground": "#C5DEF0",
 			"sideBar.background": "#090909",
