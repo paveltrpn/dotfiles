@@ -1459,8 +1459,9 @@ perl init-repository
 # configure, make and install (optionaly):
 mkdir qt6-build
 cd qt6-build
-../qt6/configure -release {-debug} {-developer-build, maybe necessary for android host build} -nomake tests -prefix /path/to/install \
-{-inotify -sctp -eventfd} -feature-vulkan -make tools -{no}make examples -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE {-skip webengine}
+../qt6/configure -release {-debug} {-developer-build, maybe necessary for android host build} \
+-nomake tests -prefix /path/to/install {-inotify -sctp -eventfd} -feature-vulkan -make tools \
+-{no}make examples -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE {-skip qtwebengine}
 
 # another example config
 ./configure -prefix /path/to/install -c++std c++20 -skip qtwebengine \
