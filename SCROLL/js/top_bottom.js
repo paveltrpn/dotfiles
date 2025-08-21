@@ -32,7 +32,7 @@ var top_style = `
     }
 
 </style>
-`
+`;
 
 var top_source = `
 <div class="top_grid">
@@ -48,7 +48,7 @@ var top_source = `
         </a>
     </div>
 </div>
-`
+`;
 
 var top_article_source = `
 <div class="top_grid">
@@ -64,22 +64,22 @@ var top_article_source = `
         </a>
     </div>
 </div>
-`
+`;
 
 function main() {
-    let elem = document.getElementById("top");
+  let elem = document.getElementById("top");
 
-    if (elem != null) {
-        elem.insertAdjacentHTML("beforeend", top_style);
-        elem.insertAdjacentHTML("beforeend", top_source);
-    }
+  if (elem != null) {
+    elem.insertAdjacentHTML("beforeend", top_style);
+    elem.insertAdjacentHTML("beforeend", top_source);
+  }
 
-    elem = document.getElementById("top_article");
+  elem = document.getElementById("top_article");
 
-    if (elem != null) {
-        elem.insertAdjacentHTML("beforeend", top_style);
-        elem.insertAdjacentHTML("beforeend", top_article_source);
-    }
+  if (elem != null) {
+    elem.insertAdjacentHTML("beforeend", top_style);
+    elem.insertAdjacentHTML("beforeend", top_article_source);
+  }
 }
 
 main();
