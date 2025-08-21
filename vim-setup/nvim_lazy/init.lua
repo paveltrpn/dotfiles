@@ -88,10 +88,12 @@ vim.g.netrw_browse_split = 3
 vim.opt.confirm = true
 
 -- Show hidden chars
---vim.opt.list = true
-----vim.opt.listchars = {eol = "¬"}
---vim.opt.listchars = {eol = "⏎", trail = "×", tab = ">·", nbsp = "⎵"}
-----vim.opt.listchars = {space = "¬"}
+vim.opt.list = true
+--vim.opt.listchars = {eol = "¬"}
+--vim.opt.listchars = {multispace = "￮"}
+vim.opt.listchars = {eol = "⏎"}
+vim.opt.listchars = {trail = "×", tab = ">·", nbsp = "⎵", multispace = "·"}
+-- vim.opt.listchars = {space = "¬"}
 
 -- Move newborn quickfix window to bottomest place.
 -- This trigger takes advantage of the fact that the quickfix window
