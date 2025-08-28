@@ -1690,13 +1690,19 @@ C-r0     Press Ctrl-R and 0 to paste in</code></pre>
     <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
     <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
     <div>
-      <p><b>Install and use</b> typescript, ts language server, prettier for js, css and html format. Update nodejs.</p>
-      <pre><code class="language-bash"># prerequisites - nodejs
-# typescript, tsserver globally
+      <p><b>Prepare JavaScript environment</b>, i.e. install npm, nodejs, typescript, ts language server, prettier for js, css and html format.
+                eslint. Update nodejs. Restore dependency packages on bootstrap new project.</p>
+      <pre><code class="language-bash"># Install nodejs, npm
+sudo apt install nodejs npm
+
+# typescript, tsserver. Install globally.
 sudo npm install -g typescript-language-server typescript
 
-# install via npm
-npm install --save-dev --save-exact prettier
+# Pretttier. Install local.
+npm install --save-dev prettier
+
+# Eslint. Install local.
+nppm install --save-dev eslint
 
 # update nodejs via n
 sudo npm install -g n
