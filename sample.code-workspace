@@ -25,6 +25,9 @@
 		"workbench.activityBar.location": "hidden",
 		"window.zoomLevel": 0.5,
 		"window.commandCenter": false,
+        "[javascript]": {
+           "editor.formatOnSave": false
+        },
 		"workbench.colorCustomizations": {
 			"list.inactiveSelectionBackground": "#C5DEF0",
 			"sideBar.background": "#090909",
