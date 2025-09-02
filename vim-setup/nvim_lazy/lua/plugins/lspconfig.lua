@@ -56,21 +56,21 @@ return {
         }
 
         -- kotlin
-        vim.lsp.enable('kotlin_lsp')
-        lspconfig.kotlin_lsp.setup {
-            on_attach = on_attach,
-            flags = lsp_flags,
-            cmd = {"kotlin-lsp", "--stdio"},
-            filetypes = {"kotlin"},
-            root_markers = {
-                "settings.gradle", -- Gradle (multi-project)
-                "settings.gradle.kts", -- Gradle (multi-project)
-                "pom.xml", -- Maven
-                "build.gradle", -- Gradle
-                "build.gradle.kts", -- Gradle
-                "workspace.json" -- Used to integrate your own build system
-            }
-        }
+        -- vim.lsp.enable('kotlin_lsp')
+        -- lspconfig.kotlin_lsp.setup {
+        --     on_attach = on_attach,
+        --     flags = lsp_flags,
+        --     cmd = {"kotlin-lsp", "--stdio"},
+        --     filetypes = {"kotlin"},
+        --     root_markers = {
+        --         "settings.gradle", -- Gradle (multi-project)
+        --         "settings.gradle.kts", -- Gradle (multi-project)
+        --         "pom.xml", -- Maven
+        --         "build.gradle", -- Gradle
+        --         "build.gradle.kts", -- Gradle
+        --         "workspace.json" -- Used to integrate your own build system
+        --     }
+        -- }
 
         -- Use LspAttach autocommand to only map the following keys
         -- after the language server attaches to the current buffer
