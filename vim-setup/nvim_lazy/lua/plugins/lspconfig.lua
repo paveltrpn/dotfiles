@@ -25,13 +25,89 @@ return {
 
         -- typescript
         lspconfig.ts_ls.setup {
-            on_attach = on_attach,
+            on_attach = function(client, bufnr)
+                -- Disable formatting from tsserver
+                if client.name == "ts_ls" then
+                    client.server_capabilities.documentFormattingProvider = false
+                    client.server_capabilities.documentRangeFormattingProvider = false
+                end
+            end,
             flags = lsp_flags,
             settings = {
                 completions = {
                     completeFunctionCalls = true
                 }
             }
+        }
+
+        -- biome - javascript formatter and linter
+        lspconfig.biome.setup {
+            on_attach = on_attach,
+            flags = lsp_flags,
+            filetypes = {
+                "astro",
+                "css",
+                "graphql",
+                "html",
+                "javascript",
+                "javascriptreact",
+                "json",
+                "jsonc",
+                "svelte",
+                "typescript",
+                "typescript.tsx",
+                "typescriptreact",
+                "vue"
+            },
+            cmd = {"biome"},
+            settings = {
+                completions = {
+                    completeFunctionCalls = true
+                }
+            },
+            workspace_required = true,
+            root_dir = function(bufnr, on_dir)
+                -- The project root is where the LSP can be started from
+                -- As stated in the documentation above, this LSP supports monorepos and simple projects.
+                -- We select then from the project root, which is identified by the presence of a package
+                -- manager lock file.
+                local root_markers = {
+                    "package-lock.json",
+                    "yarn.lock",
+                    "pnpm-lock.yaml",
+                    "bun.lockb",
+                    "bun.lock",
+                    "deno.lock"
+                }
+                -- Give the root markers equal priority by wrapping them in a table
+                root_markers = vim.fn.has("nvim-0.11.3") == 1 and {root_markers} or root_markers
+                local project_root = vim.fs.root(bufnr, root_markers)
+                if not project_root then
+                    return
+                end
+
+                -- We know that the buffer is using Biome if it has a config file
+                -- in its directory tree.
+                local filename = vim.api.nvim_buf_get_name(bufnr)
+                local biome_config_files = {"biome.json", "biome.jsonc"}
+                biome_config_files = util.insert_package_json(biome_config_files, "biome", filename)
+                local is_buffer_using_biome =
+                    vim.fs.find(
+                    biome_config_files,
+                    {
+                        path = filename,
+                        type = "file",
+                        limit = 1,
+                        upward = true,
+                        stop = vim.fs.dirname(project_root)
+                    }
+                )[1]
+                if not is_buffer_using_biome then
+                    return
+                end
+
+                on_dir(project_root)
+            end
         }
 
         -- golang
@@ -74,6 +150,7 @@ return {
 
         -- Use LspAttach autocommand to only map the following keys
         -- after the language server attaches to the current buffer
+        vim.lsp.enable("biome")
         vim.api.nvim_create_autocmd(
             "LspAttach",
             {

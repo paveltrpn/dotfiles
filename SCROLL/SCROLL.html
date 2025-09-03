@@ -1693,23 +1693,27 @@ C-r0     Press Ctrl-R and 0 to paste in</code></pre>
       <p><b>Prepare JavaScript environment</b>, i.e. install npm, nodejs, typescript, ts language server, prettier for js, css and html format.
                 eslint. Update nodejs. Restore dependency packages on bootstrap new project.</p>
       <pre><code class="language-bash"># Install nodejs, npm
-sudo apt install nodejs npm
+$ sudo apt install nodejs npm
 
-# typescript, tsserver. Install globally.
-sudo npm install -g typescript-language-server typescript
+# LSP server, linter and formatter can be typescript, tsserver and biome, installed globally.
+$ sudo npm install -g typescript-language-server typescript
+$ sudo npm install -g @biomejs/biome
+
+# Biame local install
+$ npm install --save-dev --save-exact @biomejs/biome
 
 # Pretttier. Install local.
-npm install --save-dev prettier
+$ npm install --save-dev prettier
 
 # Eslint. Install local.
-nppm install --save-dev eslint
+$ npm install --save-dev eslint
 
 # update nodejs via n
-sudo npm install -g n
-sudo n latest
+$ sudo npm install -g n
+$ sudo n latest
 
 # use on existing code base with already configured .prettierrc.json
-npx prettier . --write</code></pre>
+$ npx prettier . --write</code></pre>
     </div>
     <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
     <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
