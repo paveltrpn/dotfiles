@@ -7,7 +7,8 @@
 -- vim.o.guifont = "monospace:h10"
 -- vim.o.guifont = "Source Code Pro:h10"
 -- vim.o.guifont = "IBM Plex Mono:h10"
-vim.o.guifont = "Fira Code Medium:h8.5"
+vim.o.guifont = "Fira Code Medium:h10"
+vim.o.linespace = 3
 
 -- Enable mouse. set mouse = - for disable
 vim.opt.mouse = "a"
