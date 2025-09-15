@@ -1,49 +1,53 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
-	"formatter": {
-		"enabled": true,
-		"indentStyle": "tab",
-		"indentWidth": 4,
-		"lineWidth": 120,
-		"lineEnding": "lf",
-		"bracketSameLine": false,
-		"bracketSpacing": true
-	},
-	"html": {
-		"formatter": {
-			"enabled": true,
-			"indentStyle": "space",
-			"indentWidth": 4
-		}
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"correctness": {
-				"noUnusedVariables": {
-					"level": "error",
-					"fix": "none"
-				}
-			},
-			"style": {
-				"useConst": {
-					"level": "warn",
-					"fix": "unsafe"
-				},
-				"useTemplate": {
-					"level": "warn",
-					"fix": "safe"
-				},
-				"useNamingConvention": {
-					"level": "error",
-					"options": {
-						"strictCase": false
-					}
-				}
-			}
-		}
-	},
-	"assist": {
-		"enabled": false
-	}
+    "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 120,
+        "lineEnding": "lf",
+        "bracketSameLine": false,
+        "bracketSpacing": true
+    },
+    "html": {
+        "formatter": {
+            "enabled": true,
+            "indentStyle": "space",
+            "indentWidth": 4
+        }
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "correctness": {
+                "noUnsafeOptionalChaining": "off",
+                "noUnusedVariables": {
+                    "level": "error",
+                    "fix": "none"
+                }
+            },
+            "complexity": {
+                "useOptionalChain": "off"
+            },
+            "style": {
+                "useConst": {
+                    "level": "warn",
+                    "fix": "unsafe"
+                },
+                "useTemplate": {
+                    "level": "warn",
+                    "fix": "safe"
+                },
+                "useNamingConvention": {
+                    "level": "error",
+                    "options": {
+                        "strictCase": false
+                    }
+                }
+            }
+        }
+    },
+    "assist": {
+        "enabled": false
+    }
 }
