@@ -25,14 +25,23 @@
 		"workbench.activityBar.location": "hidden",
 		"window.zoomLevel": 0.5,
 		"window.commandCenter": false,
-        "[javascript]": {
-           "editor.formatOnSave": false,
-           "editor.tabSize": 4
-        },
-        "[html]": {
-           "editor.formatOnSave": false,
-            "editor.tabSize": 4
-        }
+        "[cpp]": {
+			"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+		},
+		"[javascript]": {
+			"editor.formatOnSave": false,
+			"editor.tabSize": 4,
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[typescript]": {
+			"editor.formatOnSave": false,
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[html]": {
+			"editor.formatOnSave": false,
+			"editor.tabSize": 4,
+			"editor.defaultFormatter": "biomejs.biome"
+		},
 		"workbench.colorCustomizations": {
 			"list.inactiveSelectionBackground": "#C5DEF0",
 			"sideBar.background": "#090909",
