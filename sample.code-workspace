@@ -25,6 +25,7 @@
 		"workbench.activityBar.location": "hidden",
 		"window.zoomLevel": 0.5,
 		"window.commandCenter": false,
+		"workbench.editor.showTabs": false,
         "[cpp]": {
 			"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
 		},
