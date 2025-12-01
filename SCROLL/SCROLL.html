@@ -1613,15 +1613,17 @@ sudo apt -t bullseye install ffmpeg</code></pre>
 # Dependencies:
 ffmpeg dev libs install as seen above (4.x version because of OSG bug).
 sudo apt install libyaml-cpp*dev liblz4-dev libsqlite3*dev libluajit2*dev libopenal*dev \
-build-essential libicu-dev libbz2-dev libboost-all-de
+build-essential libicu-dev libbz2-dev libboost-all-de libunshield-dev sudo apt install libyaml-cpp-dev \
+libboost-filesystem-dev libboost-program-options-dev libboost-iostreams-dev libluajit-5.1-dev libsqlite3-dev \
+(See build docs on - https://wiki.openmw.org/index.php?title=Development_Environment_Setup)
 
-export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/qt6-build/qtbase/lib/cmake
-export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/mygui-build
-export OSG_DIR=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/OpenSceneGraph-build
-# Or use OpenMW osg fork!!!
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:{/path/to/qt/sources}/qtbase/lib/cmake
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:{/path/to}/mygui-build
+export OSG_DIR={/path/to}/OpenSceneGraph-build
+# It is necessary to use OpenMW OpenSceneGraph fork!!!
 
-cmake .. -DBULLET_ROOT=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/bullet3-build -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
--DCMAKE_INSTALL_PREFIX=/mnt/Fdisk_ext4_ssd_sata/code/extern_libs/openmw-build</code></pre>
+cmake .. -DBULLET_ROOT={/path/to}/bullet3-build -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+-DCMAKE_INSTALL_PREFIX={/path/where/install}/openmw-build</code></pre>
     </div>
     <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
     <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
