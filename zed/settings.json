@@ -7,6 +7,10 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  // "proxy": "socks5://localhost:9150",
+  "auto_update_extensions": {
+    "html": false,
+  },
   "base_keymap": "VSCode",
   "ui_font_family": "Fira Code",
   "ui_font_weight": 400,
@@ -60,6 +64,12 @@
         "config_path": "{path}",
       },
     },
+    "kotlin-lsp": {
+      "binary": {
+        "path": "/mnt/main/kotlin-lsp/kotlin-lsp.sh",
+        "arguments": ["--stdio"],
+      },
+    },
   },
   "languages": {
     "C++": {
@@ -91,6 +101,9 @@
         "source.organizeImports.biome": false,
       },
       "format_on_save": "on",
+    },
+    "Kotlin": {
+      "language_servers": ["kotlin-lsp"],
     },
   },
 }
