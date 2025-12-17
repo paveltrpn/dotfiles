@@ -1573,8 +1573,17 @@ cmake --install . --prefix /patj/to/install --component Dependencies</code></pre
     <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
     <div>
       <p><b>Build OpenSceneGraph: </b></p>
-      <pre><code class="language-bash">cmake .. {-DOpenGL_GL_PREFERENCE=GLVND} -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+      <pre><code class="language-bash"># Must be build with COLLADA for osgdb-dae plugin
+sudo apt install libcollada-dom-dev
+
+cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1 
+-DBUILD_OSG_PLUGINS_BY_DEFAULT=0 -DBUILD_OSG_PLUGIN_OSG=1 -DBUILD_OSG_PLUGIN_DAE=1 -DBUILD_OSG_PLUGIN_DDS=1 
+-DBUILD_OSG_PLUGIN_TGA=1 -DBUILD_OSG_PLUGIN_BMP=1 -DBUILD_OSG_PLUGIN_JPEG=1 -DBUILD_OSG_PLUGIN_PNG=1 
+-DBUILD_OSG_PLUGIN_FREETYPE=1 -DBUILD_OSG_DEPRECATED_SERIALIZERS=0 
+-DCMAKE_INSTALL_PREFIX={/path/to/build}/osg-OpenMW
+
 cmake --build . --parallel 6
+
 cmake --install . --prefix=/install/dir</code></pre>
       <p>
         There is a bug with build OpenSceneGraph with ffmpeg &gt;= 5.0, some
@@ -1617,6 +1626,7 @@ ffmpeg dev libs install as seen above (4.x version because of OSG bug).
 sudo apt install libyaml-cpp*dev liblz4-dev libsqlite3*dev libluajit2*dev libopenal*dev \
 build-essential libicu-dev libbz2-dev libboost-all-de libunshield-dev sudo apt install libyaml-cpp-dev \
 libboost-filesystem-dev libboost-program-options-dev libboost-iostreams-dev libluajit-5.1-dev libsqlite3-dev \
+libcollada-dom-dev
 (See build docs on - https://wiki.openmw.org/index.php?title=Development_Environment_Setup)
 
 export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:{/path/to/qt/sources}/qtbase/lib/cmake

@@ -5,17 +5,92 @@
 //
 // To see all of Zed's default settings without changing your
 // custom settings, run `zed: open default settings` from the
-// command palette
+// command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "ui_font_size": 14,
-  "buffer_font_size": 12,
+  "base_keymap": "VSCode",
+  "ui_font_family": "Fira Code",
+  "ui_font_weight": 400,
+  "ui_font_size": 16,
   "buffer_font_family": "Fira Code",
-  "buffer_font_weight": 600,
+  "buffer_font_size": 13.5,
+  "buffer_font_weight": 500,
   "buffer_line_height": { "custom": 1.4 },
-  "vim_mode": true,
   "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Gruvbox Dark Hard"
-  }
+    "mode": "dark",
+    "light": "Gruvbox Light Hard",
+    "dark": "Gruvbox Dark Hard",
+  },
+  "theme_overrides": {
+    "Gruvbox Dark Hard": {
+      "editor.background": "#0a0a0a",
+      "panel.background": "#0a0a0a",
+      "syntax": {
+        "comment": {
+          "font_style": "italic",
+        },
+        "comment.doc": {
+          "font_style": "italic",
+        },
+      },
+      "accents": [
+        "#ff0000",
+        "#ff7f00",
+        "#ffff00",
+        "#00ff00",
+        "#0000ff",
+        "#8b00ff",
+      ],
+    },
+  },
+  "lsp": {
+    "clangd": {
+      "binary": {
+        "path": "/usr/local/bin/clangd",
+        "arguments": [
+          "--background-index",
+          "--compile-commands-dir=build",
+          "--clang-tidy",
+          "--clang-tidy-checks=*",
+          "--header-insertion=never",
+        ],
+      },
+    },
+    "biome": {
+      "settings": {
+        "config_path": "{path}",
+      },
+    },
+  },
+  "languages": {
+    "C++": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "/usr/local/bin/clang-format",
+          "arguments": [],
+        },
+      },
+    },
+    "JavaScript": {
+      "formatter": {
+        "external": {
+          "command": "npx",
+          "arguments": ["biome", "format", "./", "--write"],
+        },
+      },
+      "format_on_save": "on",
+    },
+    "TypeScript": {
+      "formatter": {
+        "language_server": {
+          "name": "biome",
+        },
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": false,
+        "source.organizeImports.biome": false,
+      },
+      "format_on_save": "on",
+    },
+  },
 }

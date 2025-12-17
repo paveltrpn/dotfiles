@@ -13,9 +13,24 @@
     }
   },
   {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    }
+  },
+  {
     "context": "Editor",
     "bindings": {
-      // "j k": ["workspace::SendKeystrokes", "escape"]
+      "ctrl-shift-up": "editor::AddSelectionAbove",
+      "ctrl-shift-down": "editor::AddSelectionBelow"
+    }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "back": "pane::GoBack",
+      "alt-left": "pane::GoBack",
+      "alt-right": "pane::GoForward"
     }
   }
 ]
