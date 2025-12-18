@@ -8,6 +8,7 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   // "proxy": "socks5://localhost:9150",
+  "auto_update": false,
   "auto_update_extensions": {
     "html": false,
   },
@@ -104,6 +105,9 @@
     },
     "Kotlin": {
       "language_servers": ["kotlin-lsp"],
+    },
+    "JSON": {
+      "format_on_save": "off",
     },
   },
 }
