@@ -1,0 +1,13 @@
+name: Local Config
+version: 1.0.0
+schema: v1
+models:
+  - name: QWEN
+    provider: openrouter
+    model: Qwen3-Next-80B-A3B-Instruct
+    apiKey: aa-ssssomekey
+    apiBase: https://ai.integra-s.com/api
+    roles:
+      - chat
+      - edit
+#      - autocomplete

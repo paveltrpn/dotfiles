@@ -1,7 +1,7 @@
 {
 	"folders": [
 		{
-			"path": "sample"
+			"path": "/some/path"
 		}
 	],
 	"settings": {
@@ -16,7 +16,7 @@
 		"editor.minimap.enabled": false,
 		"editor.minimap.renderCharacters": false,
 		"editor.fontFamily": "Fira Code Medium",
-		"editor.fontSize": 11.0,
+		"editor.fontSize": 13.0,
 		"editor.fontWeight": 500,
 		"workbench.colorTheme": "Gruvbox Dark Hard",
 		"zenMode.hideLineNumbers": false,
@@ -24,9 +24,8 @@
 		"explorer.sortOrder": "type",
 		"workbench.activityBar.location": "hidden",
 		"window.zoomLevel": 0.5,
-		"window.commandCenter": false,
-		"workbench.editor.showTabs": false,
-        "[cpp]": {
+		"go.diagnostic.vulncheck": "Prompt",
+		"[cpp]": {
 			"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
 		},
 		"[javascript]": {
@@ -38,6 +37,23 @@
 			"editor.formatOnSave": false,
 			"editor.defaultFormatter": "biomejs.biome"
 		},
+        "[go]": {
+			"editor.formatOnSave": true,
+		},
+		"go.inlayHints.assignVariableTypes": true,
+		"go.inlayHints.compositeLiteralTypes": true,
+		"go.inlayHints.compositeLiteralFields": true,
+  		"go.inlayHints.constantValues": true,
+  		"go.inlayHints.functionTypeParameters": true,
+  		"go.inlayHints.parameterNames": true,
+  		"go.inlayHints.rangeVariableTypes": true,
+  		"go.lintTool": "golint",
+  		"go.lintFlags": ["--path-mode=abs", "--fast-only"],
+  		"go.toolsManagement.autoUpdate": false,
+  		"gopls": {
+  		  "formatting.gofumpt": true,
+  		  "ui.semanticTokens": true,
+  		},
 		"[html]": {
 			"editor.formatOnSave": false,
 			"editor.tabSize": 4,

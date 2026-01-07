@@ -1,5 +1,0 @@
-C/C++ workspace setup.
-
-Linux.
-
-1) Download llvm-clang:
