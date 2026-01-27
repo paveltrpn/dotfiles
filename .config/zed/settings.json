@@ -7,7 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  // "proxy": "socks5://localhost:9150",
+  //"proxy": "socks5://localhost:9150",
+  "disable_ai": true,
+  // "features": {
+  // "edit_prediction_provider": "copilot",
+  // },
   "auto_update": false,
   "auto_update_extensions": {
     "html": false,
@@ -17,16 +21,36 @@
   "ui_font_weight": 400,
   "ui_font_size": 16,
   "buffer_font_family": "Fira Code",
-  "buffer_font_size": 13.5,
-  "buffer_font_weight": 500,
-  "buffer_line_height": { "custom": 1.4 },
+  "buffer_font_size": 14.0,
+  "buffer_font_weight": 400,
+  "buffer_line_height": { "custom": 1.42 },
   "theme": {
     "mode": "dark",
     "light": "Gruvbox Light Hard",
-    "dark": "Gruvbox Dark Hard",
+    "dark": "Adaptify Darker",
   },
   "theme_overrides": {
     "Gruvbox Dark Hard": {
+      "editor.background": "#0a0a0a",
+      "panel.background": "#0a0a0a",
+      "syntax": {
+        "comment": {
+          "font_style": "italic",
+        },
+        "comment.doc": {
+          "font_style": "italic",
+        },
+      },
+      "accents": [
+        "#ff0000",
+        "#ff7f00",
+        "#ffff00",
+        "#00ff00",
+        "#0000ff",
+        "#8b00ff",
+      ],
+    },
+    "Adaptify Darker": {
       "editor.background": "#0a0a0a",
       "panel.background": "#0a0a0a",
       "syntax": {
@@ -81,6 +105,9 @@
           "arguments": [],
         },
       },
+    },
+    "Go": {
+      "format_on_save": "on",
     },
     "JavaScript": {
       "formatter": {
