@@ -118,14 +118,24 @@ fi
 
 # export TERM=bash
 
+# OpenSceneGraph and VulkanSceneGraph
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main/sources_build/OpenSceneGraph-build/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main/sources_build/osg-OpenMW/lib/osgPlugins-3.6.5
+export OSG_DIR=/mnt/main/sources_build/OpenSceneGraph-build
+export vsg_DIR=/mnt/main/sources_build/vsg
+export vsgqt_DIR=/mnt/main/sources_build/vsgQt
+export vsgXchange_DIR=/mnt/main/sources_build/vsgXchange
+
 # clang++18 libs
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/x86_64-unknown-linux-gnu
 
-# latest local qt build
-export LOCAL_LATEST_QT=/mnt/main/sources_build/qt6_9_rel
+export LOCAL_GLFW=/mnt/main/sources_build/glfw
 
 # QT files for work
 export QTDIR=/mnt/main/work/Qt/5.15.2/gcc_64
+# latest local qt build
+export LOCAL_LATEST_QT=/mnt/main/sources_build/qt6_10
+export QT_DIR=$LOCAL_LATEST_QT
 
 # local build of Qt6.7
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/code/extern_libs/qt6-install/lib
@@ -140,6 +150,10 @@ export VK_SDK_PATH=$VULKAN_SDK
 export CPATH=$CPATH:$VULKAN_SDK/include
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$VULKAN_SDK/lib
 export PATH=$PATH:$VULKAN_SDK/bin
+export glslang_DIR=/mnt/main/sources_build/glslang
+
+# Vulkan memory allocator
+export VMA_DIR=/mnt/main/sources/VulkanMemoryAllocator
 
 # libuv
 export LIBUV_DIR=/mnt/main/sources_build/libuv
@@ -166,11 +180,12 @@ export PATH=$PATH:/mnt/main/sources/Python-2.7.18/build
 export PATH=$PATH:/usr/local/nvim/bin
 
 # java kotlin scala gradle
-export PATH=$PATH:/mnt/main/jdk/bin
+export PATH=$PATH:/mnt/main/jdk-21.0.7/bin
 export PATH=$PATH:/mnt/main/kotlinc/bin
 export PATH=$PATH:/mnt/main/kotlin-native/bin
 export PATH=$PATH:/mnt/main/gradle/bin
 export PATH=$PATH:/mnt/main/scala/bin
+export PATH=$PATH:/mnt/main/kotlin-lsp
 
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/main_disk/work/editor/build/Ninja_RelWithDebInfo/IntegraPlanetEarth/lib
 
@@ -178,7 +193,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export LOCAL_QT_DIR=/mnt/main/sources_build/qt6_8_rel
 export LOCAL_USERVER_DI=/mnt/main/sources_build/userver
 
 # android dev tools

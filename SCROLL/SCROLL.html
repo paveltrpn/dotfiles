@@ -826,12 +826,18 @@ $ sudo apt upgrade</code></pre>
       </p>
 
       <pre><code class="language-shell">$ cd ~
+# Load from FTP as archive
 $ wget https://ftpmirror.gnu.org/gcc/gcc-XX.Y.Z/gcc-XX.Y.Z.tar.xz
 $ tar xf gcc-XX.Y.Z.tar.xz
 $ cd gcc-XX.Y.Z
+
+# Fetch from GIT
+$ git clone git://gcc.gnu.org/git/gcc.git
+
 # execute at top level of gcc directory
 $ ./contrib/download_prerequisites
 # some dependencies
+$ sudo apt install libgmp-dev libmpfr-dev libmpc-dev
 $ sudo apt-get install flex bison</code></pre>
 
       <p>
@@ -845,9 +851,19 @@ $ sudo apt-get install flex bison</code></pre>
 
       <pre><code class="language-shell">$ cd ~
 $ mkdir build &amp;&amp; cd build
-$ ../configure {-v} --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
- --prefix=/where/to/install{/usr/local/gcc-xx.yy.zz} --enable-checking=release --enable-languages=c,c++,fortran
- --disable-multilib {--disable-libsanitize} --program-suffix=-xx.y {-13.2}
+
+# This call may help on "undefined macro" compile error.
+$ unset LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE LD_LIBRARY_PATH
+
+# Example for 13.2 version
+$ ../configure {-v} --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu\
+--prefix=/where/to/install{/usr/local/gcc-xx.yy.zz} --enable-checking=release --enable-languages=c,c++\
+--disable-multilib {--disable-libsanitize} --program-suffix=-xx.y {-13.2}
+
+# Build trunc branch
+$ ../configure --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --prefix=/usr/local/gcc-trunc \
+--enable-checking=release --enable-languages=c,c++ --disable-multilib --program-suffix=-trunc
+
 $ make -j 256
 $ sudo make install-strip</code></pre>
 
