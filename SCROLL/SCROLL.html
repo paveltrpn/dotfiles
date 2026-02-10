@@ -1587,19 +1587,29 @@ cmake --install . --prefix /patj/to/install --component Dependencies</code></pre
 -DCMAKE_EXPORT_COMPMPILE_COMMANDS=1 -DUSE_DOUBLE_PRECISION=ON -DINSTALL_LIBS=ON -DCMAKE_BUILD_TYPE=Release</code></pre>
     </div>
     <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
+ <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
+    <div>
+      <p><b>OSG Earth</b> build from sources:</p>
+      <pre><code class="language-bash"># Dependencies:
+$ sudo apt install libzip-dev ziptool zipmerge zipcmp
+
+# Obtain sources
+
+$ git clone https://github.com/gwaldron/osgearth
+$ cd osgearth
+$ mkdir build && cd build
+$ cmake .. -DOPENGL_PROFILE=GL3 -DOSG_GL_CONTEXT_VERSION=4.6 -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=1</code></pre>
+    </div>
+    <!-- ============= КОНЕЦ ЗАПИСИ ============== -->
     <!-- ============= НАЧАЛО ЗАПИСИ ============= -->
     <div>
       <p><b>Build OpenSceneGraph: </b></p>
       <pre><code class="language-bash"># Must be build with COLLADA for osgdb-dae plugin
 sudo apt install libcollada-dom-dev
 
-cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1 
--DBUILD_OSG_PLUGINS_BY_DEFAULT=0 -DBUILD_OSG_PLUGIN_OSG=1 -DBUILD_OSG_PLUGIN_DAE=1 -DBUILD_OSG_PLUGIN_DDS=1 
--DBUILD_OSG_PLUGIN_TGA=1 -DBUILD_OSG_PLUGIN_BMP=1 -DBUILD_OSG_PLUGIN_JPEG=1 -DBUILD_OSG_PLUGIN_PNG=1 
--DBUILD_OSG_PLUGIN_FREETYPE=1 -DBUILD_OSG_DEPRECATED_SERIALIZERS=0 
--DCMAKE_INSTALL_PREFIX={/path/to/build}/osg-OpenMW
+cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DBUILD_OSG_PLUGINS_BY_DEFAULT=0 -DBUILD_OSG_PLUGIN_OSG=1 -DBUILD_OSG_PLUGIN_DAE=1 -DBUILD_OSG_PLUGIN_DDS=1 -DBUILD_OSG_PLUGIN_TGA=1 -DBUILD_OSG_PLUGIN_BMP=1 -DBUILD_OSG_PLUGIN_JPEG=1 -DBUILD_OSG_PLUGIN_PNG=1 -DBUILD_OSG_PLUGIN_FREETYPE=1 -DBUILD_OSG_DEPRECATED_SERIALIZERS=0 -DBUILD_OSG_EXAMPLES=ON -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release
 
-cmake --build . --parallel 6
+cmake --build . --parallel {N}
 
 cmake --install . --prefix=/install/dir</code></pre>
       <p>
