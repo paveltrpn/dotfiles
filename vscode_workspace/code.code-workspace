@@ -1,24 +1,74 @@
 {
 	"folders": [
 		{
-			"path": "toy_std"
-		},
-		{
-			"path": "tiny_render"
-		},
-		{
-			"path": "curl_coro"
-		},
-		{
-			"path": "js_std"
+			"path": ""
 		}
 	],
 	"settings": {
+        "editor.tokenColorCustomizations": {
+		    "textMateRules": [
+		        {
+		            "scope": "keyword.control", // Target keywords like 'class', 'if', 'return', etc.
+		            "settings": {
+		                "fontStyle": "bold",     // or "normal" or "italic"
+		                // "foreground": "#FF0000" // Optionally, change the color
+		            }
+		        }
+		    ]
+		},
+		"editor.tabCompletion": "on",
+		"editor.renderWhitespace": "all",
+		"editor.inlayHints.enabled": "off",
+		"editor.formatOnSave": true,
+		"editor.parameterHints.enabled": false,
+		"editor.stickyScroll.enabled": false,
+		"editor.formatOnSaveMode": "file",
+		"editor.renderControlCharacters": false,
+		"editor.minimap.enabled": false,
+		"editor.minimap.renderCharacters": false,
+		"editor.fontFamily": "Fira Code",
+		"editor.fontSize": 13.0,
 		"workbench.colorTheme": "Gruvbox Dark Hard",
 		"zenMode.hideLineNumbers": false,
 		"zenMode.hideStatusBar": false,
 		"explorer.sortOrder": "type",
 		"workbench.activityBar.location": "hidden",
+		"window.zoomLevel": 0.5,
+		"go.diagnostic.vulncheck": "Prompt",
+		"[cpp]": {
+			"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+		},
+		"[javascript]": {
+			"editor.formatOnSave": false,
+			"editor.tabSize": 4,
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[typescript]": {
+			"editor.formatOnSave": false,
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+        "[go]": {
+			"editor.formatOnSave": true,
+		},
+		"go.inlayHints.assignVariableTypes": true,
+		"go.inlayHints.compositeLiteralTypes": true,
+		"go.inlayHints.compositeLiteralFields": true,
+  		"go.inlayHints.constantValues": true,
+  		"go.inlayHints.functionTypeParameters": true,
+  		"go.inlayHints.parameterNames": true,
+  		"go.inlayHints.rangeVariableTypes": true,
+  		"go.lintTool": "golint",
+  		"go.lintFlags": ["--path-mode=abs", "--fast-only"],
+  		"go.toolsManagement.autoUpdate": false,
+  		"gopls": {
+  		  "formatting.gofumpt": true,
+  		  "ui.semanticTokens": true,
+  		},
+		"[html]": {
+			"editor.formatOnSave": false,
+			"editor.tabSize": 4,
+			"editor.defaultFormatter": "biomejs.biome"
+		},
 		"workbench.colorCustomizations": {
 			"list.inactiveSelectionBackground": "#C5DEF0",
 			"sideBar.background": "#090909",
