@@ -864,6 +864,9 @@ $ ../configure {-v} --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x8
 $ ../configure --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --prefix=/usr/local/gcc-trunc \
 --enable-checking=release --enable-languages=c,c++ --disable-multilib --program-suffix=-trunc
 
+# Build versioned branch
+$ ../configure --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --prefix=/usr/local/gcc-16 --enable-checking=release --enable-languages=c,c++ --disable-multilib --program-suffix=-16
+z
 $ make -j 256
 $ sudo make install-strip</code></pre>
 
